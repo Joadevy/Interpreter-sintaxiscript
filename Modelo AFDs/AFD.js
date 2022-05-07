@@ -1,49 +1,106 @@
-// Definiendo los elementos del AFD como globales.
-var alfabeto = ['a','b'];
-var estados = [0,1];
-var estadosFinales = [0];
-var estadoInicial = [0];
-let tablaTransiciones = [];
-
-// Recibe un conjunto finito de estados (array) y un conjunto finito de simbolos (array)
-const funcionTransicion = (tablaTransiciones,estados,alfabeto) => {
-    // Se necesita cargar la tabla: estado a traves de cada simbolo => salida, esto varia segun cada automata.
-  			tablaTransiciones.push(
-          										[estados[0],
-                              {"simbolo":alfabeto[0],
-                              "estadoSiguiente":estados[1]}]
-        );
-  			tablaTransiciones.push(
-          										[estados[0],
-                              {"simbolo":alfabeto[1],
-                              "estadoSiguiente":estados[1]}]
-        );
+// Recibe y carga la tabla de transiciones.
+const funcionTransicion = (estados,alfabeto,tablaTransiciones) => { 
+  // Estado a traves de cada simbolo => exactamente una salida. Se guarda en un array con la logica: [estadoPartida, {"simboloEntrada","estadoSiguiente"}]. Esto podria mejorarse, no es muy legible.
+  tablaTransiciones.push(
+    [estados[0],
+    {"simbolo":alfabeto[0],
+    "estadoSiguiente":estados[1]}]
+  );
   
-  			tablaTransiciones.push(
-          										[estados[1],
-                              {"simbolo":alfabeto[0],
-                              "estadoSiguiente":estados[0]}]
-        );
-  			tablaTransiciones.push(
-          										[estados[1],
-                              {"simbolo":alfabeto[1],
-                              "estadoSiguiente":estados[0]}]
-        );
-        //tablaTransiciones.forEach(element => console.log(element));
+  tablaTransiciones.push(
+    [estados[0],
+    {"simbolo":alfabeto[1],
+    "estadoSiguiente":estados[1]}]
+  );
+  
+  tablaTransiciones.push(
+    [estados[0],
+    {"simbolo":alfabeto[2],
+    "estadoSiguiente":estados[2]}]
+  );
+
+  tablaTransiciones.push(
+    [estados[1],
+    {"simbolo":alfabeto[0],
+    "estadoSiguiente":estados[0]}]
+  );
+
+  tablaTransiciones.push(
+    [estados[1],
+    {"simbolo":alfabeto[1],
+    "estadoSiguiente":estados[0]}]
+  );
+  
+  tablaTransiciones.push(
+    [estados[1],
+    {"simbolo":alfabeto[2],
+    "estadoSiguiente":estados[2]}]
+  );
+  
+  tablaTransiciones.push(
+    [estados[2],
+    {"simbolo":alfabeto[0],
+    "estadoSiguiente":estados[2]}]
+  );
+  	
+  tablaTransiciones.push(
+    [estados[2],
+    {"simbolo":alfabeto[1],
+    "estadoSiguiente":estados[2]}]
+  );
+  
+  tablaTransiciones.push(
+    [estados[2],
+    {"simbolo":alfabeto[2],
+    "estadoSiguiente":estados[2]}]
+  );	
 }
 
-const esValida = (cadena) => {
-  let estadoActual = estadoInicial;
-  // Busca el estado siguiente del estado actual en la tabla de transiciones.
-  for (let caracter of cadena){
-    console.log(caracter);
-    estadoActual = tablaTransiciones.filter(transicion=> transicion[0] == estadoActual).find(transicion=> transicion[1].simbolo == caracter)[1].estadoSiguiente;
-  	console.log(estadoActual);
+// Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
+const carAsimb = (caracter) => {
+  let simbolo;
+	switch(caracter){
+      case 'a': simbolo = 'a';
+      break;
+    	case 'b': simbolo = 'b'
+      break;
+    	default: simbolo = 'otro';
   }
+  return simbolo
+}
+
+const esValida = (estadoInicial,estadosFinales,tablaTransiciones,cadena) => {
+  let estadoActual = estadoInicial;
+  // Toma un caracter y busca el estado siguiente en la tabla de transiciones.
+  for (let caracter of cadena){
+   estadoActual = tablaTransiciones
+     .filter(transicion=> transicion[0] == estadoActual)
+     .find(transicion=> transicion[1].simbolo == carAsimb(caracter))
+   	 [1].estadoSiguiente;	
+  }
+  // estadoActual contendra el estado final al que llego el automata.
   return estadosFinales.includes(estadoActual);
 }
 
-funcionTransicion(tablaTransiciones,estados,alfabeto);
-if (esValida('babb')){
-  console.log('CADENA VALIDA')
+function main(){
+  // Definiendo los elementos del AFD
+  const estados = [0,1,2];
+  const alfabeto = ['a','b','otro'];
+  const estadosFinales = [0];
+  const estadoInicial = 0;
+  let tablaTransiciones = [];
+  
+  // Cargo la tabla de transiciones
+  funcionTransicion(estados,alfabeto,tablaTransiciones);
+  let cadena = 'ababbabb';
+  // Compruebo que sea valida o no segun el AFD.
+	const resultado = esValida(estadoInicial,estadosFinales,tablaTransiciones,cadena);
+  if (resultado){
+    console.log('CADENA VALIDA')
+  } else if (!resultado){
+    console.log('CADENA NO VALIDA');
+  }
 }
+
+// Llamo a la funcion para test.
+main()
