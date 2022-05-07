@@ -1,8 +1,7 @@
 
 # Ejemplo automata finito deterministico
 
-## Uso / funcionamiento
-Para cargar un AFD se tiene que modificar:
+## Uso / Carga de un AFD
 
 La funcion 'carAsimb' tiene que devolver el caracter del alfabeto correspondiente segun cada caracter de entrada.
 ```javascript
@@ -21,7 +20,7 @@ const carAsimb = (caracter) => {
 
 La funcion 'funcionTransicion' carga la tabla de transiciones que es un array bidimensional que guarda en cada poscion un array con el estado y un objeto que contiene el simbolo y la salida para ese simbolo.
   ```javascript
-Se debe modificar para cada AFD la insercion de los elementos en la tabla:
+// Se debe modificar para cada AFD la insercion de los elementos en la tabla:
 
 tablaTransiciones.push(
     [estados[0],
