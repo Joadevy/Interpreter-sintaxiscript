@@ -1,3 +1,5 @@
+// Programado para cadenas sobre {a.b} de longitud par.
+
 // Recibe y carga la tabla de transiciones.
 const funcionTransicion = (estados,alfabeto,tablaTransiciones) => { 
   // Estado a traves de cada simbolo => exactamente una salida. Se guarda en un array con la logica: [estadoPartida, {"simboloEntrada","estadoSiguiente"}]. Esto podria mejorarse, no es muy legible.
