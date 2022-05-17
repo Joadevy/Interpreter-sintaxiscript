@@ -1,0 +1,121 @@
+/* --------------- Fonts -------------- */
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-family: 'Kumbh Sans',Arial, Helvetica, sans-serif;
+}
+
+/* --------------- Colors --------------- */
+:root{
+    --primary-purple: #BB86FC;
+    --primary-variant: #3700B3;
+    --secondary: #03DAC6;
+    --secondary-variant: #018786;
+
+    --background: #121212;
+    --error: #B00020;
+    --error-light: #CF6679;
+    --white: #FFFFFF;
+    --light-white: #d1d1d1;
+    --black: #000000;
+    --light-black:#1b1a1a;
+}
+
+body {
+    background-color: var(--background);
+    display: grid;
+    place-content: center;
+    height: 100vh;
+
+    .titulo,.parrafo{
+        color: var(--white);
+    }
+    .titulo{
+        opacity: 75%;
+    }
+    .parrafo{
+        opacity: 66%;
+    }
+
+    .header{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .header__contenedor-logo{
+            margin-bottom: -2rem;
+            img {
+                width: 100%;
+            }
+        }
+        .header__subtitulo{
+            margin-bottom: 1rem;
+        }
+    }
+
+    .verificador{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .verificador__input-label{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-black);
+            border: 1px solid var(--primary-variant);
+            border-radius: 10px;
+            padding: .75rem;
+            gap: .75rem;
+
+            .verificador__input {
+                color: transparent;
+                width: 175px;
+              }
+              .verificador__input::-webkit-file-upload-button {
+                visibility: hidden;
+              }
+              .verificador__input::before {
+                content: 'Selecciona el archivo';
+                color: black;
+                width: 150px;
+                text-align: center;
+                display: inline-block;
+                background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+                border: 1px solid var(--background);
+                border-radius: 5px;
+                padding: 5px 8px;
+                outline: none;
+                white-space: nowrap;
+                user-select: none;
+                cursor: pointer;
+                text-shadow: 1px 1px #fff;
+                font-weight: 700;
+                font-size: 10pt;
+              }
+              .verificador__input:hover::before {
+                border-color: var(--white);
+              }
+              .verificador__input:active {
+                outline: 0;
+              }
+              .verificador__input:active::before {
+                background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+              }
+        }
+
+        .verificador__output{
+            margin-top: .25rem;
+            background-color: var(--light-black);
+            padding: .75rem;
+        }
+    }
+}
+

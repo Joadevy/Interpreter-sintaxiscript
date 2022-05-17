@@ -1,0 +1,113 @@
+/* --------------- Fonts -------------- */
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Kumbh Sans", Arial, Helvetica, sans-serif;
+}
+
+/* --------------- Colors --------------- */
+:root {
+  --primary-purple: #BB86FC;
+  --primary-variant: #3700B3;
+  --secondary: #03DAC6;
+  --secondary-variant: #018786;
+  --background: #121212;
+  --error: #B00020;
+  --error-light: #CF6679;
+  --white: #FFFFFF;
+  --light-white: #d1d1d1;
+  --black: #000000;
+  --light-black:#1b1a1a;
+}
+
+body {
+  background-color: var(--background);
+  display: grid;
+  place-content: center;
+  height: 100vh;
+}
+body .titulo, body .parrafo {
+  color: var(--white);
+}
+body .titulo {
+  opacity: 75%;
+}
+body .parrafo {
+  opacity: 66%;
+}
+body .header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+body .header .header__contenedor-logo {
+  margin-bottom: -2rem;
+}
+body .header .header__contenedor-logo img {
+  width: 100%;
+}
+body .header .header__subtitulo {
+  margin-bottom: 1rem;
+}
+body .verificador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body .verificador .verificador__input-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-black);
+  border: 1px solid var(--primary-variant);
+  border-radius: 10px;
+  padding: 0.75rem;
+  gap: 0.75rem;
+}
+body .verificador .verificador__input-label .verificador__input {
+  color: transparent;
+  width: 175px;
+}
+body .verificador .verificador__input-label .verificador__input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+body .verificador .verificador__input-label .verificador__input::before {
+  content: "Selecciona el archivo";
+  color: black;
+  width: 150px;
+  text-align: center;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid var(--background);
+  border-radius: 5px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+body .verificador .verificador__input-label .verificador__input:hover::before {
+  border-color: var(--white);
+}
+body .verificador .verificador__input-label .verificador__input:active {
+  outline: 0;
+}
+body .verificador .verificador__input-label .verificador__input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+body .verificador .verificador__output {
+  margin-top: 0.25rem;
+  background-color: var(--light-black);
+  padding: 0.75rem;
+}
+
+/*# sourceMappingURL=styles.css.map */
