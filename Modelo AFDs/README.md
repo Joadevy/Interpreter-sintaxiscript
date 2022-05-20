@@ -1,42 +1,54 @@
 
 # Ejemplo automata finito deterministico
 
-## Uso / Carga de un AFD
+## Uso / Carga de un AFD: ejemplo en cadenas de longitud par sobre {a,b}
 
 La funcion 'carAsimb' tiene que devolver el caracter del alfabeto correspondiente segun cada caracter de entrada.
-```javascript
-const carAsimb = (caracter) => {
-  let simbolo;
-	switch(caracter){
+```typescript
+const carAsimb = (caracter:string):string => {
+  let simbolo:string;
+    switch(caracter){
       case 'a': simbolo = 'a';
       break;
-    	case 'b': simbolo = 'b'
+        case 'b': simbolo = 'b'
       break;
-    	default: simbolo = 'otro';
+        default: simbolo = 'otro';
   }
   return simbolo
 }
 ```
 
-La funcion 'funcionTransicion' carga la tabla de transiciones que es un array bidimensional que guarda en cada poscion un array con el estado y un objeto que contiene el simbolo y la salida para ese simbolo.
-  ```javascript
+La funcion 'cargaTabla' carga la tabla de transiciones que es un array bidimensional que almacena el estado siguiente en la posicion [estado][simbolo]
+  ```typescript
 // Se debe modificar para cada AFD la insercion de los elementos en la tabla:
 
-tablaTransiciones.push(
-    [estados[0],
-    {"simbolo":alfabeto[0],
-    "estadoSiguiente":estados[1]}]
-  );
+tablaTransiciones[estado.q0][simbolo.a] = 1;
+tablaTransiciones[estado.q0][simbolo.b] = 1;
+tablaTransiciones[estado.q0][simbolo.otro] = 2;
 ```
 
 La funcion 'main' se debe modificar con los elementos del AFD que se carga
-  ```javascript
-  // Modificar los elementos
-  const estados = [0,1,2];
-  const alfabeto = ['a','b','otro'];
-  const estadosFinales = [0];
-  const estadoInicial = 0;
+  ```typescript
+  // Modificar los elementos:
 
-  // Modificar la cadena de entrada para testing antes de llamar para validarla.
-  let cadena = 'ababbabb';
+// Cargar el alfabeto
+ enum simbolo{
+  a,
+  b,
+  otro
+}
+
+// Cargar los estados
+enum estado{
+  q0,
+  q1,
+  q2
+}
+
+// Definiendo estado inicial y finales.
+let estadoFinal:Array<number> = [estado.q0];
+let estadoInicial: number = estado.q0;
+
+// Modificar la cadena de entrada para testing antes de llamar para validarla.
+const cadena: string = 'ababbabb';
 ```
