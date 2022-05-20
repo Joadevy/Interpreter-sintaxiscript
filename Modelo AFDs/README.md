@@ -22,9 +22,9 @@ La funcion 'cargaTabla' carga la tabla de transiciones que es un array bidimensi
   ```typescript
 // Se debe modificar para cada AFD la insercion de los elementos en la tabla:
 
-tablaTransiciones[estado.q0][simbolo.a] = 1;
+tablaTransiciones[estado.q0][simbolo.a] = 1; // Desde el estado q0 a traves de a => estado 1.
 tablaTransiciones[estado.q0][simbolo.b] = 1;
-tablaTransiciones[estado.q0][simbolo.otro] = 2;
+tablaTransiciones[estado.q0][simbolo.otro] = 2; // Desde el estado q0 a traves de otro => estado 2.
 ```
 
 La funcion 'main' se debe modificar con los elementos del AFD que se carga
