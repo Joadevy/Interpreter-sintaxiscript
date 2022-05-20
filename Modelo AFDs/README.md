@@ -1,7 +1,7 @@
 
 # Ejemplo automata finito deterministico
 
-## Uso / Carga de un AFD: ejemplo en cadenas de longitud par sobre {a,b}
+## Uso y carga de un AFD: ejemplo en cadenas de longitud par sobre {a,b}
 
 La funcion 'carAsimb' tiene que devolver el caracter del alfabeto correspondiente segun cada caracter de entrada.
 ```typescript
