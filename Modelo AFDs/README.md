@@ -45,7 +45,7 @@ enum estado{
   q2
 }
 
-// Definiendo estado inicial y finales.
+// Definir estado inicial y estados finales (siempre usando los enums)
 let estadoFinal:Array<number> = [estado.q0];
 let estadoInicial: number = estado.q0;
 
