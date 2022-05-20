@@ -1,4 +1,4 @@
-// Programado para cadenas sobre {a.b} de longitud par.
+/* // Programado para cadenas sobre {a.b} de longitud par.
 
 // Recibe y carga la tabla de transiciones.
 const funcionTransicion = (estados,alfabeto,tablaTransiciones) => { 
@@ -105,4 +105,4 @@ function main(){
 }
 
 // Llamo a la funcion para test.
-main()
+main() */
