@@ -7,7 +7,7 @@
     <title>Proyecto final sintaxis</title>
     <link rel="stylesheet" href="src/estilos/styles.css">
     <link rel="shortcut icon" href="src/estilos/assets/icon/favicon.png" type="image/x-icon">
-    <script src="src/Analizador lexico/main/index.js"></script>
+    <script src="src/build/src/Analizador lexico/main/index.js"></script>
 </head>
 <body>
     <header class="header">
@@ -22,7 +22,7 @@
         <article class="verificador">
             <!-- Carga el archivo que sera el programa input del analizador lexico -->
             <label for="input" class="verificador__input-label parrafo">
-                Ingrese su programa<input class="verificador__input" id="input" type="file" accept=".txt"> onchange="mostrarArchivo(this.files[0])">
+                Ingrese su programa<input class="verificador__input" id="input" type="file" accept=".txt" onchange="mostrarArchivo(this.files[0])">
             </label>
             <pre class="verificador__output parrafo" id="output"></pre>
         </article>
