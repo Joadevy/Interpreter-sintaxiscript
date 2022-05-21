@@ -36,6 +36,3 @@ import {esConstEntera} from "../Automatas/constanteEntera";
   '!=' : 'opRel',
   "=" : 'opAsignacion',
 };
-
-console.log('hola');
-esConstEntera('-1234');
