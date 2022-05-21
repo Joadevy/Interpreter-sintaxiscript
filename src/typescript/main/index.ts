@@ -1,3 +1,4 @@
+import {esConstEntera} from "../Automatas/constanteEntera";
 
 // Muestra el contenido del archivo en el HTML, es la input del analizador lexico.
  async function mostrarArchivo(file:File):Promise<void> {
@@ -35,4 +36,6 @@
   '!=' : 'opRel',
   "=" : 'opAsignacion',
 };
-  
+
+console.log('hola');
+esConstEntera('-1234');

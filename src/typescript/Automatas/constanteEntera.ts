@@ -33,7 +33,7 @@ const carAsimb = (caracter:string):string => {
     return estadosFinales.includes(estadoActual);
   }
   
-  function esConstEntera(cadena:string):void{
+ export function esConstEntera(cadena:string):void{
   enum simbolo{
     'digito',
     '-',

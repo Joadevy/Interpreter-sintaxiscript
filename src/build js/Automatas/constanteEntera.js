@@ -1,37 +1,30 @@
 "use strict";
-// Forma mas compacta y legible de resolver el problema y mas parecida a la que dio el profesor.
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.esConstEntera = void 0;
+const funciones_1 = require("./funciones");
 // Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
 const carAsimb = (caracter) => {
     let simbolo;
     switch (caracter) {
-        case 'a':
-            simbolo = 'a';
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            simbolo = 'digito';
             break;
-        case 'b':
-            simbolo = 'b';
+        case '-':
+            simbolo = '-';
             break;
         default: simbolo = 'otro';
     }
     return simbolo;
 };
-function creaTabla(tablaTransiciones, cantidadSimbolos) {
-    // Creando cada subArray para cargar los datos en la tabla
-    for (let celdas = 0; celdas < cantidadSimbolos; celdas++) {
-        tablaTransiciones.push([]);
-    }
-}
-// ***** CARGA DE LA TABLA DE TRANSICIONES *****
-function cargaTabla(tablaTransiciones, estado, simbolo) {
-    tablaTransiciones[estado.q0][simbolo.a] = 1;
-    tablaTransiciones[estado.q0][simbolo.b] = 1;
-    tablaTransiciones[estado.q0][simbolo.otro] = 2;
-    tablaTransiciones[estado.q1][simbolo.a] = 0;
-    tablaTransiciones[estado.q1][simbolo.b] = 0;
-    tablaTransiciones[estado.q1][simbolo.otro] = 2;
-    tablaTransiciones[estado.q2][simbolo.a] = 2;
-    tablaTransiciones[estado.q2][simbolo.b] = 2;
-    tablaTransiciones[estado.q2][simbolo.otro] = 2;
-}
 function esValida(estadoInicial, estadosFinales, tablaTransiciones, simbolo, cadena) {
     let estadoActual = estadoInicial;
     // Toma un caracter y busca el estado siguiente en la tabla de transiciones.
@@ -41,11 +34,11 @@ function esValida(estadoInicial, estadosFinales, tablaTransiciones, simbolo, cad
     // estadoActual contendra el estado final al que llego el automata.
     return estadosFinales.includes(estadoActual);
 }
-function main() {
+function esConstEntera(cadena) {
     let simbolo;
     (function (simbolo) {
-        simbolo[simbolo["a"] = 0] = "a";
-        simbolo[simbolo["b"] = 1] = "b";
+        simbolo[simbolo["digito"] = 0] = "digito";
+        simbolo[simbolo["-"] = 1] = "-";
         simbolo[simbolo["otro"] = 2] = "otro";
     })(simbolo || (simbolo = {}));
     let estado;
@@ -55,14 +48,21 @@ function main() {
         estado[estado["q2"] = 2] = "q2";
     })(estado || (estado = {}));
     // Definiendo estado inicial y finales.
-    let estadoFinal = [estado.q0];
+    let estadoFinal = [estado.q1];
     let estadoInicial = estado.q0;
     let cantidadSimbolos = (Object.keys(simbolo).length / 2); // Porque es un enum numerico.
     let tablaTransiciones = [];
-    creaTabla(tablaTransiciones, cantidadSimbolos);
-    cargaTabla(tablaTransiciones, estado, simbolo);
-    // Cargar la cadena a comprobar
-    const cadena = 'ababbabb';
+    (0, funciones_1.creaTabla)(tablaTransiciones, cantidadSimbolos);
+    // ***** CARGA DE LA TABLA DE TRANSICIONES *****
+    tablaTransiciones[estado.q0][simbolo.digito] = 1;
+    tablaTransiciones[estado.q0][simbolo['-']] = 1;
+    tablaTransiciones[estado.q0][simbolo.otro] = 2;
+    tablaTransiciones[estado.q1][simbolo.digito] = 1;
+    tablaTransiciones[estado.q1][simbolo['-']] = 2;
+    tablaTransiciones[estado.q1][simbolo.otro] = 2;
+    tablaTransiciones[estado.q2][simbolo.digito] = 2;
+    tablaTransiciones[estado.q2][simbolo['-']] = 2;
+    tablaTransiciones[estado.q2][simbolo.otro] = 2;
     const resultado = esValida(estadoInicial, estadoFinal, tablaTransiciones, simbolo, cadena);
     if (resultado) {
         console.log('CADENA VALIDA');
@@ -71,4 +71,6 @@ function main() {
         console.log('CADENA NO VALIDA');
     }
 }
-main();
+exports.esConstEntera = esConstEntera;
+// Paso la cadena a comprobar
+esConstEntera('-12345');
