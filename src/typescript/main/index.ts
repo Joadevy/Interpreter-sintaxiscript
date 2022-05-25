@@ -11,6 +11,12 @@ import {esConstEntera} from "../Automatas/constanteEntera";
     }else{
       alert('Ha ocurrido un error, intentalo de nuevo.');
     }
+    let resultado:boolean= esConstEntera('1234');
+    if (resultado){
+      console.log('CADENA VALIDA')
+    } else {
+      console.log('CADENA NO VALIDA');
+    }
   }
 
   let tablaSimbolos: object = {

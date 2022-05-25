@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.esConstEntera = void 0;
+exports.esConstEntera = exports.esValida = exports.carAsimb = void 0;
 const funciones_1 = require("./funciones");
 // Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
 const carAsimb = (caracter) => {
@@ -25,15 +25,17 @@ const carAsimb = (caracter) => {
     }
     return simbolo;
 };
+exports.carAsimb = carAsimb;
 function esValida(estadoInicial, estadosFinales, tablaTransiciones, simbolo, cadena) {
     let estadoActual = estadoInicial;
     // Toma un caracter y busca el estado siguiente en la tabla de transiciones.
     for (let caracter of cadena) {
-        estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(caracter)]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
+        estadoActual = tablaTransiciones[estadoActual][simbolo[(0, exports.carAsimb)(caracter)]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
     }
     // estadoActual contendra el estado final al que llego el automata.
     return estadosFinales.includes(estadoActual);
 }
+exports.esValida = esValida;
 function esConstEntera(cadena) {
     let simbolo;
     (function (simbolo) {
@@ -63,14 +65,6 @@ function esConstEntera(cadena) {
     tablaTransiciones[estado.q2][simbolo.digito] = 2;
     tablaTransiciones[estado.q2][simbolo['-']] = 2;
     tablaTransiciones[estado.q2][simbolo.otro] = 2;
-    const resultado = esValida(estadoInicial, estadoFinal, tablaTransiciones, simbolo, cadena);
-    if (resultado) {
-        console.log('CADENA VALIDA');
-    }
-    else {
-        console.log('CADENA NO VALIDA');
-    }
+    return esValida(estadoInicial, estadoFinal, tablaTransiciones, simbolo, cadena);
 }
 exports.esConstEntera = esConstEntera;
-// Paso la cadena a comprobar
-esConstEntera('-12345');

@@ -1,7 +1,7 @@
 import {creaTabla} from "./funciones";
 
 // Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
-const carAsimb = (caracter:string):string => {
+export const carAsimb = (caracter:string):string => {
     let simbolo:string;
       switch(caracter){
         case '0':
@@ -23,7 +23,7 @@ const carAsimb = (caracter:string):string => {
     return simbolo
   }
 
-  function esValida(estadoInicial:number,estadosFinales:Array<number>,tablaTransiciones:Array<any>,simbolo:any,cadena:string):boolean{
+  export function esValida(estadoInicial:number,estadosFinales:Array<number>,tablaTransiciones:Array<any>,simbolo:any,cadena:string):boolean{
     let estadoActual: number = estadoInicial;
     // Toma un caracter y busca el estado siguiente en la tabla de transiciones.
     for (let caracter of cadena){
@@ -33,7 +33,7 @@ const carAsimb = (caracter:string):string => {
     return estadosFinales.includes(estadoActual);
   }
   
- export function esConstEntera(cadena:string):void{
+ export function esConstEntera(cadena:string):boolean{
   enum simbolo{
     'digito',
     '-',
@@ -67,14 +67,7 @@ const carAsimb = (caracter:string):string => {
   tablaTransiciones[estado.q2][simbolo['-']] = 2;
   tablaTransiciones[estado.q2][simbolo.otro] = 2;
   
-  const resultado: boolean = esValida(estadoInicial,estadoFinal,tablaTransiciones,simbolo,cadena);
-  if (resultado){
-      console.log('CADENA VALIDA')
-    } else {
-      console.log('CADENA NO VALIDA');
-    }
-  }
-  
-// Paso la cadena a comprobar
-  esConstEntera('-12345');
+  return esValida(estadoInicial,estadoFinal,tablaTransiciones,simbolo,cadena);
+ }
+
   

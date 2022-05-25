@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const constanteEntera_1 = require("../Automatas/constanteEntera");
 // Muestra el contenido del archivo en el HTML, es la input del analizador lexico.
 function mostrarArchivo(file) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -21,6 +22,13 @@ function mostrarArchivo(file) {
         }
         else {
             alert('Ha ocurrido un error, intentalo de nuevo.');
+        }
+        let resultado = (0, constanteEntera_1.esConstEntera)('123');
+        if (resultado) {
+            console.log('CADENA VALIDA');
+        }
+        else {
+            console.log('CADENA NO VALIDA');
         }
     });
 }
