@@ -11,7 +11,7 @@ import { esConstEntera } from '../Automatas/constanteEntera.js';
 // Muestra el contenido del archivo en el HTML, es la input del analizador lexico.
 const input = document.getElementById('input');
 input === null || input === void 0 ? void 0 : input.addEventListener('change', (e) => {
-    if (e.target.files[0] != null) {
+    if (e.target.files[0] != null) { // No entiendo porque esto no lo soluciona, nunca puede ser null.
         const archivo = e.target.files[0];
         // Expresion regular que comprueba que se haya pasado un .txt
         let compruebaTXT = /\w+\.txt$/;
@@ -25,12 +25,14 @@ input === null || input === void 0 ? void 0 : input.addEventListener('change', (
 });
 function mostrarArchivo(file) {
     return __awaiter(this, void 0, void 0, function* () {
-        // if (typeof file == .txt) que haga esto, sino un alert('Ingrese archivo .txt') para evitar errores.
+        // Contenido va a guardar toda la cadena, es decir, todo el codigo del programa.
         let contenido = yield file.text();
         let output = document.getElementById('output');
         if (output) {
             output.textContent = contenido;
-            let resultado = esConstEntera('-123,25');
+            //.trim() para remover espacios en blanco al inicio y al final del archivo.
+            let resultado = esConstEntera(contenido.trim());
+            console.log(resultado);
             if (resultado) {
                 console.log('CADENA VALIDA');
             }

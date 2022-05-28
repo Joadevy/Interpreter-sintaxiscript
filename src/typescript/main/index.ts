@@ -18,12 +18,14 @@ input?.addEventListener('change', (e) => {
 
 
  async function mostrarArchivo(file:File):Promise<void> {
-   // if (typeof file == .txt) que haga esto, sino un alert('Ingrese archivo .txt') para evitar errores.
+    // Contenido va a guardar toda la cadena, es decir, todo el codigo del programa.
     let contenido:string = await file.text();
     let output = document.getElementById('output');
     if (output){
       output.textContent = contenido;
-      let resultado = esConstEntera('-123,25');
+      //.trim() para remover espacios en blanco al inicio y al final del archivo.
+      let resultado = esConstEntera(contenido.trim());
+      console.log(resultado);
       if (resultado){
         console.log('CADENA VALIDA')
       } else {
