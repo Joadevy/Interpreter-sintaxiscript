@@ -4,7 +4,16 @@ import {esConstEntera} from '../Automatas/constanteEntera.js';
 
 const input = document.getElementById('input');
 input?.addEventListener('change', (e) => {
-    mostrarArchivo(e.target.files[0]);
+  if (e.target.files[0] != null) { // No entiendo porque esto no lo soluciona, nunca puede ser null.
+    const archivo = e.target.files[0];
+  // Expresion regular que comprueba que se haya pasado un .txt
+    let compruebaTXT = /\w+\.txt$/;
+    if (compruebaTXT.test(archivo.name)){
+      mostrarArchivo(archivo);
+    } else {
+      alert('Porfavor, introduce un archivo de texto .TXT')
+    }
+  }
 })
 
 

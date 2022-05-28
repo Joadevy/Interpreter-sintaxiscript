@@ -11,7 +11,17 @@ import { esConstEntera } from '../Automatas/constanteEntera.js';
 // Muestra el contenido del archivo en el HTML, es la input del analizador lexico.
 const input = document.getElementById('input');
 input === null || input === void 0 ? void 0 : input.addEventListener('change', (e) => {
-    mostrarArchivo(e.target.files[0]);
+    if (e.target.files[0] != null) {
+        const archivo = e.target.files[0];
+        // Expresion regular que comprueba que se haya pasado un .txt
+        let compruebaTXT = /\w+\.txt$/;
+        if (compruebaTXT.test(archivo.name)) {
+            mostrarArchivo(archivo);
+        }
+        else {
+            alert('Porfavor, introduce un archivo de texto .TXT');
+        }
+    }
 });
 function mostrarArchivo(file) {
     return __awaiter(this, void 0, void 0, function* () {
