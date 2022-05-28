@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,9 +7,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const constanteEntera_1 = require("../Automatas/constanteEntera");
+import { esConstEntera } from '../Automatas/constanteEntera.js';
 // Muestra el contenido del archivo en el HTML, es la input del analizador lexico.
+const input = document.getElementById('input');
+input === null || input === void 0 ? void 0 : input.addEventListener('change', (e) => {
+    mostrarArchivo(e.target.files[0]);
+});
 function mostrarArchivo(file) {
     return __awaiter(this, void 0, void 0, function* () {
         // if (typeof file == .txt) que haga esto, sino un alert('Ingrese archivo .txt') para evitar errores.
@@ -18,17 +20,17 @@ function mostrarArchivo(file) {
         let output = document.getElementById('output');
         if (output) {
             output.textContent = contenido;
+            let resultado = esConstEntera('-123,25');
+            if (resultado) {
+                console.log('CADENA VALIDA');
+            }
+            else {
+                console.log('CADENA INVALIDA');
+            }
             // llama a la funcion ObtenerSiguienteCompLex para empezar a reconocer las cadenas.
         }
         else {
             alert('Ha ocurrido un error, intentalo de nuevo.');
-        }
-        let resultado = (0, constanteEntera_1.esConstEntera)('123');
-        if (resultado) {
-            console.log('CADENA VALIDA');
-        }
-        else {
-            console.log('CADENA NO VALIDA');
         }
     });
 }

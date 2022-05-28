@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.esConstReal = exports.esValida = exports.carAsimb = void 0;
-const funciones_1 = require("./funciones");
+import { creaTabla } from "./funciones.js";
 // Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
-const carAsimb = (caracter) => {
+export const carAsimb = (caracter) => {
     let simbolo;
     switch (caracter) {
         case '0':
@@ -25,18 +22,16 @@ const carAsimb = (caracter) => {
     }
     return simbolo;
 };
-exports.carAsimb = carAsimb;
-function esValida(estadoInicial, estadosFinales, tablaTransiciones, simbolo, cadena) {
+export function esValida(estadoInicial, estadosFinales, tablaTransiciones, simbolo, cadena) {
     let estadoActual = estadoInicial;
     // Toma un caracter y busca el estado siguiente en la tabla de transiciones.
     for (let caracter of cadena) {
-        estadoActual = tablaTransiciones[estadoActual][simbolo[(0, exports.carAsimb)(caracter)]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
+        estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(caracter)]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
     }
     // estadoActual contendra el estado final al que llego el automata.
     return estadosFinales.includes(estadoActual);
 }
-exports.esValida = esValida;
-function esConstReal(cadena) {
+export function esConstReal(cadena) {
     let simbolo;
     (function (simbolo) {
         simbolo[simbolo["digito"] = 0] = "digito";
@@ -54,7 +49,7 @@ function esConstReal(cadena) {
     let estadoInicial = estado.q0;
     let cantidadSimbolos = (Object.keys(simbolo).length / 2); // Porque es un enum numerico.
     let tablaTransiciones = [];
-    (0, funciones_1.creaTabla)(tablaTransiciones, cantidadSimbolos);
+    creaTabla(tablaTransiciones, cantidadSimbolos);
     // ***** CARGA DE LA TABLA DE TRANSICIONES *****
     tablaTransiciones[estado.q0][simbolo.digito] = 1;
     tablaTransiciones[estado.q0][simbolo['-']] = 1;
@@ -73,4 +68,3 @@ function esConstReal(cadena) {
         console.log('CADENA NO VALIDA');
     }
 }
-exports.esConstReal = esConstReal;

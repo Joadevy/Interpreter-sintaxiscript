@@ -1,4 +1,4 @@
-import {creaTabla} from "./funciones";
+import {creaTabla} from "./funciones.js";
 
 // Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
 export const carAsimb = (caracter:string):string => {
