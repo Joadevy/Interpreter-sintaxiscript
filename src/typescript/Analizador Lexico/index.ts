@@ -1,21 +1,23 @@
 import {esConstEntera} from '../Analizador Lexico/Automatas/constanteEntera.js';
 
-export async function mostrarArchivo(file:File):Promise<void> {
-    // Contenido va a guardar toda la cadena, es decir, todo el codigo del programa.
-    let contenido:string = await file.text();
+export function analizadorLexico(codigoFuente:string):void{
+
+    // Aca habria que hacer el manejo general del analizador lexico
+
+
     let output = document.getElementById('output');
     if (output){
-      output.textContent = contenido;
-      //.trim() para remover espacios en blanco al inicio y al final del archivo.
-      let resultado = esConstEntera(contenido.trim());
+      let resultado = esConstEntera(codigoFuente);
       console.log(resultado);
       if (resultado){
+        output.textContent = '"' + codigoFuente + '"'+ " es una cadena valida";
         console.log('CADENA VALIDA')
       } else {
+        output.textContent = '"' + codigoFuente + '"' + " es una cadena invalida";
         console.log('CADENA INVALIDA')
       }
       // llama a la funcion ObtenerSiguienteCompLex para empezar a reconocer las cadenas.
     }else{
       alert('Ha ocurrido un error, intentalo de nuevo.');
     }
-  }
+  } 

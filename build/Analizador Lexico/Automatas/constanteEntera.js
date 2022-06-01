@@ -1,6 +1,6 @@
 import { creaTabla } from "./funciones.js";
 // Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
-export const carAsimb = (caracter) => {
+const carAsimb = (caracter) => {
     let simbolo;
     switch (caracter) {
         case '0':
@@ -22,7 +22,7 @@ export const carAsimb = (caracter) => {
     }
     return simbolo;
 };
-export function esValida(estadoInicial, estadosFinales, tablaTransiciones, simbolo, cadena) {
+function esValida(estadoInicial, estadosFinales, tablaTransiciones, simbolo, cadena) {
     let estadoActual = estadoInicial;
     // Toma un caracter y busca el estado siguiente en la tabla de transiciones.
     for (let caracter of cadena) {
