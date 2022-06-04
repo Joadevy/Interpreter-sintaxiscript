@@ -31,7 +31,7 @@ function esValida(estadoInicial, estadosFinales, tablaTransiciones, simbolo, cad
     // estadoActual contendra el estado final al que llego el automata.
     return estadosFinales.includes(estadoActual);
 }
-export function esConstEntera(cadena) {
+export function esConstEntera(codigoFuente, lexema, control) {
     let simbolo;
     (function (simbolo) {
         simbolo[simbolo["digito"] = 0] = "digito";
@@ -44,9 +44,6 @@ export function esConstEntera(cadena) {
         estado[estado["q1"] = 1] = "q1";
         estado[estado["q2"] = 2] = "q2";
     })(estado || (estado = {}));
-    // Definiendo estado inicial y finales.
-    let estadoFinal = [estado.q1];
-    let estadoInicial = estado.q0;
     let cantidadSimbolos = (Object.keys(simbolo).length / 2); // Porque es un enum numerico.
     let tablaTransiciones = [];
     creaTabla(tablaTransiciones, cantidadSimbolos);
@@ -60,5 +57,27 @@ export function esConstEntera(cadena) {
     tablaTransiciones[estado.q2][simbolo.digito] = 2;
     tablaTransiciones[estado.q2][simbolo['-']] = 2;
     tablaTransiciones[estado.q2][simbolo.otro] = 2;
-    return esValida(estadoInicial, estadoFinal, tablaTransiciones, simbolo, cadena);
+    // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
+    // Elementos del analizador lexico
+    let controlAnt = control;
+    // Definicin de elementos necesarios para el automata
+    let estadosFinales = [estado.q1];
+    let estadoInicial = estado.q0;
+    // Inicializando estado actual en el inicial.
+    let estadoActual = estadoInicial;
+    // estadoActual contendra el estado al que llego el automata tras analizar el caracter del codigo fuente.
+    while (estadoActual !== 1) {
+        // Toma un caracter del archivo y busca el estado siguiente en la tabla de transiciones.
+        estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(codigoFuente[control])]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
+        if (estadoActual !== 1) {
+            lexema += codigoFuente[control];
+        }
+        control++;
+    }
+    if (estadosFinales.includes(estadoActual)) {
+        return [true, control - 1, lexema];
+    }
+    else {
+        return [false, controlAnt];
+    }
 }

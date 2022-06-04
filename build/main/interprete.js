@@ -7,7 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { analizadorLexico } from '../Analizador Lexico/index.js';
+import { obtenerSiguienteComplex } from '../Analizador Lexico/index.js';
+import { tablaSimbolos } from '../Analizador Lexico/tablaSimbolos.js';
 // Esta funcion hara el manejo del compilador completo.
 export function interprete(archivo) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -15,6 +16,9 @@ export function interprete(archivo) {
         //.trim() para remover espacios en blanco al inicio y al final del archivo.
         let codigoFuente = (yield archivo.text()).trim();
         // Aca se debe declarar las variables para manejar el string codigoFuente (control,lexema)
-        analizadorLexico(codigoFuente);
+        let control = 0;
+        let lexema = "";
+        let compLex = '';
+        let inicio = obtenerSiguienteComplex(codigoFuente, control, lexema, tablaSimbolos, compLex);
     });
 }

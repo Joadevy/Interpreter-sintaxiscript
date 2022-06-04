@@ -1,4 +1,4 @@
-let tablaSimbolos: object = {
+export let tablaSimbolos: object = {
     // Tiene la forma de lexema: componente lexico, se ira actualizando a medida que se encuentren identificadores.
     'program':'PROGRAM',
     'while':'WHILE',

@@ -16,61 +16,84 @@ const carAsimb = (caracter:string):string => {
         case '9':
           simbolo = 'digito';
         break;
-          case '-': simbolo = '-'
+        case ',': 
+        case '.':
+          simbolo = 'decimal'
+        break;
+        case '-':
+          simbolo = '-'
         break;
           default: simbolo = 'otro';
     }
     return simbolo
   }
 
-  function esValida(estadoInicial:number,estadosFinales:Array<number>,tablaTransiciones:Array<any>,simbolo:any,cadena:string):boolean{
+  export function esConstReal(codigoFuente:string,lexema:string,control:number):Array<any>{
+    enum simbolo{
+      'digito',
+      '-',
+      'decimal',
+      'otro'
+    }
+    
+    enum estado{
+      q0,
+      q1,
+      q2,
+      q3,
+      q4,
+      q5
+    }
+    
+    let cantidadSimbolos: number= (Object.keys(simbolo).length / 2); // Porque es un enum numerico.
+    let tablaTransiciones: Array<any> = [];
+    creaTabla(tablaTransiciones,cantidadSimbolos);
+  
+     // ***** CARGA DE LA TABLA DE TRANSICIONES *****
+    tablaTransiciones[estado.q0][simbolo.digito] = 3;
+    tablaTransiciones[estado.q0][simbolo['-']] = 3;
+    tablaTransiciones[estado.q0][simbolo.decimal] = 5;
+    tablaTransiciones[estado.q0][simbolo.otro] = 5;
+
+    tablaTransiciones[estado.q2][simbolo.digito] = 4;
+    tablaTransiciones[estado.q2][simbolo['-']] = 5;
+    tablaTransiciones[estado.q2][simbolo.decimal] = 5;
+    tablaTransiciones[estado.q2][simbolo.otro] = 5;
+
+    tablaTransiciones[estado.q3][simbolo.digito] = 3;
+    tablaTransiciones[estado.q3][simbolo['-']] = 1;
+    tablaTransiciones[estado.q3][simbolo.decimal] = 2;
+    tablaTransiciones[estado.q3][simbolo.otro] = 1;
+
+    //tablaTransiciones[estado.q4][simbolo.digito] = 4;
+    //tablaTransiciones[estado.q4][simbolo['-']] = 1;
+    //tablaTransiciones[estado.q4][simbolo.decimal] = 1;
+    //tablaTransiciones[estado.q4][simbolo.otro] = 1;
+  
+    // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
+  
+    // Elementos del analizador lexico
+    let controlAnt = control;
+  
+    // Definicin de elementos necesarios para el automata
+    let estadosFinales:Array<number> = [estado.q1];
+    let estadoInicial: number = estado.q0;
+  
+    // Inicializando estado actual en el inicial.
     let estadoActual: number = estadoInicial;
-    // Toma un caracter y busca el estado siguiente en la tabla de transiciones.
-    for (let caracter of cadena){
-     estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(caracter) as any]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
+    // estadoActual contendra el estado al que llego el automata tras analizar el caracter del codigo fuente.
+    while(estadoActual == (0|2|3|4)){
+      // Toma un caracter del archivo y busca el estado siguiente en la tabla de transiciones.
+      estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(codigoFuente[control]) as any]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
+      if (estadoActual == (0|2|3|4)) {
+        lexema+=codigoFuente[control];
+      }
+      control++;
     }
-    // estadoActual contendra el estado final al que llego el automata.
-    return estadosFinales.includes(estadoActual);
-  }
   
- export function esConstReal(cadena:string):void{
-  enum simbolo{
-    'digito',
-    '-',
-    'otro'
-  }
-  
-  enum estado{
-    q0,
-    q1,
-    q2
-  }
-  
-  // Definiendo estado inicial y finales.
-  let estadoFinal:Array<number> = [estado.q1];
-  let estadoInicial: number = estado.q0;
-  
-  let cantidadSimbolos: number= (Object.keys(simbolo).length / 2); // Porque es un enum numerico.
-  let tablaTransiciones: Array<any> = [];
-  creaTabla(tablaTransiciones,cantidadSimbolos);
-
-   // ***** CARGA DE LA TABLA DE TRANSICIONES *****
-  tablaTransiciones[estado.q0][simbolo.digito] = 1;
-  tablaTransiciones[estado.q0][simbolo['-']] = 1;
-  tablaTransiciones[estado.q0][simbolo.otro] = 2;
-
-  tablaTransiciones[estado.q1][simbolo.digito] = 1;
-  tablaTransiciones[estado.q1][simbolo['-']] = 2;
-  tablaTransiciones[estado.q1][simbolo.otro] = 2;
-
-  tablaTransiciones[estado.q2][simbolo.digito] = 2;
-  tablaTransiciones[estado.q2][simbolo['-']] = 2;
-  tablaTransiciones[estado.q2][simbolo.otro] = 2;
-  
-  const resultado: boolean = esValida(estadoInicial,estadoFinal,tablaTransiciones,simbolo,cadena);
-  if (resultado){
-      console.log('CADENA VALIDA')
+    if (estadosFinales.includes(estadoActual)){
+      return [true,control-1,lexema]
     } else {
-      console.log('CADENA NO VALIDA');
+      return [false,controlAnt]
     }
-  }
+   }

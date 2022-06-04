@@ -33,7 +33,7 @@ import {creaTabla} from "./funciones.js";
     return estadosFinales.includes(estadoActual);
   }
   
- export function esConstEntera(cadena:string):boolean{
+ export function esConstEntera(codigoFuente:string,lexema:string,control:number):Array<any>{
   enum simbolo{
     'digito',
     '-',
@@ -45,10 +45,6 @@ import {creaTabla} from "./funciones.js";
     q1,
     q2
   }
-  
-  // Definiendo estado inicial y finales.
-  let estadoFinal:Array<number> = [estado.q1];
-  let estadoInicial: number = estado.q0;
   
   let cantidadSimbolos: number= (Object.keys(simbolo).length / 2); // Porque es un enum numerico.
   let tablaTransiciones: Array<any> = [];
@@ -66,8 +62,33 @@ import {creaTabla} from "./funciones.js";
   tablaTransiciones[estado.q2][simbolo.digito] = 2;
   tablaTransiciones[estado.q2][simbolo['-']] = 2;
   tablaTransiciones[estado.q2][simbolo.otro] = 2;
-  
-  return esValida(estadoInicial,estadoFinal,tablaTransiciones,simbolo,cadena);
+
+  // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
+
+  // Elementos del analizador lexico
+  let controlAnt = control;
+
+  // Definicin de elementos necesarios para el automata
+  let estadosFinales:Array<number> = [estado.q1];
+  let estadoInicial: number = estado.q0;
+
+  // Inicializando estado actual en el inicial.
+  let estadoActual: number = estadoInicial;
+  // estadoActual contendra el estado al que llego el automata tras analizar el caracter del codigo fuente.
+  while(estadoActual !== 1){
+    // Toma un caracter del archivo y busca el estado siguiente en la tabla de transiciones.
+    estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(codigoFuente[control]) as any]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
+    if (estadoActual !== 1) {
+      lexema+=codigoFuente[control];
+    }
+    control++;
+  }
+
+  if (estadosFinales.includes(estadoActual)){
+    return [true,control-1,lexema]
+  } else {
+    return [false,controlAnt]
+  }
  }
 
   
