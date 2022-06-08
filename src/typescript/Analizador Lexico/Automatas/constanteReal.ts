@@ -45,9 +45,9 @@ const carAsimb = (caracter:string):string => {
       q5
     }
     
-    let cantidadSimbolos: number= (Object.keys(simbolo).length / 2); // Porque es un enum numerico.
+    let cantidadEstados: number= (Object.keys(estado).length / 2); // Porque es un enum numerico.
     let tablaTransiciones: Array<any> = [];
-    creaTabla(tablaTransiciones,cantidadSimbolos);
+    creaTabla(tablaTransiciones,cantidadEstados);
   
      // ***** CARGA DE LA TABLA DE TRANSICIONES *****
     tablaTransiciones[estado.q0][simbolo.digito] = 3;
@@ -64,11 +64,11 @@ const carAsimb = (caracter:string):string => {
     tablaTransiciones[estado.q3][simbolo['-']] = 1;
     tablaTransiciones[estado.q3][simbolo.decimal] = 2;
     tablaTransiciones[estado.q3][simbolo.otro] = 1;
-
-    //tablaTransiciones[estado.q4][simbolo.digito] = 4;
-    //tablaTransiciones[estado.q4][simbolo['-']] = 1;
-    //tablaTransiciones[estado.q4][simbolo.decimal] = 1;
-    //tablaTransiciones[estado.q4][simbolo.otro] = 1;
+    
+    tablaTransiciones[estado.q4][simbolo.digito] = 4;
+    tablaTransiciones[estado.q4][simbolo['-']] = 1;
+    tablaTransiciones[estado.q4][simbolo.decimal] = 1;
+    tablaTransiciones[estado.q4][simbolo.otro] = 1;
   
     // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
   

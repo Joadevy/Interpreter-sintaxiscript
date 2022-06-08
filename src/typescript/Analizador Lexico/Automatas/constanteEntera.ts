@@ -46,9 +46,9 @@ import {creaTabla} from "./funciones.js";
     q2
   }
   
-  let cantidadSimbolos: number= (Object.keys(simbolo).length / 2); // Porque es un enum numerico.
+  let cantidadEstados: number= (Object.keys(estado).length / 2); // Porque es un enum numerico.
   let tablaTransiciones: Array<any> = [];
-  creaTabla(tablaTransiciones,cantidadSimbolos);
+  creaTabla(tablaTransiciones,cantidadEstados);
 
    // ***** CARGA DE LA TABLA DE TRANSICIONES *****
   tablaTransiciones[estado.q0][simbolo.digito] = 1;

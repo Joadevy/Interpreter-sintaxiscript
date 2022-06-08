@@ -43,9 +43,9 @@ export function esConstReal(codigoFuente, lexema, control) {
         estado[estado["q4"] = 4] = "q4";
         estado[estado["q5"] = 5] = "q5";
     })(estado || (estado = {}));
-    let cantidadSimbolos = (Object.keys(simbolo).length / 2); // Porque es un enum numerico.
+    let cantidadEstados = (Object.keys(estado).length / 2); // Porque es un enum numerico.
     let tablaTransiciones = [];
-    creaTabla(tablaTransiciones, cantidadSimbolos);
+    creaTabla(tablaTransiciones, cantidadEstados);
     // ***** CARGA DE LA TABLA DE TRANSICIONES *****
     tablaTransiciones[estado.q0][simbolo.digito] = 3;
     tablaTransiciones[estado.q0][simbolo['-']] = 3;
@@ -59,10 +59,10 @@ export function esConstReal(codigoFuente, lexema, control) {
     tablaTransiciones[estado.q3][simbolo['-']] = 1;
     tablaTransiciones[estado.q3][simbolo.decimal] = 2;
     tablaTransiciones[estado.q3][simbolo.otro] = 1;
-    //tablaTransiciones[estado.q4][simbolo.digito] = 4;
-    //tablaTransiciones[estado.q4][simbolo['-']] = 1;
-    //tablaTransiciones[estado.q4][simbolo.decimal] = 1;
-    //tablaTransiciones[estado.q4][simbolo.otro] = 1;
+    tablaTransiciones[estado.q4][simbolo.digito] = 4;
+    tablaTransiciones[estado.q4][simbolo['-']] = 1;
+    tablaTransiciones[estado.q4][simbolo.decimal] = 1;
+    tablaTransiciones[estado.q4][simbolo.otro] = 1;
     // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
     // Elementos del analizador lexico
     let controlAnt = control;
@@ -75,7 +75,6 @@ export function esConstReal(codigoFuente, lexema, control) {
     while (estadoActual == (0 | 2 | 3 | 4)) {
         // Toma un caracter del archivo y busca el estado siguiente en la tabla de transiciones.
         estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(codigoFuente[control])]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
-        console.log(estadoActual);
         if (estadoActual == (0 | 2 | 3 | 4)) {
             lexema += codigoFuente[control];
         }

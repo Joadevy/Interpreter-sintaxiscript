@@ -44,9 +44,9 @@ export function esConstEntera(codigoFuente, lexema, control) {
         estado[estado["q1"] = 1] = "q1";
         estado[estado["q2"] = 2] = "q2";
     })(estado || (estado = {}));
-    let cantidadSimbolos = (Object.keys(simbolo).length / 2); // Porque es un enum numerico.
+    let cantidadEstados = (Object.keys(estado).length / 2); // Porque es un enum numerico.
     let tablaTransiciones = [];
-    creaTabla(tablaTransiciones, cantidadSimbolos);
+    creaTabla(tablaTransiciones, cantidadEstados);
     // ***** CARGA DE LA TABLA DE TRANSICIONES *****
     tablaTransiciones[estado.q0][simbolo.digito] = 1;
     tablaTransiciones[estado.q0][simbolo['-']] = 1;
