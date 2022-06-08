@@ -1,5 +1,3 @@
-import {analizadorLexico} from '../Analizador Lexico/index.js';
-
 import {obtenerSiguienteComplex} from '../Analizador Lexico/index.js';
 import {tablaSimbolos} from '../Analizador Lexico/tablaSimbolos.js';
 

@@ -1,11 +1,12 @@
 import {esConstReal} from '../Analizador Lexico/Automatas/constanteReal.js';
 
-export function analizadorLexico(codigoFuente:string,control:number):void{
+/* export function analizadorLexico(codigoFuente:string,control:number):void{
     let output = document.getElementById('output');
     if (output){
       let resultado = esConstReal(codigoFuente.slice(control),'TEST',control);
-      console.log(resultado);
-      if (resultado){
+      console.log(resultado[0]);
+      // resultado[0] contiene true/false de acuerdo a si es una constante real o no.
+      if (resultado[0]){
         output.textContent = '"' + codigoFuente + '"'+ " es una cadena valida";
         console.log('CADENA VALIDA')
       } else {
@@ -16,7 +17,7 @@ export function analizadorLexico(codigoFuente:string,control:number):void{
     }else{
       alert('Ha ocurrido un error, intentalo de nuevo.');
     }
-  } 
+  } */
 
   export function obtenerSiguienteComplex(codigoFuente:string, control:number, lexema:string, tablaSimbolos:object, compLex:string):number{
     // Aca habria que hacer el manejo general del analizador lexico
@@ -30,12 +31,15 @@ export function analizadorLexico(codigoFuente:string,control:number):void{
 
     if (codigoFuente.charCodeAt(control) == 0){
       compLex = "EOF";
-    } else if (esConstReal(codigoFuente,lexema,control)) {
+      // En la posicion 0 se devuelve el true/false de acuerdo a si es el componente lexico.
+    } else if (esConstReal(codigoFuente,lexema,control)[0]) {
       compLex = "constReal";
+    } else {
+      compLex = "ERROR";
     }
 
     // Se necesita devolver un array que contenga el lexema, el componente lexico y el control
-    analizadorLexico(codigoFuente,control);
+    //analizadorLexico(codigoFuente,control);
     console.log(control);
     console.log('se encontro el componente: ',compLex)
     return control;
