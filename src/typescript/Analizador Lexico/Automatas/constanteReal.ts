@@ -17,7 +17,6 @@ const carAsimb = (caracter:string):string => {
           simbolo = 'digito';
         break;
         case ',': 
-        case '.':
           simbolo = 'decimal'
         break;
         case '-':
@@ -67,7 +66,7 @@ const carAsimb = (caracter:string):string => {
     
     tablaTransiciones[estado.q4][simbolo.digito] = 4;
     tablaTransiciones[estado.q4][simbolo['-']] = 1;
-    tablaTransiciones[estado.q4][simbolo.decimal] = 1;
+    tablaTransiciones[estado.q4][simbolo.decimal] = 5;
     tablaTransiciones[estado.q4][simbolo.otro] = 1;
   
     // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****

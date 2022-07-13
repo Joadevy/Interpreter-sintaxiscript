@@ -16,7 +16,6 @@ const carAsimb = (caracter) => {
             simbolo = 'digito';
             break;
         case ',':
-        case '.':
             simbolo = 'decimal';
             break;
         case '-':
@@ -61,7 +60,7 @@ export function esConstReal(codigoFuente, lexema, control) {
     tablaTransiciones[estado.q3][simbolo.otro] = 1;
     tablaTransiciones[estado.q4][simbolo.digito] = 4;
     tablaTransiciones[estado.q4][simbolo['-']] = 1;
-    tablaTransiciones[estado.q4][simbolo.decimal] = 1;
+    tablaTransiciones[estado.q4][simbolo.decimal] = 5;
     tablaTransiciones[estado.q4][simbolo.otro] = 1;
     // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
     // Elementos del analizador lexico
