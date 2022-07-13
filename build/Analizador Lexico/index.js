@@ -1,17 +1,14 @@
 import { esConstReal } from '../Analizador Lexico/Automatas/constanteReal.js';
-function mostrarInfo(resultado, lexema) {
+import { esSimboloEspecial } from '../Analizador Lexico/Automatas/simboloEspecial.js';
+export function mostrarInfo(resultado) {
     let output = document.getElementById('output');
     if (output) {
-        // resultado contiene true/false de acuerdo a si es una constante real o no.
         if (resultado) {
-            output.textContent = '"' + lexema + '"' + " es una cadena valida";
+            output.textContent = 'Se encontro el compLex: ' + resultado[0] + " y  el lexema asociado es: " + resultado[2];
         }
         else {
-            output.textContent = '"' + lexema + '"' + " es una cadena invalida";
+            alert('Ha ocurrido un error, intentalo de nuevo.');
         }
-    }
-    else {
-        alert('Ha ocurrido un error, intentalo de nuevo.');
     }
 }
 export function obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimbolos, compLex) {
@@ -22,21 +19,23 @@ export function obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimb
     while (evitarASCII.includes(codigoFuente.charCodeAt(control))) {
         control++;
     }
-    if (codigoFuente.charCodeAt(control) == 0) { // Analiza el codigo ASCII del caracter en control (0 = Fin de archivo)
-        // Devuelve el componente lexico fin de archivo.
+    if (control == codigoFuente.length) {
+        // Devuelve el componente lexico que representa el fin de archivo.
         compLex = "$";
     }
-    else if (esConstReal(codigoFuente, lexema, control)[0]) {
+    else if (esConstReal(codigoFuente, control, lexema)[0]) {
+        // Se necesita devolver un array que contenga el lexema, el componente lexico y el control
+        let resultado = esConstReal(codigoFuente, control, lexema); // Guarda el resultado (devuelve un array [true,control,lexema])
         compLex = "constReal";
-        // Aca hay que ver lo del llamado a la funcion porque se necesita asignar lo que devuelve.
-        // mostrarInfo(true,lexema); ***** Esto todavia no funciona. *****
+        return [compLex, resultado[1], resultado[2]];
+    }
+    else if (esSimboloEspecial(codigoFuente, control, lexema)[0]) {
+        let resultado = esSimboloEspecial(codigoFuente, control, lexema); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
+        return [resultado[3], resultado[1], resultado[2]];
     }
     else {
         compLex = "ERROR";
     }
-    // Se necesita devolver un array que contenga el lexema, el componente lexico y el control
-    //analizadorLexico(codigoFuente,control);
-    console.log(control);
-    console.log('se encontro el componente: ', compLex);
-    return control;
+    // Si se llego hasta aca es porque o es error, o es fin de archivo y entonces devuelvo solo em compLex
+    return [compLex];
 }
