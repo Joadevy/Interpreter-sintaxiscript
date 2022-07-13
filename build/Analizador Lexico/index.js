@@ -1,5 +1,6 @@
 import { esConstReal } from '../Analizador Lexico/Automatas/constanteReal.js';
 import { esSimboloEspecial } from '../Analizador Lexico/Automatas/simboloEspecial.js';
+import { esIdentificador } from '../Analizador Lexico/Automatas/identificador.js';
 export function mostrarInfo(resultado) {
     let output = document.getElementById('output');
     if (output) {
@@ -29,16 +30,29 @@ export function obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimb
     else if (esConstReal(codigoFuente, control, lexema)[0]) {
         // Se necesita devolver un array que contenga el lexema, el componente lexico y el control
         let resultado = esConstReal(codigoFuente, control, lexema); // Guarda el resultado (devuelve un array [true,control,lexema])
-        compLex = "constReal";
+        compLex = "tConstanteReal";
         return [compLex, resultado[1], resultado[2]];
     }
     else if (esSimboloEspecial(codigoFuente, control, lexema)[0]) {
         let resultado = esSimboloEspecial(codigoFuente, control, lexema); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
         return [resultado[3], resultado[1], resultado[2]];
     }
+    else if (esIdentificador(codigoFuente, control, lexema)[0]) {
+        let resultado = esIdentificador(codigoFuente, control, lexema); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
+        if (!tablaSimbolos.hasOwnProperty(resultado[2].toUpperCase())) {
+            compLex = 'tId';
+            // Insertar el identificador en la tabla de simbolos (luego de convertirlo a mayusculas)
+            tablaSimbolos[resultado[2].toUpperCase()] = 'tId';
+            console.log(tablaSimbolos);
+        }
+        else {
+            // Si esta en la tabla de simbolos, buscamos cual es el componente lexico asociado.
+            compLex = tablaSimbolos[resultado[2].toUpperCase()];
+        }
+        return [compLex, resultado[1], resultado[2]];
+    }
     else {
         compLex = "ERROR";
     }
-    // Si se llego hasta aca es porque o es error, o es fin de archivo y entonces devuelvo solo em compLex
     return [compLex];
 }
