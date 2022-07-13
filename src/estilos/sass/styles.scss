@@ -112,9 +112,19 @@ body {
         }
 
         .verificador__output{
-            margin-top: .25rem;
+            margin-top: 1rem;
             background-color: var(--light-black);
             padding: .75rem;
+            display: flex;
+            flex-wrap: wrap;
+            width: 50%;
+            justify-content: center;
+            border-radius: 10px;
+            border: .5px solid var(--black);
+
+            .output-text{
+                text-align: center;
+            }
         }
     }
 }

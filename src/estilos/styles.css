@@ -105,9 +105,18 @@ body .verificador .verificador__input-label .verificador__input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 body .verificador .verificador__output {
-  margin-top: 0.25rem;
+  margin-top: 1rem;
   background-color: var(--light-black);
   padding: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  justify-content: center;
+  border-radius: 10px;
+  border: 0.5px solid var(--black);
+}
+body .verificador .verificador__output .output-text {
+  text-align: center;
 }
 
 /*# sourceMappingURL=styles.css.map */
