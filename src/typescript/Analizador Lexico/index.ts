@@ -1,25 +1,20 @@
 import {esConstReal} from '../Analizador Lexico/Automatas/constanteReal.js';
 
-/* export function analizadorLexico(codigoFuente:string,control:number):void{
+function mostrarInfo(resultado:boolean,lexema:string):void{
     let output = document.getElementById('output');
     if (output){
-      let resultado = esConstReal(codigoFuente.slice(control),'TEST',control);
-      console.log(resultado[0]);
-      // resultado[0] contiene true/false de acuerdo a si es una constante real o no.
-      if (resultado[0]){
-        output.textContent = '"' + codigoFuente + '"'+ " es una cadena valida";
-        console.log('CADENA VALIDA')
+      // resultado contiene true/false de acuerdo a si es una constante real o no.
+      if (resultado){
+        output.textContent = '"' + lexema + '"'+ " es una cadena valida";
       } else {
-        output.textContent = '"' + codigoFuente + '"' + " es una cadena invalida";
-        console.log('CADENA INVALIDA')
+        output.textContent = '"' + lexema + '"' + " es una cadena invalida";
       }
-      // llama a la funcion ObtenerSiguienteCompLex para empezar a reconocer las cadenas.
     }else{
       alert('Ha ocurrido un error, intentalo de nuevo.');
     }
-  } */
+  } 
 
-  export function obtenerSiguienteComplex(codigoFuente:string, control:number, lexema:string, tablaSimbolos:object, compLex:string):number{
+  export function obtenerSiguienteCompLex(codigoFuente:string, control:number, lexema:string, tablaSimbolos:object, compLex:string):number{
     // Aca habria que hacer el manejo general del analizador lexico
 
     // Asigna [1,2, ... , 32] que son los ASCII a saltear en el archivo
@@ -29,11 +24,13 @@ import {esConstReal} from '../Analizador Lexico/Automatas/constanteReal.js';
       control++;
     }
 
-    if (codigoFuente.charCodeAt(control) == 0){
-      compLex = "EOF";
-      // En la posicion 0 se devuelve el true/false de acuerdo a si es el componente lexico.
+    if (codigoFuente.charCodeAt(control) == 0){ // Analiza el codigo ASCII del caracter en control (0 = Fin de archivo)
+      // Devuelve el componente lexico fin de archivo.
+      compLex = "$"; 
     } else if (esConstReal(codigoFuente,lexema,control)[0]) {
       compLex = "constReal";
+      // Aca hay que ver lo del llamado a la funcion porque se necesita asignar lo que devuelve.
+      // mostrarInfo(true,lexema); ***** Esto todavia no funciona. *****
     } else {
       compLex = "ERROR";
     }

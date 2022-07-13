@@ -9,7 +9,7 @@ const input = document.getElementById('input');
 input?.addEventListener('change', (e) => {
     const archivos = (e.target as HTMLInputElement).files;
     // Si se subio al menos un archivo.
-    if (archivos != null) {
+    if (archivos) {
       // Expresion regular que comprueba que se haya pasado un .txt
       let compruebaTXT = /\w+\.txt$/;
       // Usamos solamente el primer archivo que se haya pasado (aunque por defecto solo se puede pasar uno)

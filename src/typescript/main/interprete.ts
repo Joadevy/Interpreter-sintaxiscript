@@ -1,4 +1,4 @@
-import {obtenerSiguienteComplex} from '../Analizador Lexico/index.js';
+import {obtenerSiguienteCompLex} from '../Analizador Lexico/index.js';
 import {tablaSimbolos} from '../Analizador Lexico/tablaSimbolos.js';
 
 // Esta funcion hara el manejo del compilador completo.
@@ -10,5 +10,5 @@ export async function interprete(archivo:File){
     let control:number = 0;
     let lexema:string = "";
     let compLex = '';
-    let inicio = obtenerSiguienteComplex(codigoFuente, control, lexema, tablaSimbolos,compLex);
+    let inicio = obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimbolos,compLex);
 }

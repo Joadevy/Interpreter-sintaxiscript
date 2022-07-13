@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { obtenerSiguienteComplex } from '../Analizador Lexico/index.js';
+import { obtenerSiguienteCompLex } from '../Analizador Lexico/index.js';
 import { tablaSimbolos } from '../Analizador Lexico/tablaSimbolos.js';
 // Esta funcion hara el manejo del compilador completo.
 export function interprete(archivo) {
@@ -19,6 +19,6 @@ export function interprete(archivo) {
         let control = 0;
         let lexema = "";
         let compLex = '';
-        let inicio = obtenerSiguienteComplex(codigoFuente, control, lexema, tablaSimbolos, compLex);
+        let inicio = obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimbolos, compLex);
     });
 }
