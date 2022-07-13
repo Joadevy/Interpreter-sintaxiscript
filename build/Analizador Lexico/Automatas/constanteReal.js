@@ -25,7 +25,7 @@ const carAsimb = (caracter) => {
     }
     return simbolo;
 };
-export function esConstReal(codigoFuente, lexema, control) {
+export function esConstReal(codigoFuente, control, lexema) {
     let simbolo;
     (function (simbolo) {
         simbolo[simbolo["digito"] = 0] = "digito";
@@ -86,7 +86,7 @@ export function esConstReal(codigoFuente, lexema, control) {
     }
     console.log('POST WHILE');
     if (estadosFinales.includes(estadoActual)) {
-        return [true, control - 1, lexema];
+        return [true, control + 1, lexema];
     }
     else {
         return [false, controlAnt];

@@ -27,7 +27,7 @@ const carAsimb = (caracter:string):string => {
     return simbolo
   }
 
-  export function esConstReal(codigoFuente:string,lexema:string,control:number):Array<any>{
+  export function esConstReal(codigoFuente:string,control:number,lexema:string):Array<any>{
     enum simbolo{
       'digito',
       '-',
@@ -97,7 +97,7 @@ const carAsimb = (caracter:string):string => {
     console.log('POST WHILE');
   
     if (estadosFinales.includes(estadoActual)){
-      return [true,control-1,lexema]
+      return [true,control+1,lexema]
     } else {
       return [false,controlAnt]
     }
