@@ -68,6 +68,6 @@ export function esSimboloEspecial(codigoFuente, control, lexema) {
         return [true, control + 1, lexema, compLex];
     }
     else {
-        return [false];
+        return [false, control];
     }
 }

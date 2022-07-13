@@ -4,7 +4,10 @@ export function mostrarInfo(resultado) {
     let output = document.getElementById('output');
     if (output) {
         if (resultado) {
-            output.textContent = 'Se encontro el compLex: ' + resultado[0] + " y  el lexema asociado es: " + resultado[2];
+            let text = document.createElement('p');
+            text.classList.add('output-text');
+            text.textContent = ' Se encontro el compLex: ' + resultado[0] + " y el lexema asociado es: " + resultado[2];
+            output.appendChild(text);
         }
         else {
             alert('Ha ocurrido un error, intentalo de nuevo.');
