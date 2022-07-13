@@ -2,17 +2,17 @@ export function esSimboloEspecial(codigoFuente:string,control:number,lexema:stri
     let simbolosEspeciales = 
     {',':'tComa',
     ';':'tPuntoComa',
-    '[':'tCorcheteAbre',
-    ']':'tCorcheteCierra',
+    '(':'tParentesisAbre',
+    ')':'tParentesisCierra',
     '{':'tLlaveAbre',
     '}':'tLlaveCierra',
-    '>' : 'opRel',
-    '<' : 'opRel',
-    '>=' : 'opRel',
-    '<=' : 'opRel',
-    '==' : 'opRel',
-    '<>' : 'opRel',
-    "=" : 'opAsignacion'}
+    '>' : 'tOpRel',
+    '<' : 'tOpRel',
+    '>=' : 'tOpRel',
+    '<=' : 'tOpRel',
+    '==' : 'tOpRel',
+    '<>' : 'tpRel',
+    "=" : 'tOpAsignacion'}
 
     let compLex = ''
     lexema += codigoFuente[control];
@@ -24,11 +24,11 @@ export function esSimboloEspecial(codigoFuente:string,control:number,lexema:stri
         case ';':
             compLex = simbolosEspeciales[';']
         break
-        case '[':
-            compLex = simbolosEspeciales['[']
+        case '(':
+            compLex = simbolosEspeciales['(']
         break
-        case ']':
-            compLex = simbolosEspeciales[']']
+        case ')':
+            compLex = simbolosEspeciales[')']
         break
         case '{':
             compLex = simbolosEspeciales['{']
@@ -50,6 +50,7 @@ export function esSimboloEspecial(codigoFuente:string,control:number,lexema:stri
             if (codigoFuente[control+1] == '='){
                 compLex = simbolosEspeciales['<=']
                 lexema += codigoFuente[control+1]
+                control++
             } else if (codigoFuente[control+1] == '>'){
                 compLex = simbolosEspeciales['<>']
                 lexema += codigoFuente[control+1]

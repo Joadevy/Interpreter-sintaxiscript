@@ -1,17 +1,17 @@
 export function esSimboloEspecial(codigoFuente, control, lexema) {
     let simbolosEspeciales = { ',': 'tComa',
         ';': 'tPuntoComa',
-        '[': 'tCorcheteAbre',
-        ']': 'tCorcheteCierra',
+        '(': 'tParentesisAbre',
+        ')': 'tParentesisCierra',
         '{': 'tLlaveAbre',
         '}': 'tLlaveCierra',
-        '>': 'opRel',
-        '<': 'opRel',
-        '>=': 'opRel',
-        '<=': 'opRel',
-        '==': 'opRel',
-        '<>': 'opRel',
-        "=": 'opAsignacion' };
+        '>': 'tOpRel',
+        '<': 'tOpRel',
+        '>=': 'tOpRel',
+        '<=': 'tOpRel',
+        '==': 'tOpRel',
+        '<>': 'tpRel',
+        "=": 'tOpAsignacion' };
     let compLex = '';
     lexema += codigoFuente[control];
     if (simbolosEspeciales.hasOwnProperty(codigoFuente[control])) {
@@ -22,11 +22,11 @@ export function esSimboloEspecial(codigoFuente, control, lexema) {
             case ';':
                 compLex = simbolosEspeciales[';'];
                 break;
-            case '[':
-                compLex = simbolosEspeciales['['];
+            case '(':
+                compLex = simbolosEspeciales['('];
                 break;
-            case ']':
-                compLex = simbolosEspeciales[']'];
+            case ')':
+                compLex = simbolosEspeciales[')'];
                 break;
             case '{':
                 compLex = simbolosEspeciales['{'];
@@ -49,6 +49,7 @@ export function esSimboloEspecial(codigoFuente, control, lexema) {
                 if (codigoFuente[control + 1] == '=') {
                     compLex = simbolosEspeciales['<='];
                     lexema += codigoFuente[control + 1];
+                    control++;
                 }
                 else if (codigoFuente[control + 1] == '>') {
                     compLex = simbolosEspeciales['<>'];
