@@ -13,7 +13,7 @@ export async function interprete(archivo:File){
     let lexema:string = "";
     let compLex = '';
     // Llamo a la funcion para obtener el compLex
-    while(compLex !== '$'){
+    while(compLex !== '$' && compLex !== 'ERROR'){
     let nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimbolos,compLex);
     
     // Testing en consola
@@ -27,5 +27,5 @@ export async function interprete(archivo:File){
     console.log(control);
     // Mostrar en la interfaz la data del resultado.
     mostrarInfo(nodoCompLex);
-    }
+    } 
 }

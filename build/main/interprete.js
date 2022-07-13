@@ -21,7 +21,7 @@ export function interprete(archivo) {
         let lexema = "";
         let compLex = '';
         // Llamo a la funcion para obtener el compLex
-        while (compLex !== '$') {
+        while (compLex !== '$' && compLex !== 'ERROR') {
             let nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimbolos, compLex);
             // Testing en consola
             console.log('compLex encontrado: ' + nodoCompLex[0]);
