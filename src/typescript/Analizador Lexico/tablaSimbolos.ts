@@ -7,7 +7,7 @@ export let tablaSimbolos: object = {
     'WHILE':'tWhile',
     'IF':'tIf',
     'ELSE':'tElse',
-    "AND" :'tAnd',
-    "OR" : 'tOr',
-    "NOT" :'tNot'
+    'AND' :'tAnd',
+    'OR': 'tOr',
+    'NOT' :'tNot'
   };
