@@ -19,9 +19,6 @@ const carAsimb = (caracter:string):string => {
         case ',': 
           simbolo = 'decimal'
         break;
-        case '-':
-          simbolo = '-'
-        break;
           default: simbolo = 'otro';
     }
     return simbolo
@@ -30,7 +27,6 @@ const carAsimb = (caracter:string):string => {
   export function esConstReal(codigoFuente:string,control:number,lexema:string):Array<any>{
     enum simbolo{
       'digito',
-      '-',
       'decimal',
       'otro'
     }
@@ -50,22 +46,18 @@ const carAsimb = (caracter:string):string => {
   
      // ***** CARGA DE LA TABLA DE TRANSICIONES *****
     tablaTransiciones[estado.q0][simbolo.digito] = 3;
-    tablaTransiciones[estado.q0][simbolo['-']] = 3;
     tablaTransiciones[estado.q0][simbolo.decimal] = 5;
     tablaTransiciones[estado.q0][simbolo.otro] = 5;
 
     tablaTransiciones[estado.q2][simbolo.digito] = 4;
-    tablaTransiciones[estado.q2][simbolo['-']] = 5;
     tablaTransiciones[estado.q2][simbolo.decimal] = 5;
     tablaTransiciones[estado.q2][simbolo.otro] = 5;
 
     tablaTransiciones[estado.q3][simbolo.digito] = 3;
-    tablaTransiciones[estado.q3][simbolo['-']] = 1;
     tablaTransiciones[estado.q3][simbolo.decimal] = 2;
     tablaTransiciones[estado.q3][simbolo.otro] = 1;
     
     tablaTransiciones[estado.q4][simbolo.digito] = 4;
-    tablaTransiciones[estado.q4][simbolo['-']] = 1;
     tablaTransiciones[estado.q4][simbolo.decimal] = 5;
     tablaTransiciones[estado.q4][simbolo.otro] = 1;
   

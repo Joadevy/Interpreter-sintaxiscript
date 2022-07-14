@@ -18,9 +18,6 @@ const carAsimb = (caracter) => {
         case ',':
             simbolo = 'decimal';
             break;
-        case '-':
-            simbolo = '-';
-            break;
         default: simbolo = 'otro';
     }
     return simbolo;
@@ -29,9 +26,8 @@ export function esConstReal(codigoFuente, control, lexema) {
     let simbolo;
     (function (simbolo) {
         simbolo[simbolo["digito"] = 0] = "digito";
-        simbolo[simbolo["-"] = 1] = "-";
-        simbolo[simbolo["decimal"] = 2] = "decimal";
-        simbolo[simbolo["otro"] = 3] = "otro";
+        simbolo[simbolo["decimal"] = 1] = "decimal";
+        simbolo[simbolo["otro"] = 2] = "otro";
     })(simbolo || (simbolo = {}));
     let estado;
     (function (estado) {
@@ -47,19 +43,15 @@ export function esConstReal(codigoFuente, control, lexema) {
     creaTabla(tablaTransiciones, cantidadEstados);
     // ***** CARGA DE LA TABLA DE TRANSICIONES *****
     tablaTransiciones[estado.q0][simbolo.digito] = 3;
-    tablaTransiciones[estado.q0][simbolo['-']] = 3;
     tablaTransiciones[estado.q0][simbolo.decimal] = 5;
     tablaTransiciones[estado.q0][simbolo.otro] = 5;
     tablaTransiciones[estado.q2][simbolo.digito] = 4;
-    tablaTransiciones[estado.q2][simbolo['-']] = 5;
     tablaTransiciones[estado.q2][simbolo.decimal] = 5;
     tablaTransiciones[estado.q2][simbolo.otro] = 5;
     tablaTransiciones[estado.q3][simbolo.digito] = 3;
-    tablaTransiciones[estado.q3][simbolo['-']] = 1;
     tablaTransiciones[estado.q3][simbolo.decimal] = 2;
     tablaTransiciones[estado.q3][simbolo.otro] = 1;
     tablaTransiciones[estado.q4][simbolo.digito] = 4;
-    tablaTransiciones[estado.q4][simbolo['-']] = 1;
     tablaTransiciones[estado.q4][simbolo.decimal] = 5;
     tablaTransiciones[estado.q4][simbolo.otro] = 1;
     // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
