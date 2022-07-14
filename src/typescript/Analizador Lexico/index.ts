@@ -9,8 +9,15 @@ export function mostrarInfo(resultado:Array<any>):void{
       if (resultado){
       let text = document.createElement('p');
       text.classList.add('output-text');
-      text.textContent = ' Se encontro el compLex: ' + resultado[0] + " y el lexema asociado es: " + resultado[2];
-      output.appendChild(text)
+      if (resultado[0] == "ERROR"){
+        text.innerHTML = ` Se encontro el compLex: <span class="error">${resultado[0]}</span>`;
+      } else if (resultado[0] == "$"){
+        text.innerHTML = ` Se encontro el compLex: <span class="complex">${resultado[0]}</span> y representa el fin de archivo.`;
+      } else {
+        text.innerHTML = ` Se encontro el compLex: <span class="complex">${resultado[0]}</span> y el lexema asociado es <span class="lexema">${resultado[2]}</span>`;
+      }
+      output.appendChild(text);
+      output.classList.add('output-show');
     } else{
       alert('Ha ocurrido un error, intentalo de nuevo.');
     }
