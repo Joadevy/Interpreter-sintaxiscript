@@ -14,18 +14,18 @@ export async function interprete(archivo:File){
     let compLex = '';
     // Llamo a la funcion para obtener el compLex
     while(compLex !== '$' && compLex !== 'ERROR'){
-    let nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimbolos,compLex);
-    
-    // Testing en consola
-    console.log('compLex encontrado: ' + nodoCompLex[0]);
-    if (nodoCompLex[0] !== 'ERROR'){
-        console.log('Lexema encontrado: ' + nodoCompLex[2]);
-        console.log('Posicion del control actual: ' + nodoCompLex[1])
-    }
-    compLex = nodoCompLex[0];
-    control = nodoCompLex[1];
-    console.log(control);
-    // Mostrar en la interfaz la data del resultado.
-    mostrarInfo(nodoCompLex);
+        let nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimbolos,compLex);
+
+        // Testing en consola
+        console.log('compLex encontrado: ' + nodoCompLex[0]);
+        if (nodoCompLex[0] !== 'ERROR'){
+            console.log('Lexema encontrado: ' + nodoCompLex[2]);
+            console.log('Posicion del control actual: ' + nodoCompLex[1])
+        }
+        compLex = nodoCompLex[0];
+        control = nodoCompLex[1];
+        console.log(control);
+        // Mostrar en la interfaz la data del resultado.
+        mostrarInfo(nodoCompLex);
     } 
 }
