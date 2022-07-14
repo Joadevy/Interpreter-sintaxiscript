@@ -1,6 +1,7 @@
 import {esConstReal} from '../Analizador Lexico/Automatas/constanteReal.js';
 import {esSimboloEspecial} from '../Analizador Lexico/Automatas/simboloEspecial.js';
 import {esIdentificador} from '../Analizador Lexico/Automatas/identificador.js';
+import {esCadena} from '../Analizador Lexico/Automatas/cadena.js';
 
 export function mostrarInfo(resultado:Array<any>):void{
     let output = document.getElementById('output');
@@ -18,7 +19,6 @@ export function mostrarInfo(resultado:Array<any>):void{
 
   export function obtenerSiguienteCompLex(codigoFuente:string, control:number, lexema:string, tablaSimbolos:any, compLex:string):Array<any>{
     // Aca habria que hacer el manejo general del analizador lexico
-
     // Asigna [1,2, ... , 32] que son los ASCII a saltear en el archivo
   let evitarASCII = [...Array(33).keys()].slice(1);
     // Si  caracter del codigo fuente es distinto de un caracter de control, avanza control.
@@ -50,6 +50,11 @@ export function mostrarInfo(resultado:Array<any>):void{
         // Si esta en la tabla de simbolos, buscamos cual es el componente lexico asociado.
         compLex = tablaSimbolos[resultado[2].toUpperCase()];
       }
+      return [compLex,resultado[1],resultado[2]];
+    }
+    else if(esCadena(codigoFuente,control,lexema)[0]){
+      let resultado = esCadena(codigoFuente,control,lexema); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
+      compLex = 'tCadena';
       return [compLex,resultado[1],resultado[2]];
     }
     else {

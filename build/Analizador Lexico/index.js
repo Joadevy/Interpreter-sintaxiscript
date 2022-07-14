@@ -1,6 +1,7 @@
 import { esConstReal } from '../Analizador Lexico/Automatas/constanteReal.js';
 import { esSimboloEspecial } from '../Analizador Lexico/Automatas/simboloEspecial.js';
 import { esIdentificador } from '../Analizador Lexico/Automatas/identificador.js';
+import { esCadena } from '../Analizador Lexico/Automatas/cadena.js';
 export function mostrarInfo(resultado) {
     let output = document.getElementById('output');
     if (output) {
@@ -49,6 +50,11 @@ export function obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimb
             // Si esta en la tabla de simbolos, buscamos cual es el componente lexico asociado.
             compLex = tablaSimbolos[resultado[2].toUpperCase()];
         }
+        return [compLex, resultado[1], resultado[2]];
+    }
+    else if (esCadena(codigoFuente, control, lexema)[0]) {
+        let resultado = esCadena(codigoFuente, control, lexema); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
+        compLex = 'tCadena';
         return [compLex, resultado[1], resultado[2]];
     }
     else {
