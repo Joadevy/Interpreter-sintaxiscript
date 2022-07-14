@@ -3,6 +3,10 @@ export function esSimboloEspecial(codigoFuente, control, lexema) {
         ';': 'tPuntoComa',
         '(': 'tParentesisAbre',
         ')': 'tParentesisCierra',
+        '+': 'tSuma',
+        '-': 'tResta',
+        '/': 'tDivision',
+        '*': 'tProducto',
         '{': 'tLlaveAbre',
         '}': 'tLlaveCierra',
         '>': 'tOpRel',
@@ -10,7 +14,7 @@ export function esSimboloEspecial(codigoFuente, control, lexema) {
         '>=': 'tOpRel',
         '<=': 'tOpRel',
         '==': 'tOpRel',
-        '<>': 'tpRel',
+        '<>': 'tOpRel',
         "=": 'tOpAsignacion' };
     let compLex = '';
     lexema += codigoFuente[control];
@@ -33,6 +37,18 @@ export function esSimboloEspecial(codigoFuente, control, lexema) {
                 break;
             case '}':
                 compLex = simbolosEspeciales['}'];
+                break;
+            case '+':
+                compLex = simbolosEspeciales['+'];
+                break;
+            case '-':
+                compLex = simbolosEspeciales['-'];
+                break;
+            case '*':
+                compLex = simbolosEspeciales['*'];
+                break;
+            case '/':
+                compLex = simbolosEspeciales['/'];
                 break;
             case '>':
                 {
