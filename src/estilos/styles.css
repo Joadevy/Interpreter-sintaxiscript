@@ -25,11 +25,12 @@ html {
   --light-black:#1b1a1a;
 }
 
+/* --------------- Styling --------------- */
 body {
   background-color: var(--background);
   display: grid;
   place-content: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 body .titulo, body .parrafo {
   color: var(--white);
@@ -41,9 +42,11 @@ body .parrafo {
   opacity: 66%;
 }
 body .header {
+  margin-top: 5rem;
   display: flex;
   align-items: center;
   flex-direction: column;
+  text-align: center;
 }
 body .header .header__contenedor-logo {
   margin-bottom: -2rem;
@@ -106,17 +109,28 @@ body .verificador .verificador__input-label .verificador__input:active::before {
 }
 body .verificador .verificador__output {
   margin-top: 1rem;
-  background-color: var(--light-black);
-  padding: 0.75rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-wrap: wrap;
-  width: 50%;
-  justify-content: center;
-  border-radius: 10px;
-  border: 0.5px solid var(--black);
 }
-body .verificador .verificador__output .output-text {
-  text-align: center;
+body .verificador .output-show {
+  margin: 1rem;
+  background-color: var(--light-black);
+  padding: 1rem 0.75rem 1.5rem 0.75rem;
+  display: block;
+  width: 100%;
+  justify-content: center;
+  border-radius: 15px;
+  border: 1px solid var(--black);
+}
+body .verificador .output-text {
+  margin-top: 0.25rem;
+}
+body .verificador .error {
+  color: var(--error-light);
+}
+body .verificador .lexema, body .verificador .complex {
+  color: var(--primary-purple);
 }
 
 /*# sourceMappingURL=styles.css.map */
