@@ -16,7 +16,10 @@ export function esSimboloEspecial(codigoFuente:string,control:number,lexema:stri
     '<=' : 'tOpRel',
     '==' : 'tOpRel',
     '<>' : 'tOpRel',
-    "=" : 'tOpAsignacion'}
+    "=" : 'tOpAsignacion',
+    "]": 'tCorcheteCierra',
+    '[': 'tCorcheteAbre'
+}
 
     let compLex = ''
     lexema += codigoFuente[control];
@@ -80,7 +83,13 @@ export function esSimboloEspecial(codigoFuente:string,control:number,lexema:stri
                     lexema += codigoFuente[control+1]
                     control++
                 }
-            break       
+            break      
+            case ']':
+                compLex = simbolosEspeciales[']']
+            break
+            case '[':
+                compLex = simbolosEspeciales['[']
+            break
         }
 
        return [true,control+1,lexema,compLex]

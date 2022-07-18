@@ -15,7 +15,10 @@ export function esSimboloEspecial(codigoFuente, control, lexema) {
         '<=': 'tOpRel',
         '==': 'tOpRel',
         '<>': 'tOpRel',
-        "=": 'tOpAsignacion' };
+        "=": 'tOpAsignacion',
+        "]": 'tCorcheteCierra',
+        '[': 'tCorcheteAbre'
+    };
     let compLex = '';
     lexema += codigoFuente[control];
     if (simbolosEspeciales.hasOwnProperty(codigoFuente[control])) {
@@ -80,6 +83,12 @@ export function esSimboloEspecial(codigoFuente, control, lexema) {
                     lexema += codigoFuente[control + 1];
                     control++;
                 }
+                break;
+            case ']':
+                compLex = simbolosEspeciales[']'];
+                break;
+            case '[':
+                compLex = simbolosEspeciales['['];
                 break;
         }
         return [true, control + 1, lexema, compLex];
