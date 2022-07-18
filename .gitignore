@@ -2,3 +2,6 @@ runjs.js
 ruta.txt
 Modelo AFDs
 funcionamiento.txt
+node_modules
+package.json
+package-lock.json
