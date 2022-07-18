@@ -1,7 +1,9 @@
-type simboloGramatical = 'tId' | 'tPuntoYComa' | 'tWhile' | 'tOpRel' | 'tConstReal' | 'tMas' | 'tMenos' | 'tProducto' | 'tDivision'
-let maxima = 10; // es el Emax (cantidad maxima de hijos que podria haber)
+type simboloGramatical = 'tProgram' | 'tEscribir' | 'tVariables' | 'tLeer' | 'tWhile' | 'tIf' | 'tElse' | 'tAnd' | 'tOr' | 'tNot' | 
+'tId' | 'tCadena' | 'tConstReal' | 'tPuntoComa' | 'tComa' | 'tOpRel' | 'tOpAsignacion' | 'tMas' | 'tMenos' | 'tProducto' | 'tDivision' | 
+'tParentesisAbre' | 'tParentesisCierra' | 'tLlaveAbre' | 'tLlaveCierra';
 
-class nodo{
+let maxima = 10; // es el Emax (cantidad maxima de hijos que podria haber - depende de la cantidad maxima del lado derecho de la CFG)
+export class nodo{
   simbolo:simboloGramatical; // deberia ser de tipo simbolo gramatical
   lexema:string; // deberia ser string
   cantHijos:number;
@@ -22,17 +24,17 @@ class nodo{
   }
 }
 
-class CrearArbol{
+export class CrearArbol{
     simbolo:simboloGramatical; // deberia ser de tipo simbolo gramatical
     lexema:string; // deberia ser string
     cantHijos:number;
     hijos:Array<nodo>
     
-    constructor(node:nodo){
-      this.simbolo = node.simbolo;
-      this.lexema = node.lexema;
+    constructor(raiz:nodo){
+      this.simbolo = raiz.simbolo;
+      this.lexema = raiz.lexema;
       this.cantHijos = 0;
-      this.hijos = node.hijos;
+      this.hijos = raiz.hijos;
     }
 
     insertarHijo(hijo:nodo){

@@ -1,6 +1,5 @@
-"use strict";
-let maxima = 10; // es el Emax (cantidad maxima de hijos que podria haber)
-class nodo {
+let maxima = 10; // es el Emax (cantidad maxima de hijos que podria haber - depende de la cantidad maxima del lado derecho de la CFG)
+export class nodo {
     constructor(compLex, lexema, cantHijos, hijos) {
         this.simbolo = compLex;
         this.lexema = lexema;
@@ -14,12 +13,12 @@ class nodo {
         }
     }
 }
-class CrearArbol {
-    constructor(node) {
-        this.simbolo = node.simbolo;
-        this.lexema = node.lexema;
+export class CrearArbol {
+    constructor(raiz) {
+        this.simbolo = raiz.simbolo;
+        this.lexema = raiz.lexema;
         this.cantHijos = 0;
-        this.hijos = node.hijos;
+        this.hijos = raiz.hijos;
     }
     insertarHijo(hijo) {
         if (this.cantHijos < maxima) {
