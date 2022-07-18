@@ -4,6 +4,7 @@ export function esSimboloEspecial(codigoFuente:string,control:number,lexema:stri
     ';':'tPuntoComa',
     '(':'tParentesisAbre',
     ')':'tParentesisCierra',
+    '^' : 'tPotencia',
     '+' : 'tSuma',
     '-' : 'tResta',
     '/' : 'tDivision',

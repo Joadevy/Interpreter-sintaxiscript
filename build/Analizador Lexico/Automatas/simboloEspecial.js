@@ -3,6 +3,7 @@ export function esSimboloEspecial(codigoFuente, control, lexema) {
         ';': 'tPuntoComa',
         '(': 'tParentesisAbre',
         ')': 'tParentesisCierra',
+        '^': 'tPotencia',
         '+': 'tSuma',
         '-': 'tResta',
         '/': 'tDivision',
