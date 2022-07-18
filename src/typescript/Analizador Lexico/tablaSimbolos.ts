@@ -1,13 +1,14 @@
 export let tablaSimbolos: object = {
     // Tiene la forma de lexema: componente lexico, se ira actualizando a medida que se encuentren identificadores.
-    'PROGRAM':'tProgram',
-    'ESCRIBIR':'tEscribir',
-    'VARIABLES': 'tVariables',
-    'LEER':'tLeer',
+    'PROGRAM':'tPrograma',
+    'PRINT':'tEscribir', // es Print
+    'VAR': 'tVariables',
+    'READ':'tLeer', // Es read
     'WHILE':'tWhile',
     'IF':'tIf',
     'ELSE':'tElse',
     'AND' :'tAnd',
     'OR': 'tOr',
-    'NOT' :'tNot'
+    'NOT' :'tNot',
+    'RAIZ' : 'tRaiz'
   };
