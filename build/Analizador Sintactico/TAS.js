@@ -99,6 +99,29 @@ export function cargaEpsilonProd(TAS) {
     TAS[variables.vPOT][terminales.tOpRel] = new celda([]);
     TAS[variables.vPOT][terminales.tAnd] = new celda([]);
     TAS[variables.vPOT][terminales.tOr] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tLlaveCierra] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tParentesisCierra] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tPuntoComa] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tComa] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tCorcheteCierra] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tOpRel] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tAnd] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tOr] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tLlaveCierra] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tParentesisCierra] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tPuntoComa] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tComa] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tMas] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tMenos] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tCorcheteCierra] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tOpRel] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tAnd] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tOr] = new celda([]);
+    TAS[variables.vSAUX][terminales.tParentesisCierra] = new celda([]);
+    TAS[variables.vCONDICIONALFACT][terminales.tLlaveCierra] = new celda([]);
+    TAS[variables.vCONDICIONALFACT][terminales.tPuntoComa] = new celda([]);
+    TAS[variables.vCONJUNCION][terminales.tCorcheteCierra] = new celda([]);
+    TAS[variables.vDISYUNCION][terminales.tCorcheteCierra] = new celda([]);
     return TAS;
 }
 // Testeando
