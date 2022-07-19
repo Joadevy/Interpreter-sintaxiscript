@@ -1,4 +1,4 @@
-let maxima = 10; // es el Emax (cantidad maxima de hijos que podria haber - depende de la cantidad maxima del lado derecho de la CFG)
+let maxima = 8; // es la cantidad maxima de hijos que podria haber, depende de la cantidad maxima del lado derecho de la CFG, en CONDICIONAL se da la maxima)
 export class nodo {
     constructor(compLex, lexema, cantHijos, hijos) {
         this.simbolo = compLex;
