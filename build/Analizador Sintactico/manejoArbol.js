@@ -13,7 +13,7 @@ export class nodo {
         }
     }
 }
-export class CrearArbol {
+export class Arbol {
     constructor(raiz) {
         this.simbolo = raiz.simbolo;
         this.lexema = raiz.lexema;
