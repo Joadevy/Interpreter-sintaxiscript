@@ -1,8 +1,8 @@
  // Asi compila
-import {simboloGramatical,Arbol,nodo} from './manejoArbol.js'; 
+// import {simboloGramatical,Arbol,nodo} from './manejoArbol.js'; 
 
 // @ts-ignore // asi funciona con Deno
-// import {simboloGramatical,Arbol,nodo} from './manejoArbol.ts';
+import {simboloGramatical,Arbol,nodo} from './manejoArbol.ts';
 
 
 /* La pila contendra a pesos y al simbolo inicial, en ese orden.
