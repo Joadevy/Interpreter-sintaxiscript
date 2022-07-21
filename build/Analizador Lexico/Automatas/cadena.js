@@ -10,7 +10,7 @@ const carAsimb = (caracter) => {
     }
     return 'otro';
 };
-export function esCadena(codigoFuente, control, lexema) {
+export function esCadena(codigoFuente, control) {
     let simbolo;
     (function (simbolo) {
         simbolo[simbolo["comillas"] = 0] = "comillas";
@@ -35,6 +35,7 @@ export function esCadena(codigoFuente, control, lexema) {
     // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
     // Elementos del analizador lexico
     let controlAnt = control;
+    let lexema = '';
     // Definicin de elementos necesarios para el automata
     let estadosFinales = [estado.q2];
     let estadoInicial = estado.q0;

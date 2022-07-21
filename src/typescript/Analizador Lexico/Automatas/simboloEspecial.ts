@@ -1,4 +1,4 @@
-export function esSimboloEspecial(codigoFuente:string,control:number,lexema:string):Array<any>{
+export function esSimboloEspecial(codigoFuente:string,control:number):Array<any>{
     let simbolosEspeciales = 
     {',':'tComa',
     ';':'tPuntoComa',
@@ -21,8 +21,8 @@ export function esSimboloEspecial(codigoFuente:string,control:number,lexema:stri
     "]": 'tCorcheteCierra',
     '[': 'tCorcheteAbre'
 }
-
-    let compLex = ''
+    let lexema = '';
+    let compLex = '';
     lexema += codigoFuente[control];
     if(simbolosEspeciales.hasOwnProperty(codigoFuente[control])){
        switch (codigoFuente[control]){

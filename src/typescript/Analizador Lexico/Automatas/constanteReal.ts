@@ -24,7 +24,7 @@ const carAsimb = (caracter:string):string => {
     return simbolo
   }
 
-  export function esConstReal(codigoFuente:string,control:number,lexema:string):Array<any>{
+  export function esConstReal(codigoFuente:string,control:number):Array<any>{
     enum simbolo{
       'digito',
       'decimal',
@@ -65,7 +65,7 @@ const carAsimb = (caracter:string):string => {
   
     // Elementos del analizador lexico
     let controlAnt = control;
-  
+    let lexema:string = '';
     // Definicin de elementos necesarios para el automata
     let estadosFinales:Array<number> = [estado.q1];
     let estadoInicial: number = estado.q0;  

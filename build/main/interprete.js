@@ -18,14 +18,13 @@ export function interprete(archivo) {
         let codigoFuente = (yield archivo.text()).trim();
         // Aca se debe declarar las variables para manejar el string codigoFuente (control,lexema)
         let control = 0;
-        let lexema = "";
         let compLex = '';
         // Llamo a la funcion para obtener el compLex
-        while (compLex !== '$' && compLex !== 'ERROR') {
-            let nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, lexema, tablaSimbolos, compLex);
+        while (compLex !== '$' && compLex !== 'errorLexico') {
+            let nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos);
             // Testing en consola
             console.log('compLex encontrado: ' + nodoCompLex[0]);
-            if (nodoCompLex[0] !== 'ERROR') {
+            if (nodoCompLex[0] !== 'errorLexico') {
                 console.log('Lexema encontrado: ' + nodoCompLex[2]);
                 console.log('Posicion del control actual: ' + nodoCompLex[1]);
             }

@@ -11,7 +11,7 @@ const carAsimb = (caracter) => {
     }
     return 'otro';
 };
-export function esIdentificador(codigoFuente, control, lexema) {
+export function esIdentificador(codigoFuente, control) {
     let simbolo;
     (function (simbolo) {
         simbolo[simbolo["digito"] = 0] = "digito";
@@ -38,6 +38,7 @@ export function esIdentificador(codigoFuente, control, lexema) {
     // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
     // Elementos del analizador lexico
     let controlAnt = control;
+    let lexema = '';
     // Definicin de elementos necesarios para el automata
     let estadosFinales = [estado.q3];
     let estadoInicial = estado.q0;

@@ -1,4 +1,4 @@
-export function esSimboloEspecial(codigoFuente, control, lexema) {
+export function esSimboloEspecial(codigoFuente, control) {
     let simbolosEspeciales = { ',': 'tComa',
         ';': 'tPuntoComa',
         '(': 'tParentesisAbre',
@@ -20,6 +20,7 @@ export function esSimboloEspecial(codigoFuente, control, lexema) {
         "]": 'tCorcheteCierra',
         '[': 'tCorcheteAbre'
     };
+    let lexema = '';
     let compLex = '';
     lexema += codigoFuente[control];
     if (simbolosEspeciales.hasOwnProperty(codigoFuente[control])) {

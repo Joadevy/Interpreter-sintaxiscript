@@ -22,7 +22,7 @@ const carAsimb = (caracter) => {
     }
     return simbolo;
 };
-export function esConstReal(codigoFuente, control, lexema) {
+export function esConstReal(codigoFuente, control) {
     let simbolo;
     (function (simbolo) {
         simbolo[simbolo["digito"] = 0] = "digito";
@@ -57,6 +57,7 @@ export function esConstReal(codigoFuente, control, lexema) {
     // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
     // Elementos del analizador lexico
     let controlAnt = control;
+    let lexema = '';
     // Definicin de elementos necesarios para el automata
     let estadosFinales = [estado.q1];
     let estadoInicial = estado.q0;

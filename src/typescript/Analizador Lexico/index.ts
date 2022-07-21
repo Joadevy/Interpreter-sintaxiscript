@@ -24,8 +24,10 @@ export function mostrarInfo(resultado:Array<any>):void{
   }
 } 
 
-  export function obtenerSiguienteCompLex(codigoFuente:string, control:number, lexema:string, tablaSimbolos:any, compLex:string):Array<any>{
+  export function obtenerSiguienteCompLex(codigoFuente:string, control:number,tablaSimbolos:any):Array<any>{
     // Aca habria que hacer el manejo general del analizador lexico
+  let lexema: string;
+  let compLex:string;
     // Asigna [1,2, ... , 32] que son los ASCII a saltear en el archivo
   let evitarASCII = [...Array(33).keys()].slice(1);
     // Si  caracter del codigo fuente es distinto de un caracter de control, avanza control.
@@ -36,18 +38,18 @@ export function mostrarInfo(resultado:Array<any>):void{
      if (control == codigoFuente.length){ 
       // Devuelve el componente lexico que representa el fin de archivo.
       compLex = "$";
-    } else if (esConstReal(codigoFuente,control,lexema)[0]) {
+    } else if (esConstReal(codigoFuente,control)[0]) {
       // Se necesita devolver un array que contenga el lexema, el componente lexico y el control
-      let resultado = esConstReal(codigoFuente,control,lexema); // Guarda el resultado (devuelve un array [true,control,lexema])
-      compLex = "tConstanteReal";
+      let resultado = esConstReal(codigoFuente,control); // Guarda el resultado (devuelve un array [true,control,lexema])
+      compLex = "tConstReal";
       return [compLex,resultado[1],resultado[2]]
     }
-    else if (esSimboloEspecial(codigoFuente,control,lexema)[0]) {        
-      let resultado = esSimboloEspecial(codigoFuente,control,lexema); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
+    else if (esSimboloEspecial(codigoFuente,control)[0]) {        
+      let resultado = esSimboloEspecial(codigoFuente,control); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
       return [resultado[3],resultado[1],resultado[2]];
     }
-    else if(esIdentificador(codigoFuente,control,lexema)[0]){
-      let resultado = esIdentificador(codigoFuente,control,lexema); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
+    else if(esIdentificador(codigoFuente,control)[0]){
+      let resultado = esIdentificador(codigoFuente,control); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
       if (!tablaSimbolos.hasOwnProperty(resultado[2].toUpperCase())){
         compLex = 'tId'
         // Insertar el identificador en la tabla de simbolos (luego de convertirlo a mayusculas)
@@ -59,13 +61,13 @@ export function mostrarInfo(resultado:Array<any>):void{
       }
       return [compLex,resultado[1],resultado[2]];
     }
-    else if(esCadena(codigoFuente,control,lexema)[0]){
-      let resultado = esCadena(codigoFuente,control,lexema); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
+    else if(esCadena(codigoFuente,control)[0]){
+      let resultado = esCadena(codigoFuente,control); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
       compLex = 'tCadena';
       return [compLex,resultado[1],resultado[2]];
     }
     else {
-      compLex = "ERROR";
+      compLex = "errorLexico";
     }
     return [compLex]
   }

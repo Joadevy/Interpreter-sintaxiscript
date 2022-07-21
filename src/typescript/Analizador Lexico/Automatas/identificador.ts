@@ -12,7 +12,7 @@ import {creaTabla} from "./funciones.js";
     return 'otro'
   }
 
-  export function esIdentificador(codigoFuente:string,control:number,lexema:string):Array<any>{
+  export function esIdentificador(codigoFuente:string,control:number):Array<any>{
     enum simbolo{
       'digito',
       'letra',
@@ -43,7 +43,8 @@ import {creaTabla} from "./funciones.js";
   
     // Elementos del analizador lexico
     let controlAnt = control;
-  
+    let lexema = ''
+
     // Definicin de elementos necesarios para el automata
     let estadosFinales:Array<number> = [estado.q3];
     let estadoInicial: number = estado.q0;  

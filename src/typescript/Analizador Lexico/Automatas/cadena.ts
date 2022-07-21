@@ -11,7 +11,7 @@ import {creaTabla} from "./funciones.js";
     return 'otro'
   }
 
-  export function esCadena(codigoFuente:string,control:number,lexema:string):Array<any>{
+  export function esCadena(codigoFuente:string,control:number):Array<any>{
     enum simbolo{
       'comillas',
       'otro',
@@ -39,6 +39,7 @@ import {creaTabla} from "./funciones.js";
   
     // Elementos del analizador lexico
     let controlAnt = control;
+    let lexema:string = '';
   
     // Definicin de elementos necesarios para el automata
     let estadosFinales:Array<number> = [estado.q2];
