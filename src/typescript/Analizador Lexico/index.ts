@@ -17,6 +17,7 @@ import {esCadena} from '../Analizador Lexico/Automatas/cadena.js';
 export function mostrarInfo(resultado:Array<any>):void{
     let output = document.getElementById('output');
     if (output){
+      console.log('MOSTRANDO?')
       if (resultado){
       let text = document.createElement('p');
       text.classList.add('output-text');

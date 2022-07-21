@@ -63,86 +63,124 @@ body {
         }
     }
 
-    .verificador{
+    #main {
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
 
-        .verificador__input-label{
+        .verificador{
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background-color: var(--light-black);
-            border: 1px solid var(--primary-variant);
-            border-radius: 10px;
-            padding: .75rem;
-            gap: .75rem;
-
-            .verificador__input {
-                color: transparent;
-                width: 175px;
-              }
-              .verificador__input::-webkit-file-upload-button {
-                visibility: hidden;
-              }
-              .verificador__input::before {
-                content: 'Selecciona el archivo';
-                color: black;
-                width: 150px;
-                text-align: center;
-                display: inline-block;
-                background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-                border: 1px solid var(--background);
-                border-radius: 5px;
-                padding: 5px 8px;
-                outline: none;
-                white-space: nowrap;
-                user-select: none;
-                cursor: pointer;
-                text-shadow: 1px 1px #fff;
-                font-weight: 700;
-                font-size: 10pt;
-              }
-              .verificador__input:hover::before {
-                border-color: var(--white);
-              }
-              .verificador__input:active {
-                outline: 0;
-              }
-              .verificador__input:active::before {
-                background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
-              }
+        
+            .verificador__input-label{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background-color: var(--light-black);
+                border: 1px solid var(--primary-variant);
+                border-radius: 10px;
+                padding: .75rem;
+                gap: .75rem;
+        
+                .verificador__input {
+                    color: transparent;
+                    width: 175px;
+                }
+                .verificador__input::-webkit-file-upload-button {
+                    visibility: hidden;
+                }
+                .verificador__input::before {
+                    content: 'Selecciona el archivo';
+                    color: black;
+                    width: 150px;
+                    text-align: center;
+                    display: inline-block;
+                    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+                    border: 1px solid var(--background);
+                    border-radius: 5px;
+                    padding: 5px 8px;
+                    outline: none;
+                    white-space: nowrap;
+                    user-select: none;
+                    cursor: pointer;
+                    text-shadow: 1px 1px #fff;
+                    font-weight: 700;
+                    font-size: 10pt;
+                }
+                .verificador__input:hover::before {
+                    border-color: var(--white);
+                }
+                .verificador__input:active {
+                    outline: 0;
+                }
+                .verificador__input:active::before {
+                    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+                }
+            }
         }
-
+        
+        .opciones{
+            display: flex;
+            gap: .75rem;
+            // border: 1px solid white;
+            justify-content: center;
+        
+            .opcion-lexico, .opcion-sintactico{
+                border: 1px solid transparent;
+                padding: .5rem;
+                border-radius: 5px;
+                text-shadow: 1px 1px #fff;
+                background: var(--light-white);
+                font-size: .75rem;
+        
+                &:hover{
+                    cursor: pointer;
+                    opacity: .75;
+                    border: 1px solid var(--primary-purple);
+                }
+            }
+        }
+        
         .verificador__output{
+            padding: .75rem;
+            border-radius: 5px;
             margin-top: 1rem;
             margin-bottom: 2rem;
             display: flex;
             flex-wrap: wrap;
-        }
-
-        .output-show{
-            margin: 1rem;
             background-color: var(--light-black);
-            padding: 1rem .75rem 1.5rem .75rem ;
-            display: block;
-            width: 100%;
-            justify-content: center;
-            border-radius: 15px;
-            border: 1px solid var(--black);
+            border: 1px solid var(--primary-variant);
+            width: 50%;
+        
+            .output-show{
+                margin: 1rem;
+                background-color: var(--light-black);
+                padding: 1rem .75rem 1.5rem .75rem ;
+                display: block;
+                width: 100%;
+                justify-content: center;
+                border-radius: 15px;
+                border: 1px solid var(--black);
+            }
+        
+            .output-text{
+                margin-top: .25rem;
+            }
+        
+            .error{
+                color: var(--error-light);
+            }
+        
+            .lexema,.complex{
+                color: var(--primary-purple);
+            }
         }
-
-        .output-text{
-            margin-top: .25rem;
-        }
-
-        .error{
-            color: var(--error-light);
-        }
-
-        .lexema,.complex{
-            color: var(--primary-purple);
+        
+        .hide{
+            display: none;
         }
     }
 }
