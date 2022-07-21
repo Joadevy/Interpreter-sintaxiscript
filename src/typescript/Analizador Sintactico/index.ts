@@ -1,26 +1,26 @@
-import { nodo, Arbol, simboloGramatical } from "./manejoArbol.js";
-import { creaTAS,cargarTAS, variables, terminales } from "./TAS.js";
-import { tablaSimbolos as TS} from "../Analizador Lexico/tablaSimbolos.js";
-import { obtenerSiguienteCompLex } from "../Analizador Lexico/index.js"; 
-import {elementoPila, crearPila, Apilar, Desapilar} from "./manejoPila.js"
+// import { nodo, Arbol, simboloGramatical } from "./manejoArbol.js";
+// import { creaTAS,cargarTAS, variables, terminales } from "./TAS.js";
+// import { tablaSimbolos as TS} from "../Analizador Lexico/tablaSimbolos.js";
+// import { obtenerSiguienteCompLex } from "../Analizador Lexico/index.js"; 
+// import {elementoPila, crearPila, Apilar, Desapilar} from "./manejoPila.js"
 
 // Testing con DENO
 // @ts-ignore
-// import { creaTAS,cargarTAS,variables, terminales } from "./TAS.ts";
+import { creaTAS,cargarTAS,variables, terminales } from "./TAS.ts";
 // @ts-ignore
-// import {elementoPila, crearPila, Apilar, Desapilar} from "./manejoPila.ts" 
+import {elementoPila, crearPila, Apilar, Desapilar} from "./manejoPila.ts" 
 // @ts-ignore
-//  import { nodo, Arbol, simboloGramatical} from "./manejoArbol.ts";
+ import { nodo, Arbol, simboloGramatical} from "./manejoArbol.ts";
 // @ts-ignore
-// import { tablaSimbolos as TS} from "../Analizador Lexico/tablaSimbolos.ts";
+import { tablaSimbolos as TS} from "../Analizador Lexico/tablaSimbolos.ts";
 // @ts-ignore
-// import { obtenerSiguienteCompLex } from "../Analizador Lexico/index.ts"; 
+import { obtenerSiguienteCompLex } from "../Analizador Lexico/index.ts"; 
 
 
 const arrayVariables = ['vPROGRAMA','vCUERPO','vSENTENCIAS','vSENTENCIA','vDECLARACION','vVARIABLES','vVARIABLE','vASIGNACION','vEXPARIT','vIZQARIT','vRAIZPOT','vPOT','vSUMARESTA','vMULTDIV','vOPERANDOS','vLECTURA','vESCRITURA','vSALIDAS','vSAUX','vSALIDA','vCONDICIONAL','vCONDICIONALFACT','vMIENTRAS','vCONDICION','vIZQCOND','vNEGACION','vCONJUNCION', 'vDISYUNCION']
   
 const arrayTerminales = ['tPrograma' , 'tEscribir' , 'tVariables' , 'tLeer' , 'tWhile' , 'tIf' , 'tElse' , 'tAnd' , 'tOr' , 'tNot' , 
-    'tId' , 'tCadena' , 'tConstReal' , 'tPuntoComa' , 'tComa' , 'tOpRel' , 'tOpAsignacion' , 'tMas' , 'tMenos' , 'tProducto' , 'tDivision' ,'tPotencia' , 'tRaiz' , 
+    'tId' , 'tCadena' , 'tConstReal' , 'tPuntoComa' , 'tComa' , 'tOpRel' , 'tOpAsignacion' , 'tSuma' , 'tResta' , 'tProducto' , 'tDivision' ,'tPotencia' , 'tRaiz' , 
     'tParentesisAbre' , 'tParentesisCierra' , 'tLlaveAbre' , 'tLlaveCierra' , 'tCorcheteAbre' , 'tCorcheteCierra']
 
 function inicializarPila(pila:Array<elementoPila>,raiz:nodo):Array<elementoPila>{
@@ -46,35 +46,36 @@ export function AnalizadorSintactico(codigoFuente:string , raiz:nodo){
     let pila: Array<elementoPila> = crearPila();
     let tablaSimbolos = TS; // Igual a la que importamos (esto es para poder ir actualizandola)
     cargarTAS(TAS)
-    const arbol = new Arbol(raiz)
     pila = inicializarPila(pila,raiz)
     let nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos);
     compLex = nodoCompLex[0]; // Guarda el compLex devuelto por el analizador lexico.
     lexema = nodoCompLex[2];// Guarda el lexema devuelto por el analizador lexico.
     tablaSimbolos = nodoCompLex[3];
     control = nodoCompLex[1]
-    console.log(TAS[0][0])
+    // console.log(TAS[0][0])
 
     console.log('compLex encontrado: ' + compLex)
     console.log('lexema encontrado: ' + lexema)
     console.log('tabla de simbolos ' + JSON.stringify(tablaSimbolos))
 
-    let y: elementoPila;
-    let x:elementoPila;
+    let x: elementoPila;
     while(compLex !== 'errorLexico' && !exito){
         x = Desapilar(pila) as any // Obtengo un elemento de la pila de elementos a encontrar en el programa.
 
+        console.log(x)
+        
         if (arrayTerminales.includes(x.simbolo)){
             console.log(x.simbolo + ' es terminal')
-
+            console.log(x.simbolo,compLex)
             if (x.simbolo == compLex){
-                if (x.arbolPila?.lexema){
-                    x.arbolPila.lexema = lexema // Si es distinto de undefined, lo asigna (esta comprobacion es por ts)
-                }
+                console.log('ACA')
+                x.arbolPila.lexema = lexema // Si es distinto de undefined, lo asigna (esta comprobacion es por ts)
+                console.log('ACA2 ' + JSON.stringify(x.arbolPila))
                 // Llama de nuevo al analizador lexico para seguir el reconocimiento.
                 nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos);
                 compLex = nodoCompLex[0]
                 tablaSimbolos = nodoCompLex[3];
+                lexema = nodoCompLex[2];
                 control = nodoCompLex[1]
                 console.log('Se obtuvo el elemento: ' + compLex)
             }
@@ -83,22 +84,56 @@ export function AnalizadorSintactico(codigoFuente:string , raiz:nodo){
         else if (arrayVariables.includes(x.simbolo)){
         console.log(x.simbolo + ' es una variable');
         let posicion1 = variables[x.simbolo as any]
-        console.log(posicion1)
+        console.log('prim posicion: ' + posicion1)
+        console.log(compLex)
         let posicion2 = terminales[compLex as any]
-        console.log(posicion2)
-        if (TAS[posicion1 as any][posicion2 as any] === undefined){
-            console.log('TAS NO DEFINIDA PARA '+ x.simbolo + ' hacia ' + compLex)
-            compLex = 'errorLexico';
-        } else{
-            let contador:number= 1;
-            let cantidad : number= TAS[posicion1 as any][posicion2 as any].cantidad
-            console.log(cantidad)
+        console.log('segunda posicion ' + posicion2)
+            if (TAS[posicion1 as any][posicion2 as any] === undefined){
+                console.log('TAS NO DEFINIDA PARA '+ x.simbolo + ' HACIA ' + compLex)
+                compLex = 'errorLexico';
+            } else{
+                let contador:number= 0;
+                let cantidad : number= TAS[posicion1 as any][posicion2 as any].cantidad-1
+
+                while (contador <= cantidad){ // Mientras el contador sea menor que la cantidad de elementos en la part derecha de la CFG
+                    let compL :string  = TAS[posicion1 as any][posicion2 as any].elementos[contador]; // Guardo el elemento del array que contiene todos los elementos d la parte derecha.
+                    let hijo = new nodo(compL,'',0,[]);
+                    x.arbolPila.insertarHijo(hijo);
+                    console.log('Nuevo nodo en el arbol ' + compL)
+                    contador++
+                }
+                // console.log('arbolito ' + JSON.stringify(x.arbolPila.hijos[0].simbolo))
+                // console.log('cantidad es: ' + cantidad)
+                
+                while(cantidad>=0){
+                    // console.log(cantidad);
+                    console.log(x.arbolPila.hijos[cantidad])
+                    let y: elementoPila = {
+                        simbolo : x.arbolPila.hijos[cantidad].simbolo,
+                        arbolPila : x.arbolPila.hijos[cantidad],
+                    };
+                    Apilar(pila,y);
+                    cantidad--
+                }
+                console.log(pila)
+            }
         }
-    }
-        exito = true;
+        if (x.simbolo == compLex && compLex == 'pesos'){
+            exito = true;
+        }
+        // exito = true
     } 
+    if (exito){
+        console.log('Sintaxis correcta')
+    } else {
+        console.log('Hay un error sintactico')
+        console.log(raiz.hijos[3].hijos)
+        // raiz.mostrarArbol()
+    }
 }
 
-const nodoPrueba = new nodo('tPrograma','Program',0,[]);
-const arbol = new Arbol(nodoPrueba)
-AnalizadorSintactico('Program{}',arbol)
+// Esto se tiene que hacer dentro del analizador (la parte del arbol)
+const raiz = new nodo('vPrograma','',0,[]);
+const arbol = new Arbol(raiz)
+
+AnalizadorSintactico('Program test{var letra12,variable,identificador,ast45; identificador = 1234 ; while[identificador>35]{identificador=124+10; if[identificador>100]{identificador=RAIZ 150}}}',arbol)
