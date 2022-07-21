@@ -154,6 +154,10 @@ body {
             background-color: var(--light-black);
             border: 1px solid var(--primary-variant);
             width: 50%;
+
+            @media screen and (max-width:768px) {
+                width: 95%;
+            }
         
             .output-show{
                 margin: 1rem;

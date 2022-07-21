@@ -142,6 +142,11 @@ body #main .verificador__output {
   border: 1px solid var(--primary-variant);
   width: 50%;
 }
+@media screen and (max-width: 768px) {
+  body #main .verificador__output {
+    width: 95%;
+  }
+}
 body #main .verificador__output .output-show {
   margin: 1rem;
   background-color: var(--light-black);
