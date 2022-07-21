@@ -65,7 +65,6 @@ function llamarLexico(archivos:any){
 }
 
 function eliminarOpciones(){
-  console.log('OLA')
   const opciones = document.querySelector('.opciones');
   if (opciones){
     opciones.classList.add('hide') // Seria mejor modificarlo con style
