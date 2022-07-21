@@ -16,10 +16,10 @@ export function mostrarInfo(resultado) {
         if (resultado) {
             let text = document.createElement('p');
             text.classList.add('output-text');
-            if (resultado[0] == "ERROR") {
+            if (resultado[0] == "errorLexico") {
                 text.innerHTML = ` Se encontro el compLex: <span class="error">${resultado[0]}</span>`;
             }
-            else if (resultado[0] == "$") {
+            else if (resultado[0] == "pesos") {
                 text.innerHTML = ` Se encontro el compLex: <span class="complex">${resultado[0]}</span> y representa el fin de archivo.`;
             }
             else {

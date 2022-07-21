@@ -15,7 +15,11 @@ input?.addEventListener('change', (e) => {
       // Usamos solamente el primer archivo que se haya pasado (aunque por defecto solo se puede pasar uno)
       if (compruebaTXT.test(archivos[0].name)){
         // Llamamos a la funcion que se encargara del manejo del compilador.
+        
+        // Podria llamar a un cartel donde si selecciona analizador lexico, le muestra el lexico.
+        // Si selecciona sintactico que muestre ambos
         interprete(archivos[0]);
+        // DEBE BORRAR EL CARTEL DE SELECCIONAR EL ARCHIVO (SINO SE PUEDE SEGUIR INPUTEANDO COSAS)
       } else {
         alert('Porfavor, introduce un archivo de texto .TXT')
       }
