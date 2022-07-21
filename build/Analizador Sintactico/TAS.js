@@ -3,7 +3,7 @@
 // 'tId' | 'tCadena' | 'tConstReal' | 'tPuntoComa' | 'tComa' | 'tOpRel' | 'tOpAsignacion' | 'tMas' | 'tMenos' | 'tProducto' | 'tDivision' |'tPotencia' | 'tRaiz' | 
 // 'tParentesisAbre' | 'tParentesisCierra' | 'tLlaveAbre' | 'tLlaveCierra' | 'tCorcheteAbre' | 'tCorcheteCierra';
 //import { simboloGramatical } from "./manejoArbol";
-var variables;
+export var variables;
 (function (variables) {
     variables[variables["vPROGRAMA"] = 0] = "vPROGRAMA";
     variables[variables["vCUERPO"] = 1] = "vCUERPO";
@@ -34,7 +34,7 @@ var variables;
     variables[variables["vCONJUNCION"] = 26] = "vCONJUNCION";
     variables[variables["vDISYUNCION"] = 27] = "vDISYUNCION";
 })(variables || (variables = {}));
-var terminales;
+export var terminales;
 (function (terminales) {
     terminales[terminales["tPrograma"] = 0] = "tPrograma";
     terminales[terminales["tEscribir"] = 1] = "tEscribir";
@@ -221,6 +221,6 @@ export function cargarTAS(TAS) {
 let TAS = creaTAS();
 TAS = cargarTAS(TAS);
 console.log(TAS);
-console.log(TAS[variables.vCUERPO][terminales.tId].elementos);
+console.log(TAS[variables['vCUERPO']][terminales['tId']].elementos);
 console.log(TAS[variables.vPOT][terminales.tCadena] === undefined); // SIgnifica que hay error lexico, no hay derivacion posible (no hay nada en la celda)
 console.log(TAS[variables.vPOT][terminales.tOr].cantidad);
