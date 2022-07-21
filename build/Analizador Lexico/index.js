@@ -3,7 +3,7 @@ import { esConstReal } from '../Analizador Lexico/Automatas/constanteReal.js';
 // import {esConstReal} from '../Analizador Lexico/Automatas/constanteReal.ts';
 import { esSimboloEspecial } from '../Analizador Lexico/Automatas/simboloEspecial.js';
 // @ts-ignore
-// import {esSimboloEspecial} from '../Analizador Lexico/Automatas/si/mboloEspecial.ts';
+// import {esSimboloEspecial} from '../Analizador Lexico/Automatas/simboloEspecial.ts';
 import { esIdentificador } from '../Analizador Lexico/Automatas/identificador.js';
 // @ts-ignore
 // import {esIdentificador} from '../Analizador Lexico/Automatas/identificador.ts';
@@ -35,7 +35,6 @@ export function mostrarInfo(resultado) {
 }
 export function obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos) {
     // Aca habria que hacer el manejo general del analizador lexico
-    let lexema;
     let compLex;
     // Asigna [1,2, ... , 32] que son los ASCII a saltear en el archivo
     let evitarASCII = [...Array(33).keys()].slice(1);
@@ -63,7 +62,6 @@ export function obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos) {
             compLex = 'tId';
             // Insertar el identificador en la tabla de simbolos (luego de convertirlo a mayusculas)
             tablaSimbolos[resultado[2].toUpperCase()] = 'tId';
-            console.log(tablaSimbolos);
         }
         else {
             // Si esta en la tabla de simbolos, buscamos cual es el componente lexico asociado.

@@ -27,7 +27,7 @@ export class Arbol {
         }
     }
     mostrarArbol(raiz, desplazamiento) {
-        console.log(desplazamiento + raiz.lexema);
+        console.log(desplazamiento + raiz.simbolo + '(' + raiz.lexema + ')');
         for (let i = 0; i < raiz.cantHijos; i++) {
             this.mostrarArbol(raiz.hijos[i], desplazamiento + " ");
         }

@@ -44,15 +44,12 @@ export function esCadena(codigoFuente, control) {
     // Inicializando estado actual en el inicial.
     let estadoActual = estadoInicial;
     // estadoActual contendra el estado al que llego el automata tras analizar el caracter del codigo fuente.
-    console.log('CHEQUEO CADENA');
     while (estadoActual == 0 || estadoActual == 1) {
         // Toma un caracter del archivo y busca el estado siguiente en la tabla de transiciones.
         estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(codigoFuente[control])]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
         if (estadoActual == 0 || estadoActual == 1 || estadoActual == 2) {
             lexema += codigoFuente[control];
-            console.log(lexema);
         }
-        console.log("el control es : " + control);
         control++;
     }
     if (estadosFinales.includes(estadoActual)) {

@@ -1,7 +1,7 @@
-// import {creaTabla} from "./funciones.js";
+import {creaTabla} from "./funciones.js";
 
 // @ts-ignore
-import {creaTabla} from "./funciones.ts";
+// import {creaTabla} from "./funciones.ts";
 
 // Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
   const carAsimb = (caracter:string):string => {
@@ -50,15 +50,12 @@ import {creaTabla} from "./funciones.ts";
     // Inicializando estado actual en el inicial.
     let estadoActual: number = estadoInicial;
     // estadoActual contendra el estado al que llego el automata tras analizar el caracter del codigo fuente.
-    console.log('CHEQUEO CADENA');
     while(estadoActual == 0 || estadoActual == 1){
       // Toma un caracter del archivo y busca el estado siguiente en la tabla de transiciones.
       estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(codigoFuente[control]) as any]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
       if (estadoActual ==  0 || estadoActual == 1 || estadoActual == 2){
         lexema+=codigoFuente[control];
-        console.log(lexema);
       }
-      console.log("el control es : " + control)
       control++;
     }
 
