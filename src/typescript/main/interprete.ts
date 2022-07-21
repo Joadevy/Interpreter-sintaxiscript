@@ -12,7 +12,7 @@ export async function interprete(archivo:File){
     let control:number = 0;
     let compLex = '';
     // Llamo a la funcion para obtener el compLex
-    while(compLex !== '$' && compLex !== 'errorLexico'){
+    while(compLex !== 'pesos' && compLex !== 'errorLexico'){
         let nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control,tablaSimbolos);
 
         // Testing en consola

@@ -37,17 +37,17 @@ export function obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos) {
     }
     if (control == codigoFuente.length) {
         // Devuelve el componente lexico que representa el fin de archivo.
-        compLex = "$";
+        compLex = "pesos";
     }
     else if (esConstReal(codigoFuente, control)[0]) {
         // Se necesita devolver un array que contenga el lexema, el componente lexico y el control
         let resultado = esConstReal(codigoFuente, control); // Guarda el resultado (devuelve un array [true,control,lexema])
         compLex = "tConstReal";
-        return [compLex, resultado[1], resultado[2]];
+        return [compLex, resultado[1], resultado[2], tablaSimbolos];
     }
     else if (esSimboloEspecial(codigoFuente, control)[0]) {
         let resultado = esSimboloEspecial(codigoFuente, control); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
-        return [resultado[3], resultado[1], resultado[2]];
+        return [resultado[3], resultado[1], resultado[2], tablaSimbolos];
     }
     else if (esIdentificador(codigoFuente, control)[0]) {
         let resultado = esIdentificador(codigoFuente, control); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
@@ -61,12 +61,12 @@ export function obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos) {
             // Si esta en la tabla de simbolos, buscamos cual es el componente lexico asociado.
             compLex = tablaSimbolos[resultado[2].toUpperCase()];
         }
-        return [compLex, resultado[1], resultado[2]];
+        return [compLex, resultado[1], resultado[2], tablaSimbolos];
     }
     else if (esCadena(codigoFuente, control)[0]) {
         let resultado = esCadena(codigoFuente, control); // Guarda el resultado (devuelve un array [true,control,lexema,compLex]
         compLex = 'tCadena';
-        return [compLex, resultado[1], resultado[2]];
+        return [compLex, resultado[1], resultado[2], tablaSimbolos];
     }
     else {
         compLex = "errorLexico";
