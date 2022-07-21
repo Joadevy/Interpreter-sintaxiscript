@@ -1,4 +1,6 @@
 import { creaTabla } from "./funciones.js";
+// @ts-ignore
+// import {creaTabla} from "./funciones.ts";
 // Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
 const carAsimb = (caracter) => {
     let simbolo;

@@ -218,10 +218,10 @@ export function cargarTAS(TAS:Array<any>):Array<any>{
 
 
 // Testeando
- let TAS = creaTAS()
+/*  let TAS = creaTAS()
 TAS = cargarTAS(TAS);
 
 console.log(TAS);
 console.log(TAS[variables['vCUERPO']][terminales['tId']].elementos)
 console.log(TAS[variables.vPOT][terminales.tCadena] === undefined) // SIgnifica que hay error lexico, no hay derivacion posible (no hay nada en la celda)
-console.log(TAS[variables.vPOT][terminales.tOr].cantidad) 
+console.log(TAS[variables.vPOT][terminales.tOr].cantidad)  */

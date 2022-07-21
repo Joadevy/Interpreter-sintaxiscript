@@ -1,7 +1,15 @@
 import { esConstReal } from '../Analizador Lexico/Automatas/constanteReal.js';
+// @ts-ignore
+// import {esConstReal} from '../Analizador Lexico/Automatas/constanteReal.ts';
 import { esSimboloEspecial } from '../Analizador Lexico/Automatas/simboloEspecial.js';
+// @ts-ignore
+// import {esSimboloEspecial} from '../Analizador Lexico/Automatas/si/mboloEspecial.ts';
 import { esIdentificador } from '../Analizador Lexico/Automatas/identificador.js';
+// @ts-ignore
+// import {esIdentificador} from '../Analizador Lexico/Automatas/identificador.ts';
 import { esCadena } from '../Analizador Lexico/Automatas/cadena.js';
+// @ts-ignore
+// import {esCadena} from '../Analizador Lexico/Automatas/cadena.ts';
 export function mostrarInfo(resultado) {
     let output = document.getElementById('output');
     if (output) {
