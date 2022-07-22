@@ -1,7 +1,8 @@
 import {interprete} from './interprete.js';
 
-// Este modulo tiene como responsabilidad el manejo del input file.
+import { analizadorLexico } from '../Analizador Lexico/index.js';
 
+// Este modulo tiene como responsabilidad el manejo del input file.
 // Tomamos el elemento HTML del input file.
 const input = document.getElementById('input');
 
@@ -57,11 +58,11 @@ function llamarLexico(archivos:any){
   const main = document.getElementById('main');
   
   const templateOutput= document.getElementById('template-output')
-   // @ts-ignore
-   const output = templateOutput.content.cloneNode(true);
-   // @ts-ignore
-   main.appendChild(output)
-  interprete(archivos[0]);
+    // @ts-ignore
+  const output = templateOutput.content.cloneNode(true);
+    // @ts-ignore
+  main.appendChild(output)
+  analizadorLexico(archivos[0]);
 }
 
 function eliminarOpciones(){

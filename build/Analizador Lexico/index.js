@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { esConstReal } from '../Analizador Lexico/Automatas/constanteReal.js';
 // @ts-ignore
 // import {esConstReal} from '../Analizador Lexico/Automatas/constanteReal.ts';
@@ -10,10 +19,10 @@ import { esIdentificador } from '../Analizador Lexico/Automatas/identificador.js
 import { esCadena } from '../Analizador Lexico/Automatas/cadena.js';
 // @ts-ignore
 // import {esCadena} from '../Analizador Lexico/Automatas/cadena.ts';
+import { tablaSimbolos } from '../Analizador Lexico/tablaSimbolos.js';
 export function mostrarInfo(resultado) {
     let output = document.getElementById('output');
     if (output) {
-        console.log('MOSTRANDO?');
         if (resultado) {
             let text = document.createElement('p');
             text.classList.add('output-text');
@@ -79,4 +88,23 @@ export function obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos) {
         compLex = "errorLexico";
     }
     return [compLex];
+}
+export function analizadorLexico(archivo) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // codigoFuente va a guardar toda la cadena, es decir, todo el codigo del programa.
+        //.trim() para remover espacios en blanco al nodoCompLex y al final del archivo.
+        let codigoFuente = (yield archivo.text()).trim();
+        // Aca se debe declarar las variables para manejar el string codigoFuente (control,lexema)
+        let control = 0;
+        let compLex = '';
+        // Llamo a la funcion para obtener el compLex
+        while (compLex !== 'pesos' && compLex !== 'errorLexico') {
+            let nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos);
+            // Actualizando la variable de control y compLex con la salida del analizador lexico.
+            compLex = nodoCompLex[0];
+            control = nodoCompLex[1];
+            // Mostrar en la interfaz la data del resultado.
+            mostrarInfo(nodoCompLex);
+        }
+    });
 }

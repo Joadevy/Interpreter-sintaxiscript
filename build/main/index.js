@@ -1,4 +1,4 @@
-import { interprete } from './interprete.js';
+import { analizadorLexico } from '../Analizador Lexico/index.js';
 // Este modulo tiene como responsabilidad el manejo del input file.
 // Tomamos el elemento HTML del input file.
 const input = document.getElementById('input');
@@ -53,10 +53,9 @@ function llamarLexico(archivos) {
     const output = templateOutput.content.cloneNode(true);
     // @ts-ignore
     main.appendChild(output);
-    interprete(archivos[0]);
+    analizadorLexico(archivos[0]);
 }
 function eliminarOpciones() {
-    console.log('OLA');
     const opciones = document.querySelector('.opciones');
     if (opciones) {
         opciones.classList.add('hide'); // Seria mejor modificarlo con style
