@@ -7,23 +7,14 @@ export async function interprete(archivo:File){
     // codigoFuente va a guardar toda la cadena, es decir, todo el codigo del programa.
     //.trim() para remover espacios en blanco al nodoCompLex y al final del archivo.
     let codigoFuente:string = (await archivo.text()).trim();
-
-    // Aca se debe declarar las variables para manejar el string codigoFuente (control,lexema)
     let control:number = 0;
     let compLex = '';
     // Llamo a la funcion para obtener el compLex
     while(compLex !== 'pesos' && compLex !== 'errorLexico'){
         let nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control,tablaSimbolos);
 
-        // Testing en consola
-        console.log('compLex encontrado: ' + nodoCompLex[0]);
-        if (nodoCompLex[0] !== 'errorLexico'){
-            console.log('Lexema encontrado: ' + nodoCompLex[2]);
-            console.log('Posicion del control actual: ' + nodoCompLex[1])
-        }
         compLex = nodoCompLex[0];
         control = nodoCompLex[1];
-        console.log(control);
         // Mostrar en la interfaz la data del resultado.
         mostrarInfo(nodoCompLex);
     } 
