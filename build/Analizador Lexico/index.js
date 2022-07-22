@@ -20,6 +20,8 @@ import { esCadena } from '../Analizador Lexico/Automatas/cadena.js';
 // @ts-ignore
 // import {esCadena} from '../Analizador Lexico/Automatas/cadena.ts';
 import { tablaSimbolos } from '../Analizador Lexico/tablaSimbolos.js';
+// @ts-ignore
+// import {tablaSimbolos} from '../Analizador Lexico/tablaSimbolos.ts';
 export function mostrarInfo(resultado) {
     let output = document.getElementById('output');
     if (output) {

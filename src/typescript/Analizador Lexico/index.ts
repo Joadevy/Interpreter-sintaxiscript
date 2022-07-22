@@ -15,6 +15,8 @@ import {esCadena} from '../Analizador Lexico/Automatas/cadena.js';
 // import {esCadena} from '../Analizador Lexico/Automatas/cadena.ts';
 
 import {tablaSimbolos} from '../Analizador Lexico/tablaSimbolos.js';
+// @ts-ignore
+// import {tablaSimbolos} from '../Analizador Lexico/tablaSimbolos.ts';
 
 export function mostrarInfo(resultado:Array<any>):void{
     let output = document.getElementById('output');

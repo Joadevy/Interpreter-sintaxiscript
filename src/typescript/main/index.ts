@@ -2,6 +2,8 @@ import {interprete} from './interprete.js';
 
 import { analizadorLexico } from '../Analizador Lexico/index.js';
 
+import { analizadorSintactico } from '../Analizador Sintactico/index.js';
+
 // Este modulo tiene como responsabilidad el manejo del input file.
 // Tomamos el elemento HTML del input file.
 const input = document.getElementById('input');
@@ -50,7 +52,7 @@ function manejarOpciones(archivos:any){
   let opcionLexico = document.querySelector('.opcion-lexico');
   opcionLexico?.addEventListener('click', () => llamarLexico(archivos));
   let opcionSintactico = document.querySelector('.opcion-sintactico');
-  opcionSintactico?.addEventListener('click', () => console.log('TEST'))
+  opcionSintactico?.addEventListener('click', () => llamarSintactico(archivos));
 }
 
 function llamarLexico(archivos:any){
@@ -70,6 +72,18 @@ function eliminarOpciones(){
   if (opciones){
     opciones.classList.add('hide') // Seria mejor modificarlo con style
   }
+}
+
+function llamarSintactico(archivos:any){
+  eliminarOpciones();
+  const main = document.getElementById('main');
+  
+  const templateOutput= document.getElementById('template-output')
+    // @ts-ignore
+  const output = templateOutput.content.cloneNode(true);
+    // @ts-ignore
+  main.appendChild(output)
+  analizadorSintactico(archivos[0]);
 }
 
 

@@ -37,8 +37,9 @@ function inicializarPila(pila:Array<elementoPila>,raiz:nodo):Array<elementoPila>
     return pila
 }
 
-export function AnalizadorSintactico(codigoFuente:string , raiz:nodo){
+export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
     let exito:boolean = false;
+    let errorLog:string = '';
     let control: number = 0;
     let lexema:string ='';
     let compLex: simboloGramatical; // tiene que ser de tipo simboloGramatical
@@ -87,6 +88,7 @@ export function AnalizadorSintactico(codigoFuente:string , raiz:nodo){
         let posicion2 = terminales[compLex as any]
         // console.log('segunda posicion ' + posicion2)
             if (TAS[posicion1 as any][posicion2 as any] === undefined){
+                errorLog = '<< TAS no definida para '+ x.simbolo + ' hacia ' + compLex + ' >>';
                 console.log('TAS NO DEFINIDA PARA '+ x.simbolo + ' HACIA ' + compLex)
                 compLex = 'errorLexico';
             } else{
@@ -120,14 +122,50 @@ export function AnalizadorSintactico(codigoFuente:string , raiz:nodo){
     } 
     if (exito){
         console.log('Sintaxis correcta');
-        arbol.mostrarArbol(raiz,'')
+        raiz.mostrarArbol(raiz,'')
+        mostrarInfoSintactico([true],raiz)
     } else {
+        mostrarInfoSintactico([false,errorLog],raiz)
         console.log('Hay un error sintactico')
     }
 }
 
 // Esto se tiene que hacer dentro del analizador (la parte del arbol)
-const raiz = new nodo('vPROGRAMA','',0,[]);
-const arbol = new Arbol(raiz)
+// const raiz = new nodo('vPROGRAMA','',0,[]);
+// const arbol = new Arbol(raiz)
 
-AnalizadorSintactico('Program test{var letra12,variable,identificador,ast45; identificador = 1234 ; while[identificador>35]{identificador=124+10; if[identificador>100]{identificador=RAIZ 150}}}',arbol)
+// analisisSintactico('Program test{var letra12,variable,identificador,ast45; identificador = 1234 ; while[identificador>35]{identificador=124+10; if[identificador>100]{identificador=RAIZ 150}}}',arbol)
+
+export async function analizadorSintactico (archivo:File){
+    // codigoFuente va a guardar toda la cadena, es decir, todo el codigo del programa.
+    //.trim() para remover espacios en blanco al nodoCompLex y al final del archivo.
+    let codigoFuente:string = (await archivo.text()).trim();
+    const raiz = new nodo('vPROGRAMA','',0,[]);
+    const arbol = new Arbol(raiz);
+    analisisSintactico(codigoFuente,arbol);
+}
+
+// analizadorSintactico('Program{var uno identificador = 1234 ; var dos,tres; while[identificador==35]{identificador=124+10; if[identificador>100]{ identificador = (((((150+noDeberiaAceptarEsto}}}')
+
+function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
+    let output = document.getElementById('output');
+
+    if (resultado[0]){ // En caso de que haya resultado en exito el analizador sintactico.
+        let text = document.createElement('p');
+        text.classList.add('output-text');
+        text.innerHTML = `No hay errores sintacticos, revisa la consola (F12 en el teclado) para ver el arbol sintactico.`
+        raiz.mostrarArbolConsola(raiz,'')
+        if (output){
+            output.appendChild(text);
+            output.classList.add('output-show');
+        }
+    } else {
+        if(output){
+            let text = document.createElement('p');
+            text.classList.add('output-text');
+            text.innerHTML = `Ocurrio un <span class="error">error sintactico.</span> Log: <span class="complex">${resultado[1]}</span>`
+            output.appendChild(text);
+            output.classList.add('output-show');
+        }
+    }
+}
