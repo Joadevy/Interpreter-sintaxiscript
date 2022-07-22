@@ -24,7 +24,7 @@ Program demo {
 ```
 
 #### Declaracion de una sentencia
-» Para declarar sentencias en Sintaxisript se debe tener en cuenta la utilizacion de ; para separar cada una de las sentencias, a excepcion de la ultima sentencia del cuerpo del programa. 
+» Para declarar sentencias en Sintaxiscript se debe tener en cuenta la utilizacion de ; como separador de sentencias, es decir, siempre que esta sentencia no represente la ultima antes de un cierre mediante llave } 
 
 ```javascript
 variable1 = 100,54;
@@ -32,7 +32,7 @@ variable2 = 110;
 suma = variable1 + variable2;
 control = 0;
 if [suma>=200]{
-  control = 1;
+  control = 1
 };
 suma = 0
 ```
@@ -68,9 +68,9 @@ var control,cambio;
 control = 1;
 cambio = 10,20;
 if [control == 1]{
-  control = cambio - 10;
+  control = cambio - 10
 } else {
-  control = cambio + 10;
+  control = cambio + 10
 }
 ```
 
@@ -82,7 +82,7 @@ var control,cambio;
 cambio = 0;
 control = 0;
 while [cambio < 100]{
-  cambio = cambio + 10;
+  cambio = cambio + 10
 };
 control = 1
 ```
