@@ -32,4 +32,10 @@ export class Arbol {
             this.mostrarArbol(raiz.hijos[i], desplazamiento + " ");
         }
     }
+    mostrarArbolConsola(raiz, desplazamiento) {
+        console.log(desplazamiento + raiz.simbolo + '(' + raiz.lexema + ')');
+        for (let i = 0; i < raiz.cantHijos; i++) {
+            this.mostrarArbol(raiz.hijos[i], desplazamiento + " ");
+        }
+    }
 }
