@@ -40,7 +40,7 @@ Program demo {
 » Para declarar sentencias en Sintaxiscript se debe tener en cuenta la utilizacion de ; como separador de sentencias, es decir, siempre que esta sentencia no represente la ultima antes de un cierre mediante llave } 
 
 ```javascript
-variable1 = 100,54;
+variable1 = 100.54;
 variable2 = 110;
 suma = variable1 + variable2;
 control = 0;
@@ -98,6 +98,34 @@ while [cambio < 100 and not[control == 1]]{
   cambio = cambio + 10
 };
 control = 1
+```
+
+#### Escritura en pantalla
+» Para realizar impresiones en pantalla se utiliza la palabra reservada Print que recibe como argumentos,separados por comas, a cadenas, que se escriben encerrandolas con "ejemplo cadena", y expresiones aritmeticas, identificadores o constantes reales. 
+
+```javascript
+var dinero,control;
+dinero = 0;
+control = 0;
+if [dinero == 0 or not[control <> 0]]{
+  dinero = dinero + 100.50;
+  Print("El dinero actual es: ",dinero);
+  control = 1
+};
+Print("El doble del dinero actual es: ",dinero*2,"fin de programa")
+```
+#### Lectura de una variable
+» Para leer una variable se utiliza la palabra reservada Read que recibe como argumentos ("cadena",id). Donde cadena es una cadena que se muestra en pantalla e id es la variable a leer.
+
+```javascript
+var dinero,boleto;
+Read("dinero disponible",dinero);
+if [dinero <= 50]{
+		Print("Para 50 aun faltan: ",50-dinero)
+}else{
+		Read("tipo de boleto",boleto);
+		Print(boleto,"ha sido adquirido")
+}
 ```
 
 ## Herramientas y metodologia de desarrollo
