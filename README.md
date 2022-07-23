@@ -40,7 +40,7 @@ Program demo {
 » Para declarar sentencias en Sintaxiscript se debe tener en cuenta la utilizacion de ; como separador de sentencias, es decir, siempre que esta sentencia no represente la ultima antes de un cierre mediante llave } 
 
 ```javascript
-variable1 = 100.54;
+variable1 = 100.54;	// Se utiliza . para denotar decimales en una constante real
 variable2 = 110;
 suma = variable1 + variable2;
 control = 0;
@@ -69,7 +69,7 @@ resta = variable1 - variable2;
 producto = variable1 * variable2;
 cociente = variable1 / variable2;
 potencia = variable1 ^ variable2;
-radical = RAIZ variable1;
+radical = RAIZ (variable1);			// El radicando debe ir entre parentesis: RAIZ (radicando)
 opCombinada = variable1 * (variable2 + variable1)
 ```
 
@@ -79,8 +79,8 @@ opCombinada = variable1 * (variable2 + variable1)
 ```javascript
 var control,cambio;
 control = 1;
-cambio = 10,20;
-if [control == 1]{
+cambio = 10.20;
+if [control == 1 or cambio>10]{
   control = cambio - 10
 } else {
   control = cambio + 10
