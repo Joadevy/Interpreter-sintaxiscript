@@ -65,6 +65,7 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
         if (arrayTerminales.includes(x.simbolo)){
             console.log(x.simbolo + ' es terminal')
             if (x.simbolo == compLex){
+                console.log('test')
                 if (x.arbolPila){
                     x.arbolPila.lexema = lexema // Si es distinto de undefined, lo asigna (esta comprobacion es por ts)
                 }
@@ -77,6 +78,9 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
                 lexema = nodoCompLex[2];
                 control = nodoCompLex[1]
                 console.log('Se obtuvo el elemento: ' + compLex)
+            } else {
+                errorLog = ' se esperaba ' + x.simbolo + ' y se encontro ' + compLex;
+                compLex = 'errorLexico'; // No es un error lexico pero sirve para cortar el while.
             }
         }
 
@@ -87,7 +91,7 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
             if (TAS[posicion1 as any][posicion2 as any] === undefined){
                 errorLog = '<< TAS no definida para '+ x.simbolo + ' hacia ' + compLex + ' >>';
                 console.log('TAS NO DEFINIDA PARA '+ x.simbolo + ' HACIA ' + compLex)
-                compLex = 'errorLexico';
+                compLex = 'errorLexico'; // No es un error lexico pero sirve para cortar el while.
             } else{
                 let contador:number= 0;
                 let cantidad : number= TAS[posicion1 as any][posicion2 as any].cantidad-1
@@ -126,12 +130,6 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
     }
 }
 
-// Esto se tiene que hacer dentro del analizador (la parte del arbol)
-// const raiz = new nodo('vPROGRAMA','',0,[]);
-// const arbol = new Arbol(raiz)
-
-// analisisSintactico('Program test{var letra12,variable,identificador,ast45; identificador = 1234 ; while[identificador>35]{identificador=124+10; if[identificador>100]{identificador=RAIZ 150}}}',arbol)
-
 export async function analizadorSintactico (archivo:File){
     // codigoFuente va a guardar toda la cadena, es decir, todo el codigo del programa.
     //.trim() para remover espacios en blanco al nodoCompLex y al final del archivo.
@@ -140,8 +138,6 @@ export async function analizadorSintactico (archivo:File){
     const arbol = new Arbol(raiz);
     analisisSintactico(codigoFuente,arbol);
 }
-
-// analizadorSintactico('Program{var uno identificador = 1234 ; var dos,tres; while[identificador==35]{identificador=124+10; if[identificador>100]{ identificador = (((((150+noDeberiaAceptarEsto}}}')
 
 function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
     let output = document.getElementById('output');

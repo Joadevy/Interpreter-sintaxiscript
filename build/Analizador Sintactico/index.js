@@ -66,18 +66,23 @@ export function analisisSintactico(codigoFuente, raiz) {
         if (arrayTerminales.includes(x.simbolo)) {
             console.log(x.simbolo + ' es terminal');
             if (x.simbolo == compLex) {
+                console.log('test');
                 if (x.arbolPila) {
                     x.arbolPila.lexema = lexema; // Si es distinto de undefined, lo asigna (esta comprobacion es por ts)
                 }
                 // Llama de nuevo al analizador lexico para seguir el reconocimiento.
                 nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos);
                 compLex = nodoCompLex[0];
-                if (nodoCompLex[3]) {
+                if (nodoCompLex[3]) { // Para evitar que pueda asignar undefined en caso que no se devuelva la tablaSimbolos.
                     tablaSimbolos = nodoCompLex[3];
                 }
                 lexema = nodoCompLex[2];
                 control = nodoCompLex[1];
                 console.log('Se obtuvo el elemento: ' + compLex);
+            }
+            else {
+                errorLog = ' se esperaba ' + x.simbolo + ' y se encontro ' + compLex;
+                compLex = 'errorLexico'; // No es un error lexico pero sirve para cortar el while.
             }
         }
         else if (arrayVariables.includes(x.simbolo)) {
@@ -87,7 +92,7 @@ export function analisisSintactico(codigoFuente, raiz) {
             if (TAS[posicion1][posicion2] === undefined) {
                 errorLog = '<< TAS no definida para ' + x.simbolo + ' hacia ' + compLex + ' >>';
                 console.log('TAS NO DEFINIDA PARA ' + x.simbolo + ' HACIA ' + compLex);
-                compLex = 'errorLexico';
+                compLex = 'errorLexico'; // No es un error lexico pero sirve para cortar el while.
             }
             else {
                 let contador = 0;
@@ -115,7 +120,6 @@ export function analisisSintactico(codigoFuente, raiz) {
             exito = true;
         }
     }
-    console.log(tablaSimbolos);
     if (exito) {
         console.log('****** Sintaxis correcta ******');
         raiz.mostrarArbol(raiz, '');
@@ -126,10 +130,6 @@ export function analisisSintactico(codigoFuente, raiz) {
         mostrarInfoSintactico([false, errorLog], raiz);
     }
 }
-// Esto se tiene que hacer dentro del analizador (la parte del arbol)
-// const raiz = new nodo('vPROGRAMA','',0,[]);
-// const arbol = new Arbol(raiz)
-// analisisSintactico('Program test{var letra12,variable,identificador,ast45; identificador = 1234 ; while[identificador>35]{identificador=124+10; if[identificador>100]{identificador=RAIZ 150}}}',arbol)
 export function analizadorSintactico(archivo) {
     return __awaiter(this, void 0, void 0, function* () {
         // codigoFuente va a guardar toda la cadena, es decir, todo el codigo del programa.
@@ -140,7 +140,6 @@ export function analizadorSintactico(archivo) {
         analisisSintactico(codigoFuente, arbol);
     });
 }
-// analizadorSintactico('Program{var uno identificador = 1234 ; var dos,tres; while[identificador==35]{identificador=124+10; if[identificador>100]{ identificador = (((((150+noDeberiaAceptarEsto}}}')
 function mostrarInfoSintactico(resultado, raiz) {
     let output = document.getElementById('output');
     if (resultado[0]) { // En caso de que haya resultado en exito el analizador sintactico.
