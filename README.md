@@ -48,7 +48,7 @@ var variable1,variable2,variable3;
 » Toda asignacion se hara hacia una expresion aritmetica sobre numeros reales. Bajo este concepto seran admitidas asignaciones a otras variables (ya que contienen numeros reales) o cualquier operacion aritmetica valida antes mencionada. Se admite el uso de parentesis ( ) para modificar las prioridades de las operaciones. La asociatividad de las mismas se ha definido por izquierda.
 
 ```javascript
-var variable1,variable2,suma,resta,producto, cociente, potencia, raiz, opCombinada;
+var variable1,variable2,suma,resta,producto, cociente, potencia, radical, opCombinada;
 variable1 = 25;
 variable2 = 5;
 suma = variable1 + variable2;
@@ -56,7 +56,7 @@ resta = variable1 - variable2;
 producto = variable1 * variable2;
 cociente = variable1 / variable2;
 potencia = variable1 ^ variable2;
-raiz = RAIZ variable1;
+radical = RAIZ variable1;
 opCombinada = variable1 * (variable2 + variable1)
 ```
 
@@ -81,7 +81,7 @@ if [control == 1]{
 var control,cambio;
 cambio = 0;
 control = 0;
-while [cambio < 100]{
+while [cambio < 100 and not[control == 1]]{
   cambio = cambio + 10
 };
 control = 1
