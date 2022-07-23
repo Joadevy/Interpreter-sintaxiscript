@@ -104,7 +104,7 @@ control = 1
 » Para realizar impresiones en pantalla se utiliza la palabra reservada Print que recibe como argumentos,separados por comas, a cadenas, que se escriben encerrandolas con "ejemplo cadena", y expresiones aritmeticas, identificadores o constantes reales. 
 
 ```javascript
-var dinero,cambio;
+var dinero,control;
 dinero = 0;
 control = 0;
 if [dinero == 0 or not[control <> 0]]{
@@ -113,6 +113,19 @@ if [dinero == 0 or not[control <> 0]]{
   control = 1
 };
 Print("El doble del dinero actual es: ",dinero*2,"fin de programa")
+```
+#### Lectura de una variable
+» Para leer una variable se utiliza la palabra reservada Read que recibe como argumentos ("cadena",id). Donde cadena es una cadena que se muestra en pantalla e id es la variable a leer.
+
+```javascript
+var dinero,boleto;
+Read("dinero disponible",dinero);
+if [dinero <= 50]{
+		Print("Para 50 aun faltan: ",50-dinero)
+}else{
+		Read("tipo de boleto",boleto);
+		Print(boleto,"ha sido adquirido")
+}
 ```
 
 ## Herramientas y metodologia de desarrollo
