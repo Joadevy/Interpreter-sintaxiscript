@@ -92,6 +92,7 @@ function cargaEProduccionesTAS(TAS:Array<any>):Array<any>{
   TAS[variables.vCONDICIONALFACT][terminales.tPuntoComa] = new celda ([]);
 
   TAS[variables.vCONJUNCION][terminales.tCorcheteCierra] = new celda ([]);
+  TAS[variables.vCONJUNCION][terminales.tOr] = new celda ([]);
 
   TAS[variables.vDISYUNCION][terminales.tCorcheteCierra] = new celda ([]);
   return TAS;
@@ -145,7 +146,7 @@ export function cargarTAS(TAS:Array<any>):Array<any>{
     TAS[variables.vRAIZPOT][terminales.tResta] = new celda (['vOPERANDOS','vPOT']);  
     TAS[variables.vRAIZPOT][terminales.tConstReal] = new celda (['vOPERANDOS','vPOT']);   
 
-    TAS[variables.vPOT][terminales.tProducto] = new celda (['tProducto','vOPERANDOS']); 
+    TAS[variables.vPOT][terminales.tPotencia] = new celda (['tPotencia','vOPERANDOS']); 
     
     TAS[variables.vSUMARESTA][terminales.tSuma] = new celda (['tSuma','vOPERANDOS','vSUMARESTA']);
     TAS[variables.vSUMARESTA][terminales.tResta] = new celda (['tResta','vOPERANDOS','vSUMARESTA']);   

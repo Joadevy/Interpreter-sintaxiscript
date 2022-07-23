@@ -126,6 +126,7 @@ function cargaEProduccionesTAS(TAS) {
     TAS[variables.vCONDICIONALFACT][terminales.tLlaveCierra] = new celda([]);
     TAS[variables.vCONDICIONALFACT][terminales.tPuntoComa] = new celda([]);
     TAS[variables.vCONJUNCION][terminales.tCorcheteCierra] = new celda([]);
+    TAS[variables.vCONJUNCION][terminales.tOr] = new celda([]);
     TAS[variables.vDISYUNCION][terminales.tCorcheteCierra] = new celda([]);
     return TAS;
 }
@@ -165,7 +166,7 @@ export function cargarTAS(TAS) {
     TAS[variables.vRAIZPOT][terminales.tRaiz] = new celda(['tRaiz', 'tParentesisAbre', 'vEXPARIT', 'tParentesisCierra', 'vPOT']);
     TAS[variables.vRAIZPOT][terminales.tResta] = new celda(['vOPERANDOS', 'vPOT']);
     TAS[variables.vRAIZPOT][terminales.tConstReal] = new celda(['vOPERANDOS', 'vPOT']);
-    TAS[variables.vPOT][terminales.tProducto] = new celda(['tProducto', 'vOPERANDOS']);
+    TAS[variables.vPOT][terminales.tPotencia] = new celda(['tPotencia', 'vOPERANDOS']);
     TAS[variables.vSUMARESTA][terminales.tSuma] = new celda(['tSuma', 'vOPERANDOS', 'vSUMARESTA']);
     TAS[variables.vSUMARESTA][terminales.tResta] = new celda(['tResta', 'vOPERANDOS', 'vSUMARESTA']);
     TAS[variables.vMULTDIV][terminales.tProducto] = new celda(['tProducto', 'vOPERANDOS', 'vMULTDIV']);
