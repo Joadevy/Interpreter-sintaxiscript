@@ -63,10 +63,8 @@ export function analisisSintactico(codigoFuente, raiz) {
     let x;
     while (compLex !== 'errorLexico' && !exito) {
         x = Desapilar(pila); // Obtengo un elemento de la pila de elementos a encontrar en el programa.
-        // console.log(x)
         if (arrayTerminales.includes(x.simbolo)) {
             console.log(x.simbolo + ' es terminal');
-            // console.log(x.simbolo,compLex)
             if (x.simbolo == compLex) {
                 if (x.arbolPila) {
                     x.arbolPila.lexema = lexema; // Si es distinto de undefined, lo asigna (esta comprobacion es por ts)
@@ -74,7 +72,9 @@ export function analisisSintactico(codigoFuente, raiz) {
                 // Llama de nuevo al analizador lexico para seguir el reconocimiento.
                 nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos);
                 compLex = nodoCompLex[0];
-                tablaSimbolos = nodoCompLex[3];
+                if (nodoCompLex[3]) {
+                    tablaSimbolos = nodoCompLex[3];
+                }
                 lexema = nodoCompLex[2];
                 control = nodoCompLex[1];
                 console.log('Se obtuvo el elemento: ' + compLex);
@@ -83,9 +83,7 @@ export function analisisSintactico(codigoFuente, raiz) {
         else if (arrayVariables.includes(x.simbolo)) {
             console.log(x.simbolo + ' es una variable');
             let posicion1 = variables[x.simbolo];
-            // console.log('prim posicion: ' + posicion1)
             let posicion2 = terminales[compLex];
-            // console.log('segunda posicion ' + posicion2)
             if (TAS[posicion1][posicion2] === undefined) {
                 errorLog = '<< TAS no definida para ' + x.simbolo + ' hacia ' + compLex + ' >>';
                 console.log('TAS NO DEFINIDA PARA ' + x.simbolo + ' HACIA ' + compLex);
@@ -111,21 +109,21 @@ export function analisisSintactico(codigoFuente, raiz) {
                     }
                     cantidad--;
                 }
-                // console.log(pila)
             }
         }
         if (x.simbolo == compLex && compLex == 'pesos') {
             exito = true;
         }
     }
+    console.log(tablaSimbolos);
     if (exito) {
-        console.log('Sintaxis correcta');
+        console.log('****** Sintaxis correcta ******');
         raiz.mostrarArbol(raiz, '');
         mostrarInfoSintactico([true], raiz);
     }
     else {
+        console.log('******  Hay un error sintactico ******');
         mostrarInfoSintactico([false, errorLog], raiz);
-        console.log('Hay un error sintactico');
     }
 }
 // Esto se tiene que hacer dentro del analizador (la parte del arbol)

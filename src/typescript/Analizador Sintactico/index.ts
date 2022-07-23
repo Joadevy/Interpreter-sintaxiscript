@@ -61,12 +61,9 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
     let x: elementoPila;
     while(compLex !== 'errorLexico' && !exito){
         x = Desapilar(pila) as any // Obtengo un elemento de la pila de elementos a encontrar en el programa.
-
-        // console.log(x)
         
         if (arrayTerminales.includes(x.simbolo)){
             console.log(x.simbolo + ' es terminal')
-            // console.log(x.simbolo,compLex)
             if (x.simbolo == compLex){
                 if (x.arbolPila){
                     x.arbolPila.lexema = lexema // Si es distinto de undefined, lo asigna (esta comprobacion es por ts)
@@ -74,7 +71,9 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
                 // Llama de nuevo al analizador lexico para seguir el reconocimiento.
                 nodoCompLex = obtenerSiguienteCompLex(codigoFuente, control, tablaSimbolos);
                 compLex = nodoCompLex[0]
-                tablaSimbolos = nodoCompLex[3];
+                if (nodoCompLex[3]){ // Para evitar que pueda asignar undefined en caso que no se devuelva la tablaSimbolos.
+                    tablaSimbolos = nodoCompLex[3];
+                }
                 lexema = nodoCompLex[2];
                 control = nodoCompLex[1]
                 console.log('Se obtuvo el elemento: ' + compLex)
@@ -84,9 +83,7 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
         else if (arrayVariables.includes(x.simbolo)){
         console.log(x.simbolo + ' es una variable');
         let posicion1 = variables[x.simbolo as any]
-        // console.log('prim posicion: ' + posicion1)
         let posicion2 = terminales[compLex as any]
-        // console.log('segunda posicion ' + posicion2)
             if (TAS[posicion1 as any][posicion2 as any] === undefined){
                 errorLog = '<< TAS no definida para '+ x.simbolo + ' hacia ' + compLex + ' >>';
                 console.log('TAS NO DEFINIDA PARA '+ x.simbolo + ' HACIA ' + compLex)
@@ -113,7 +110,6 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
                     }
                     cantidad--
                 }
-                // console.log(pila)
             }
         }
         if (x.simbolo == compLex && compLex == 'pesos'){
@@ -121,12 +117,12 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
         }
     } 
     if (exito){
-        console.log('Sintaxis correcta');
+        console.log('****** Sintaxis correcta ******');
         raiz.mostrarArbol(raiz,'')
         mostrarInfoSintactico([true],raiz)
     } else {
+        console.log('******  Hay un error sintactico ******')
         mostrarInfoSintactico([false,errorLog],raiz)
-        console.log('Hay un error sintactico')
     }
 }
 
