@@ -15,14 +15,8 @@ export enum variables{
 export enum terminales{
   'tPrograma' , 'tEscribir' , 'tVariables' , 'tLeer' , 'tWhile' , 'tIf' , 'tElse' , 'tAnd' , 'tOr' , 'tNot' , 
   'tId' , 'tCadena' , 'tConstReal' , 'tPuntoComa' , 'tComa' , 'tOpRel' , 'tOpAsignacion' , 'tSuma' , 'tResta' , 'tProducto' , 'tDivision' ,'tPotencia' , 'tRaiz' , 
-  'tParentesisAbre' , 'tParentesisCierra' , 'tLlaveAbre' , 'tLlaveCierra' , 'tCorcheteAbre' , 'tCorcheteCierra'
+  'tParentesisAbre' , 'tParentesisCierra' , 'tLlaveAbre' , 'tLlaveCierra' , 'tCorcheteAbre' , 'tCorcheteCierra', 'tPunto'
 }
-
-/* type celda = {
-  'elementos': Array<simboloGramatical>,
-  'cantidad': 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 // Hasta la maxima cantidad de partes derechas de la CFG (que son 8 por CONDICIONAL)
-} */
-
 
 export function creaTAS():Array<any>{
   const cantidadVariables:number = 28; // Defino la cantidad de variables que tiene la CFG para crear la TAS.
@@ -159,7 +153,7 @@ export function cargarTAS(TAS:Array<any>):Array<any>{
     TAS[variables.vOPERANDOS][terminales.tResta] = new celda (['tResta','vOPERANDOS']);   
     TAS[variables.vOPERANDOS][terminales.tConstReal] = new celda (['tConstReal']);   
     
-    TAS[variables.vLECTURA][terminales.tLeer] = new celda (['tLeer','tParentesisAbre','tCadena','tComa','tId']);   
+    TAS[variables.vLECTURA][terminales.tLeer] = new celda (['tLeer','tParentesisAbre','tCadena','tComa','tId','tParentesisCierra']);   
 
     TAS[variables.vESCRITURA][terminales.tEscribir] = new celda (['tEscribir','tParentesisAbre','vSALIDAS','tParentesisCierra']);
     
@@ -215,14 +209,3 @@ export function cargarTAS(TAS:Array<any>):Array<any>{
 
     return TAS
 }
-
-
-
-// Testeando
-/*  let TAS = creaTAS()
-TAS = cargarTAS(TAS);
-
-console.log(TAS);
-console.log(TAS[variables['vCUERPO']][terminales['tId']].elementos)
-console.log(TAS[variables.vPOT][terminales.tCadena] === undefined) // SIgnifica que hay error lexico, no hay derivacion posible (no hay nada en la celda)
-console.log(TAS[variables.vPOT][terminales.tOr].cantidad)  */

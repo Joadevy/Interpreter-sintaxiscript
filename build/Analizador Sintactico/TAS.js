@@ -65,6 +65,7 @@ export var terminales;
     terminales[terminales["tLlaveCierra"] = 26] = "tLlaveCierra";
     terminales[terminales["tCorcheteAbre"] = 27] = "tCorcheteAbre";
     terminales[terminales["tCorcheteCierra"] = 28] = "tCorcheteCierra";
+    terminales[terminales["tPunto"] = 29] = "tPunto";
 })(terminales || (terminales = {}));
 /* type celda = {
   'elementos': Array<simboloGramatical>,
@@ -175,7 +176,7 @@ export function cargarTAS(TAS) {
     TAS[variables.vOPERANDOS][terminales.tParentesisAbre] = new celda(['tParentesisAbre', 'vEXPARIT', 'tParentesisCierra']);
     TAS[variables.vOPERANDOS][terminales.tResta] = new celda(['tResta', 'vOPERANDOS']);
     TAS[variables.vOPERANDOS][terminales.tConstReal] = new celda(['tConstReal']);
-    TAS[variables.vLECTURA][terminales.tLeer] = new celda(['tLeer', 'tParentesisAbre', 'tCadena', 'tComa', 'tId']);
+    TAS[variables.vLECTURA][terminales.tLeer] = new celda(['tLeer', 'tParentesisAbre', 'tCadena', 'tComa', 'tId', 'tParentesisCierra']);
     TAS[variables.vESCRITURA][terminales.tEscribir] = new celda(['tEscribir', 'tParentesisAbre', 'vSALIDAS', 'tParentesisCierra']);
     TAS[variables.vSALIDAS][terminales.tId] = new celda(['vSALIDA', 'vSAUX']);
     TAS[variables.vSALIDAS][terminales.tParentesisAbre] = new celda(['vSALIDA', 'vSAUX']);
