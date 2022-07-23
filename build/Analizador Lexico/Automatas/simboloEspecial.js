@@ -43,6 +43,9 @@ export function esSimboloEspecial(codigoFuente, control) {
             case '}':
                 compLex = simbolosEspeciales['}'];
                 break;
+            case '^':
+                compLex = simbolosEspeciales['^'];
+                break;
             case '+':
                 compLex = simbolosEspeciales['+'];
                 break;

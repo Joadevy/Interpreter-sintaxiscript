@@ -44,6 +44,9 @@ export function esSimboloEspecial(codigoFuente:string,control:number):Array<any>
             case '}':
                 compLex = simbolosEspeciales['}']
             break
+            case '^':
+                compLex = simbolosEspeciales['^']
+            break
             case '+':
                 compLex = simbolosEspeciales['+']
             break
