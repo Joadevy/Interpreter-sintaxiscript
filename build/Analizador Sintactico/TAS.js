@@ -67,10 +67,6 @@ export var terminales;
     terminales[terminales["tCorcheteCierra"] = 28] = "tCorcheteCierra";
     terminales[terminales["tPunto"] = 29] = "tPunto";
 })(terminales || (terminales = {}));
-/* type celda = {
-  'elementos': Array<simboloGramatical>,
-  'cantidad': 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 // Hasta la maxima cantidad de partes derechas de la CFG (que son 8 por CONDICIONAL)
-} */
 export function creaTAS() {
     const cantidadVariables = 28; // Defino la cantidad de variables que tiene la CFG para crear la TAS.
     let TAS = [];
@@ -219,11 +215,3 @@ export function cargarTAS(TAS) {
     TAS[variables.vDISYUNCION][terminales.tOr] = new celda(['tOr', 'vIZQCOND', 'vDISYUNCION']);
     return TAS;
 }
-// Testeando
-/*  let TAS = creaTAS()
-TAS = cargarTAS(TAS);
-
-console.log(TAS);
-console.log(TAS[variables['vCUERPO']][terminales['tId']].elementos)
-console.log(TAS[variables.vPOT][terminales.tCadena] === undefined) // SIgnifica que hay error lexico, no hay derivacion posible (no hay nada en la celda)
-console.log(TAS[variables.vPOT][terminales.tOr].cantidad)  */ 

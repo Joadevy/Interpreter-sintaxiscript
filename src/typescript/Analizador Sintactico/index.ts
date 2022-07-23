@@ -65,7 +65,6 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
         if (arrayTerminales.includes(x.simbolo)){
             console.log(x.simbolo + ' es terminal')
             if (x.simbolo == compLex){
-                console.log('test')
                 if (x.arbolPila){
                     x.arbolPila.lexema = lexema // Si es distinto de undefined, lo asigna (esta comprobacion es por ts)
                 }
