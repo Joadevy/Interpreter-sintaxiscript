@@ -12,9 +12,13 @@
   - [Feedback](#feedback)
 
 ## Vista general
-» Se trata de una UI que toma un archivo.txt donde este debe contener el codigo fuente del programa. Se cuentan con dos opciones donde:
-- Ejecutar analizador lexico: realizara el analisis lexico del programa introducido y devolvera en pantalla los componentes lexicos (cada uno de los componentes atomicos del programa que tienen el mismo significado a nivel semantico: identificador, constante real, operador relacional, etc) que ha encontrado.
-- Ejecutar analizador sintactico: realizara el analisis sintactico, donde trabajando en conjunto con el analizador lexico, detectara posibles errores a nivel sintactico, es decir, en la forma que se ha escrito el codigo del programa, verificando si este cumple las reglas definidas por el lenguaje (por ejemplo que haya ; luego de cada sentencia pero NO en la ultima de estas). En caso de detectar un error mostrara un log con informacion del mismo. En caso de exito, se mostrara el arbol sintactico.
+» El proyecto trata de construir un interprete para un lenguaje con caracteristicas especificas. Dicho interprete consta de un analizador lexico,primera eapa del proceso de compilacion, donde se evaluan las estructuras a nivel atomico y se reconocen cada uno de los componentes lexicos, un analizador sintactico en el cual se analiza la estructura del programa determinando que secuencia de componentes lexicos es valida y cuales no, y un analizador semantico que evalua el significado del programa para verificar que es lo que hace cada sentencia y si estas tienen sentido.  
+  
+  » La implementacion que he abordado para este concepto se trata de una aplicacion que toma un archivo de texto (formato .txt) donde este debe contener el codigo fuente del programa.  
+Una vez cargado un archivo valido se cuenta con dos opciones donde:
+
+- Ejecutar analizador lexico: devolvera en pantalla los componentes lexicos que ha encontrado, esto es cada uno de los componentes atomicos del programa que tienen el mismo significado a nivel sintactico: identificador, constante real, operador relacional, etc.
+- Ejecutar analizador sintactico: trabajando en conjunto con el analizador lexico, detectara posibles errores a nivel sintactico, es decir, en la forma que se ha escrito el codigo del programa, verificando si este cumple las reglas definidas por el lenguaje (por ejemplo que haya ; luego de cada sentencia) En caso de detectar un error mostrara un log con informacion del mismo. En caso de exito, se mostrara el arbol sintactico que representa la estructura sintactica que tiene el estado del programa y el orden en que se ejecutan las operaciones simples.
 
 ## Documentacion del lenguaje
 Sintaxiscript es un lenguaje donde un programa es una secuencia de sentencias. Cada sentencia puede ser una declaracion de variables, una asignacion, una escritura, una lectura, un condicional (if / if else) o un ciclo while.
@@ -54,7 +58,7 @@ var variable1,variable2,variable3;
 ```
 
 #### Asignacion de variables
-» Toda asignacion se hara hacia una expresion aritmetica sobre numeros reales. Bajo este concepto seran admitidas asignaciones a otras variables (ya que contienen numeros reales) o cualquier operacion aritmetica valida antes mencionada. Se admite el uso de parentesis ( ) para modificar las prioridades de las operaciones. La asociatividad de las mismas se ha definido por izquierda.
+» Toda asignacion se hara hacia una expresion aritmetica sobre numeros reales. Bajo este concepto seran admitidas asignaciones a otras variables (ya que contienen numeros reales) o cualquier operacion aritmetica valida antes mencionada. Se admite el uso de parentesis ( ) para modificar las prioridades de las operaciones. La asociatividad de las mismas ha sido definida por izquierda.
 
 ```javascript
 var variable1,variable2,suma,resta,producto, cociente, potencia, radical, opCombinada;
@@ -112,4 +116,4 @@ control = 1
 ## Feedback
 Cualquier comentario y/o sugerencia/apreciacion acerca del proyecto, asi como tambien cualquier duda respecto del mismo puede ser consultada a cualquiera de mis redes/formas de contacto y estare contento de responderlas.
 
-** Gracias por leer, que tengas un buen dia!** 🚀
+** Gracias por leer, que tengas un buen dia! ** 🚀
