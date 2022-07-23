@@ -25,6 +25,7 @@ Sintaxiscript es un lenguaje donde un programa es una secuencia de sentencias. C
 
 Otras caracteristicas importantes son:
 - Todas las variables en un programa son del tipo constante real y no es necesario indicarlo.
+- Todas las constantes son positivas por defecto. Para indicar un numero negativo se debe plantear el opuesto mediante: -(5), o en general -(constReal).
 - Una expresion aritmetica puede incluir los operadores aritmeticos: + para indicar suma, - para indicar resta, * para indicar producto, / para indicar division, ^ para indicar potenciacion, RAIZ para indicar una raiz.
 
 #### Escribiendo un programa en Sintaxiscript
@@ -43,7 +44,7 @@ Program demo {
 variable1 = 100.54;	// Se utiliza . para denotar decimales en una constante real
 variable2 = 110;
 suma = variable1 + variable2;
-control = 0;
+control = -(10);  	// Para numeros negativos se indican anteponiendo un - y la constante entre parentesis. 
 if [suma>=200]{
   control = 1
 };
