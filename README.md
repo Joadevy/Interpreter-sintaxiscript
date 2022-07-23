@@ -1,9 +1,18 @@
 
-**Projecto final sintaxis & semantica de los lenguajes**
+# Proyecto final sintaxis & semantica de los lenguajes
 
-Deploy Alpha version: https://joadevy.github.io/sintaxis-final-project/
+## Live Site 🚀
+» Live site - (version en desarrollo): https://joadevy.github.io/sintaxis-final-project/
 
-» Es una UI que toma un archivo.txt donde este debe contener el codigo fuente del programa. Se cuentan con dos opciones donde:
+## Tabla de contenidos
+  - [Vista general](#vista-general)
+  - [Documentacion](#documentacion-del-lenguaje)
+  - [Herramientas utilizadas](#herramientas-y-metodologia-de-desarrollo)
+  - [Autor](#autor)
+  - [Feedback](#feedback)
+
+## Vista general
+» Se trata de una UI que toma un archivo.txt donde este debe contener el codigo fuente del programa. Se cuentan con dos opciones donde:
 - Ejecutar analizador lexico: realizara el analisis lexico del programa introducido y devolvera en pantalla los componentes lexicos (cada uno de los componentes atomicos del programa que tienen el mismo significado a nivel semantico: identificador, constante real, operador relacional, etc) que ha encontrado.
 - Ejecutar analizador sintactico: realizara el analisis sintactico, donde trabajando en conjunto con el analizador lexico, detectara posibles errores a nivel sintactico, es decir, en la forma que se ha escrito el codigo del programa, verificando si este cumple las reglas definidas por el lenguaje (por ejemplo que haya ; luego de cada sentencia pero NO en la ultima de estas). En caso de detectar un error mostrara un log con informacion del mismo. En caso de exito, se mostrara el arbol sintactico.
 
@@ -87,8 +96,20 @@ while [cambio < 100 and not[control == 1]]{
 control = 1
 ```
 
-## Author
+## Herramientas y metodologia de desarrollo
+ 
+- TypeScript
+- Sass
+- Control de versiones del proyecto usando Git
+- Mobile first workflow
+- Responsive design
+
+## Autor
 
 - Twitter - [@JoaquinArlettaz](https://twitter.com/JoaquinArlettaz)
-- Gmail - [jjoaquinArlettaz@gmail.com](mailto:jjoaquinarlettaz@gmail.com)
 - LinkedIn - [@joaquin-arlettaz](https://www.linkedin.com/in/joaqu%C3%ADn-arlettaz/)
+
+## Feedback
+Cualquier comentario y/o sugerencia/apreciacion acerca del proyecto, asi como tambien cualquier duda respecto del mismo puede ser consultada a cualquiera de mis redes/formas de contacto y estare contento de responderlas.
+
+** Gracias por leer, que tengas un buen dia!** 🚀
