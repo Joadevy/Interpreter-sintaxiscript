@@ -1,5 +1,6 @@
 export function esSimboloEspecial(codigoFuente, control) {
     let simbolosEspeciales = { ',': 'tComa',
+        '.': 'tPunto',
         ';': 'tPuntoComa',
         '(': 'tParentesisAbre',
         ')': 'tParentesisCierra',
@@ -27,6 +28,9 @@ export function esSimboloEspecial(codigoFuente, control) {
         switch (codigoFuente[control]) {
             case ',':
                 compLex = simbolosEspeciales[','];
+                break;
+            case '.':
+                compLex = simbolosEspeciales['.'];
                 break;
             case ';':
                 compLex = simbolosEspeciales[';'];

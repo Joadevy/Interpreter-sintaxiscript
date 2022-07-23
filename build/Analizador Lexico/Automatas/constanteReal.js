@@ -17,7 +17,7 @@ const carAsimb = (caracter) => {
         case '9':
             simbolo = 'digito';
             break;
-        case ',':
+        case '.':
             simbolo = 'decimal';
             break;
         default: simbolo = 'otro';
