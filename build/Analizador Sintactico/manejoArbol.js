@@ -27,15 +27,19 @@ export class Arbol {
         }
     }
     mostrarArbol(raiz, desplazamiento) {
-        console.log(desplazamiento + raiz.simbolo + '(' + raiz.lexema + ')');
+        var _a;
+        const nodo = document.createElement('p');
+        nodo.classList.add('output-text');
+        nodo.textContent += desplazamiento + raiz.simbolo + '(' + raiz.lexema + ')';
+        (_a = document.querySelector('.arbolSintactico')) === null || _a === void 0 ? void 0 : _a.appendChild(nodo);
         for (let i = 0; i < raiz.cantHijos; i++) {
-            this.mostrarArbol(raiz.hijos[i], desplazamiento + " ");
+            this.mostrarArbol(raiz.hijos[i], desplazamiento + "-");
         }
     }
     mostrarArbolConsola(raiz, desplazamiento) {
         console.log(desplazamiento + raiz.simbolo + '(' + raiz.lexema + ')');
         for (let i = 0; i < raiz.cantHijos; i++) {
-            this.mostrarArbol(raiz.hijos[i], desplazamiento + " ");
+            this.mostrarArbolConsola(raiz.hijos[i], desplazamiento + " ");
         }
     }
 }

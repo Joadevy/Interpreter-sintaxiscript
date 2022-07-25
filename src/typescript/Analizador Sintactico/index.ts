@@ -121,7 +121,6 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
     } 
     if (exito){
         console.log('****** Sintaxis correcta ******');
-        raiz.mostrarArbol(raiz,'')
         mostrarInfoSintactico([true],raiz)
     } else {
         console.log('******  Hay un error sintactico ******')
@@ -142,13 +141,17 @@ function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
     let output = document.getElementById('output');
 
     if (resultado[0]){ // En caso de que haya resultado en exito el analizador sintactico.
-        let text = document.createElement('p');
+        const text = document.createElement('p');
+        const arbolSintactico = document.createElement('div');
+        arbolSintactico.classList.add('arbolSintactico');
         text.classList.add('output-text');
-        text.innerHTML = `No hay errores sintacticos, revisa la consola (F12 en el teclado) para ver el arbol sintactico.`
-        raiz.mostrarArbolConsola(raiz,'')
+        text.innerHTML = `No hay errores sintacticos, se ha generado el arbol sintactico: <br><br>`;
+        raiz.mostrarArbolConsola(raiz,''); // Muestra el arbol en la consola del navegador (con " ")
         if (output){
             output.appendChild(text);
+            output.appendChild(arbolSintactico);                    
             output.classList.add('output-show');
+            raiz.mostrarArbol(raiz,''); // Muestra el arbol en la web (con "-")
         }
     } else {
         if(output){

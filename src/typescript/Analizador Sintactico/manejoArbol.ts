@@ -45,16 +45,19 @@ export class Arbol{
     }
 
     mostrarArbol(raiz:nodo,desplazamiento:string){
-      console.log(desplazamiento + raiz.simbolo + '(' + raiz.lexema + ')');
+      const nodo = document.createElement('p');
+      nodo.classList.add('output-text');
+      nodo.textContent += desplazamiento + raiz.simbolo + '(' + raiz.lexema + ')';
+      document.querySelector('.arbolSintactico')?.appendChild(nodo);
       for(let i = 0; i < raiz.cantHijos; i++){
-        this.mostrarArbol(raiz.hijos[i],desplazamiento + " ");
+        this.mostrarArbol(raiz.hijos[i],desplazamiento + "-");
       }
     }
 
     mostrarArbolConsola(raiz:nodo,desplazamiento:string){
       console.log(desplazamiento + raiz.simbolo + '(' + raiz.lexema + ')');
       for(let i = 0; i < raiz.cantHijos; i++){
-        this.mostrarArbol(raiz.hijos[i],desplazamiento + " ");
+        this.mostrarArbolConsola(raiz.hijos[i],desplazamiento + " ");
       }
     }
   }
