@@ -30,7 +30,7 @@ export class Arbol {
         var _a;
         const nodo = document.createElement('p');
         nodo.classList.add('output-text');
-        nodo.textContent += desplazamiento + raiz.simbolo + '(' + raiz.lexema + ')';
+        nodo.innerHTML += `<span class="desplazamiento">${desplazamiento}</span>${raiz.simbolo}(<span class="lexema">${raiz.lexema}</span>)`;
         (_a = document.querySelector('.arbolSintactico')) === null || _a === void 0 ? void 0 : _a.appendChild(nodo);
         for (let i = 0; i < raiz.cantHijos; i++) {
             this.mostrarArbol(raiz.hijos[i], desplazamiento + "-");

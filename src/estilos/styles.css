@@ -160,6 +160,9 @@ body #main .verificador__output .output-show {
 body #main .verificador__output .output-text {
   margin-top: 0.25rem;
 }
+body #main .verificador__output .arbolSintactico .desplazamiento {
+  color: var(--light-black);
+}
 body #main .verificador__output .error {
   color: var(--error-light);
 }
