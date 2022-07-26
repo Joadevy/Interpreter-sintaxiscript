@@ -156,6 +156,14 @@ function evaluarCONDICIONALFACT(arbol:nodo,estado:Array<dato>){
 
 // MIENTRAS → while [CONDICION] {CUERPO}
 function evaluarMIENTRAS(arbol:nodo,estado:Array<dato>){
+    //let resultadoCond: Array<boolean>;
+    //evaluarCONDICION(arbol.hijos[2],estado,resultadoCond);
+    // while (resultadoCond){
+        // evaluarCUERPO(arbol.hijos[5],estado);
+        // evaluarCONDICION(arbol.hijos[2],estado,resultadoCond);
+    // }
+        // El arrray va por referencia entonces puede escribirlo.
+
     let resultadoCondicion:boolean= evaluarCONDICION(arbol.hijos[2],estado);
     while (resultadoCondicion){
         evaluarCUERPO(arbol.hijos[5],estado);
@@ -164,69 +172,80 @@ function evaluarMIENTRAS(arbol:nodo,estado:Array<dato>){
 }
 
 // CONDICION → IZQCOND DISYUNCION
-function evaluarCONDICION(arbol:nodo,estado:Array<dato>,resultado?:boolean):boolean{
+function evaluarCONDICION(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>):boolean{
     console.log('TEST')
     let operando1:boolean;
     // operando1 = evaluarIZQCOND(arbol.hijos[0],estado,0);
-    // return evaluarDISYUNCION(arbol.hijos[1],estado,operando1);
+    // evaluarDISYUNCION(arbol.hijos[1],estado,operando1,resultado);
     return true                      // --- ELIMINAR ESTO ----
 }
 
 // IZQCOND → NEGACION CONJUNCION
-function evaluarIZQCOND(arbol:nodo,estado:Array<dato>):boolean{
-    return true
+function evaluarIZQCOND(arbol:nodo,estado:Array<dato>,resultado?:Array<boolean>){
+    let temp:Array<boolean> = [];
+    evaluarNEGACION(arbol,estado,temp);
+    //evaluarCONJUNCION(arbol,estado,temp,resultado)
 }
 
 // NEGACION → not NEGACION | EXPARIT opRel EXPARIT |  [CONDICION]
-function evaluarNEGACION(arbol:nodo,estado:Array<dato>,resultado?:boolean):boolean{
+function evaluarNEGACION(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>){
     let operador:string;
+    let operando1:Array<number> = [];
+    let operando2:Array<number> = [];
     if (arbol.hijos[0].simbolo == "tNot"){
-        resultado = !evaluarNEGACION(arbol.hijos[1],estado,resultado);
+        evaluarNEGACION(arbol.hijos[1],estado,resultado);
+        resultado[0] = !resultado[0];
     } else if(arbol.hijos[0].simbolo = "vEXPARIT"){
-        // let operador1: number = evaluarEXPARIT(arbol.hijos[0],estados);
+        //evaluarEXPARIT(arbol.hijos[0],estados,operando1);
         operador = arbol.hijos[1].lexema;
-        // let operador2: number = evaluarEXPARIT(arbol.hijos[2],estados);
+        //evaluarEXPARIT(arbol.hijos[2],estados,operando2);
         switch(operador){
             case "==":
-                // resultado = operando1 == operando2;
+                resultado[0] = operando1 == operando2;
             break;
             case ">=":
-                // resultado = operando1 >= operando2;
+                resultado[0] = operando1 >= operando2;
             break;
             case "<=":
-                // resultado = operando1 <= operando2;
+                resultado[0] = operando1 <= operando2;
             break;
             case ">":
-                // resultado = operando1 > operando2;
+                resultado[0] = operando1 > operando2;
             break;
             case "<":
-                // resultado = operando1 < operando2;
+                resultado[0] = operando1 < operando2;
             break;
             case "<>":
-                // resultado = operando1 != operando2;
+                resultado[0] = operando1 != operando2;
             break;
         }
     } else if(arbol.hijos[0].simbolo == "tCorcheteAbre"){
         evaluarCONDICION(arbol.hijos[1],estado,resultado)
     }
-    // return resultado
-    return true
 } 
 
 // CONJUNCION → and NEGACION CONJUNCION | epsilon
-function evaluarCONJUNCION(arbol:nodo,estado:Array<dato>,operando1:boolean):boolean{
+function evaluarCONJUNCION(arbol:nodo,estado:Array<dato>,operando1:Array<boolean>,resultado:Array<boolean>){
     if (arbol.cantHijos!== 0){ // puede no haber un or.
+        let resultadoNegacion:Array<boolean> = [];
+        evaluarNEGACION(arbol.hijos[1],estado,resultadoNegacion)
+        operando1[0] = operando1[0] && resultadoNegacion[0];
+        evaluarCONJUNCION(arbol.hijos[2],estado,operando1,resultado)
+        /* 
+            ASI ESTABA ANTES (SIN REFERENCIA)
         let resultadoNEGACION:boolean = evaluarNEGACION(arbol.hijos[1],estado);
         operando1 = operando1 && resultadoNEGACION;
-        evaluarCONJUNCION(arbol.hijos[3],estado,operando1)
-    } 
-    return operando1 // usando recursividad para devolver el valor final obtenido
+        evaluarCONJUNCION(arbol.hijos[3],estado,operando1) */
+    } else {
+        resultado[0] = operando1[0];
+    }
+   // return operando1 // usando recursividad para devolver el valor final obtenido
 }
 
 // DISYUNCION → or IZQCOND DISYUNCION | epsilon
 function evaluarDISYUNCION(arbol:nodo,estado:Array<dato>,operando1:boolean):boolean{
     if (arbol.cantHijos!== 0){ // puede no haber un or.
-        let resultadoIZQCOND:boolean = evaluarIZQCOND(arbol.hijos[1],estado);
+        let resultadoIZQCOND:boolean = evaluarIZQCOND(arbol.hijos[1],estado); // CAMBIAR ESTO, no tiene que ser asi.
         operando1 = operando1 || resultadoIZQCOND;
         evaluarDISYUNCION(arbol.hijos[3],estado,operando1)
     } 
