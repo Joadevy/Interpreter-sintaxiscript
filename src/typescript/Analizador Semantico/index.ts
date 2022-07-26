@@ -64,15 +64,15 @@ function evaluarSENTENCIA(arbol:nodo,estado:Array<dato>){
         if (arbol.hijos[0].simbolo == "vDECLARACION") {
             evaluarDECLARACION(arbol.hijos[0],estado);
         }else if (arbol.hijos[0].simbolo == "vASIGNACION"){
-            //evaluarASIGNACION(arbol.hijos[0],estado);
+            evaluarASIGNACION(arbol.hijos[0],estado);
         } else if (arbol.hijos[0].simbolo == "vLECTURA"){
-            //evaluarLECTURA(arbol.hijos[0],estado);
+            evaluarLECTURA(arbol.hijos[0],estado);
         } else if (arbol.hijos[0].simbolo == "vESCRITURA"){
-            //evaluarESCRITURA(arbol.hijos[0],estado);       
+            evaluarESCRITURA(arbol.hijos[0],estado);       
         } else if (arbol.hijos[0].simbolo == "vCONDICIONAL"){
-            //evaluarCONDICIONAL(arbol.hijos[0],estado);      
+            evaluarCONDICIONAL(arbol.hijos[0],estado);      
         } else if (arbol.hijos[0].simbolo == "vMIENTRAS"){
-            //evaluarMIENTRAS(arbol.hijos[0],estado);        
+            evaluarMIENTRAS(arbol.hijos[0],estado);        
         } 
 }
 
@@ -109,10 +109,6 @@ function evaluarLECTURA(arbol:nodo,estado:Array<dato>){
 
 // ESCRITURA → Print (SALIDAS)
 function evaluarESCRITURA(arbol:nodo,estado:Array<dato>){
-   /*  let mostrarPantalla: Array<any> = evaluarSALIDAS(arbol.hijos[2],estado);
-    for (let salida of mostrarPantalla){
-        console.log(salida)
-    } */
     evaluarSALIDAS(arbol.hijos[2],estado);
 }
 
@@ -139,6 +135,102 @@ function evaluarSALIDA(arbol:nodo,estado:Array<dato>):string|number{
         terminal = arbol.hijos[0].lexema;
     }
     return terminal
+}
+
+// CONDICIONAL → if [CONDICION] {CUERPO} CONDICIONALFACT
+function evaluarCONDICIONAL(arbol:nodo, estado:Array<dato>){
+    let resultadoCondicion = evaluarCONDICION(arbol.hijos[2],estado);
+    if (resultadoCondicion){
+        evaluarCUERPO(arbol.hijos[5],estado);
+    } else {
+        evaluarCONDICIONALFACT(arbol.hijos[7],estado);
+    }
+}
+
+// CONDICIONALFACT → else {CUERPO} | epsilon
+function evaluarCONDICIONALFACT(arbol:nodo,estado:Array<dato>){
+    if (arbol.cantHijos !== 0){ // Este checkeo no deberia ser necesario por como esta planteado evalCONDICIONAL
+        evaluarCUERPO(arbol.hijos[0],estado);
+    }
+}
+
+// MIENTRAS → while [CONDICION] {CUERPO}
+function evaluarMIENTRAS(arbol:nodo,estado:Array<dato>){
+    let resultadoCondicion:boolean= evaluarCONDICION(arbol.hijos[2],estado);
+    while (resultadoCondicion){
+        evaluarCUERPO(arbol.hijos[5],estado);
+        resultadoCondicion = evaluarCONDICION(arbol.hijos[2],estado);
+    }
+}
+
+// CONDICION → IZQCOND DISYUNCION
+function evaluarCONDICION(arbol:nodo,estado:Array<dato>,resultado?:boolean):boolean{
+    console.log('TEST')
+    let operando1:boolean;
+    // operando1 = evaluarIZQCOND(arbol.hijos[0],estado,0);
+    // return evaluarDISYUNCION(arbol.hijos[1],estado,operando1);
+    return true                      // --- ELIMINAR ESTO ----
+}
+
+// IZQCOND → NEGACION CONJUNCION
+function evaluarIZQCOND(arbol:nodo,estado:Array<dato>):boolean{
+    return true
+}
+
+// NEGACION → not NEGACION | EXPARIT opRel EXPARIT |  [CONDICION]
+function evaluarNEGACION(arbol:nodo,estado:Array<dato>,resultado?:boolean):boolean{
+    let operador:string;
+    if (arbol.hijos[0].simbolo == "tNot"){
+        resultado = !evaluarNEGACION(arbol.hijos[1],estado,resultado);
+    } else if(arbol.hijos[0].simbolo = "vEXPARIT"){
+        // let operador1: number = evaluarEXPARIT(arbol.hijos[0],estados);
+        operador = arbol.hijos[1].lexema;
+        // let operador2: number = evaluarEXPARIT(arbol.hijos[2],estados);
+        switch(operador){
+            case "==":
+                // resultado = operando1 == operando2;
+            break;
+            case ">=":
+                // resultado = operando1 >= operando2;
+            break;
+            case "<=":
+                // resultado = operando1 <= operando2;
+            break;
+            case ">":
+                // resultado = operando1 > operando2;
+            break;
+            case "<":
+                // resultado = operando1 < operando2;
+            break;
+            case "<>":
+                // resultado = operando1 != operando2;
+            break;
+        }
+    } else if(arbol.hijos[0].simbolo == "tCorcheteAbre"){
+        evaluarCONDICION(arbol.hijos[1],estado,resultado)
+    }
+    // return resultado
+    return true
+} 
+
+// CONJUNCION → and NEGACION CONJUNCION | epsilon
+function evaluarCONJUNCION(arbol:nodo,estado:Array<dato>,operando1:boolean):boolean{
+    if (arbol.cantHijos!== 0){ // puede no haber un or.
+        let resultadoNEGACION:boolean = evaluarNEGACION(arbol.hijos[1],estado);
+        operando1 = operando1 && resultadoNEGACION;
+        evaluarCONJUNCION(arbol.hijos[3],estado,operando1)
+    } 
+    return operando1 // usando recursividad para devolver el valor final obtenido
+}
+
+// DISYUNCION → or IZQCOND DISYUNCION | epsilon
+function evaluarDISYUNCION(arbol:nodo,estado:Array<dato>,operando1:boolean):boolean{
+    if (arbol.cantHijos!== 0){ // puede no haber un or.
+        let resultadoIZQCOND:boolean = evaluarIZQCOND(arbol.hijos[1],estado);
+        operando1 = operando1 || resultadoIZQCOND;
+        evaluarDISYUNCION(arbol.hijos[3],estado,operando1)
+    } 
+    return operando1 // usando recursividad para devolver el valor final obtenido
 }
 
 // OPERANDOS → -OPERANDOS | constReal | id  | (EXPARIT)
