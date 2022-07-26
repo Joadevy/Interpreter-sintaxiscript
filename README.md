@@ -12,7 +12,7 @@
   - [Feedback](#feedback)
 
 ## Vista general
-» El proyecto trata de construir un interprete para un lenguaje con caracteristicas especificas. Dicho interprete consta de un analizador lexico,primera eapa del proceso de compilacion, donde se evaluan las estructuras a nivel atomico y se reconocen cada uno de los componentes lexicos, un analizador sintactico en el cual se analiza la estructura del programa determinando que secuencia de componentes lexicos es valida y cuales no, y un analizador semantico que evalua el significado del programa para verificar que es lo que hace cada sentencia y si estas tienen sentido.  
+» El proyecto trata de construir un interprete para un lenguaje con caracteristicas especificas. Dicho interprete consta de un analizador lexico,primera etapa del proceso de compilacion, donde se evaluan las estructuras a nivel atomico y se reconocen cada uno de los componentes lexicos, un analizador sintactico en el cual se analiza la estructura del programa determinando que secuencia de componentes lexicos es valida y cuales no, y un analizador semantico que evalua el significado del programa para verificar que es lo que hace cada sentencia y si estas tienen sentido (este ultimo aun no implementado).  
   
   » La implementacion que he abordado para este concepto se trata de una aplicacion que toma un archivo de texto (formato .txt) donde este debe contener el codigo fuente del programa.  
 Una vez cargado un archivo valido se cuenta con dos opciones donde:
