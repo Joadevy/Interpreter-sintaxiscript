@@ -8,8 +8,6 @@ type dato = {
     valor: number;
 }
 
-let Estado: Array<dato> = [];
-
 function mostrarEstado (estado:Array<dato>):void{
     for (let elemento of estado){
         console.log('Variable: ' + elemento.variable);
@@ -40,20 +38,29 @@ function asignarValor(estado:Array<dato>,variable:string,valorAsignar:number):vo
 // *** EVALUADORES ***
 
 // PROGRAMA → program id {CUERPO}
-function evaluarPrograma(arbol:Arbol,estado:Array<dato>){
-    evaluarCUERPO(arbol.hijos[3],estado);
+export function evaluarPrograma(arbol:Arbol){
+    console.log(arbol)
+    let Estado: Array<dato> = [];
+    console.log('evaluando programa');
+    evaluarCUERPO(arbol.hijos[3],Estado);
 }
 
 // CUERPO → SENTENCIA SENTENCIAS
 function evaluarCUERPO(arbol:nodo,estado:Array<dato>){
+    console.log('evaluando cuerpo');
+    console.log(arbol)
     evaluarSENTENCIA(arbol.hijos[0],estado);
     evaluarSENTENCIAS(arbol.hijos[1],estado);
 }
 
 // SENTENCIAS → ;CUERPO | epsilon 
 function evaluarSENTENCIAS(arbol:nodo,estado:Array<dato>){
+    console.log('evaluando SENTENCIAS');
+    console.log(arbol)
     if (arbol.cantHijos!==0){
+        console.log('detecto mas de un hijo');
         if(arbol.hijos[0].simbolo == "tPuntoComa"){
+            console.log('detecto punto y coma')
             evaluarCUERPO(arbol.hijos[1],estado);
         }
     }
@@ -84,6 +91,7 @@ function evaluarDECLARACION(arbol:nodo,estado:Array<dato>){
 // VARIABLES → id VARIABLE
 function evaluarVARIABLES(arbol:nodo,estado:Array<dato>){
     agregarVariable(estado,{variable:arbol.hijos[0].lexema,valor:0}) // Guarda en la lista el id (y lo inicializa en 0)
+    console.log(estado);
     evaluarVARIABLE(arbol.hijos[1],estado);
 }
 
@@ -96,9 +104,10 @@ function evaluarVARIABLE(arbol:nodo,estado:Array<dato>){
 
 // ASIGNACION → id opAsignacion EXPARIT  <<<<<<<<<<<<< 
 function evaluarASIGNACION(arbol:nodo,estado:Array<dato>){
-    // let valorAsignar:Array<number> = []
-    // evaluarEXPARIT(arbol.hijos[2],estado,valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
-    //asignarValor(estado,arbol.hijos[0].lexema,valorAsignar)
+    let valorAsignar:Array<number> = []
+    console.log('antes de llamar a EXPARIT');
+    evaluarEXPARIT(arbol.hijos[2],estado,valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
+    asignarValor(estado,arbol.hijos[0].lexema,valorAsignar[0])
 }
 
 // LECTURA → Read (cadena, id)
@@ -123,14 +132,16 @@ function evaluarSALIDAS(arbol:nodo,estado:Array<dato>){
 // SAUX → ,SALIDAS | epsilon
 function evaluarSAUX(arbol:nodo,estado:Array<dato>){
     if (arbol.cantHijos !== 0){
-        evaluarSALIDAS(arbol.hijos[0],estado);
+        evaluarSALIDAS(arbol.hijos[1],estado);
     }
 }
 
 // SALIDA → EXPARIT | cadena
 function evaluarSALIDA(arbol:nodo,estado:Array<dato>):string|number{
     let terminal:string|number = ''; // Esta inicializacion como cadena no deberia pero creo no afecta.
+    console.log(arbol)
     if (arbol.hijos[0].simbolo == "vEXPARIT"){
+        terminal == "test";
         // terminal = evaluarEXPARIT(arbol.hijos[0],estado);
     } else if (arbol.hijos[0].simbolo == "tCadena"){
         terminal = arbol.hijos[0].lexema;
@@ -269,8 +280,7 @@ function evaluarOPERANDOS (arbol:nodo,estado:Array<dato>,resultado:Array<number>
 
 
 /* el "estado" del programa es una lista con todas las variables que están declaradas en el programa fuente y sus valores 
-actuales.
-esa lista parte como lista vacía.
+actuales.esa lista parte como lista vacía
 cuando hay una declaración de variables, cada una de esas variables se agrega en la lista y se inicializa en 0.
 cuando en una expresión tenés un "id", ese id (el lexema asociado en realidad) se busca en el estado para conocer su valor. 
 Si no se encuentra, devolvés un error que debe decir que la variable no fue declarada. */

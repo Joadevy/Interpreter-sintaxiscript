@@ -3,6 +3,7 @@ import { creaTAS,cargarTAS, variables, terminales } from "./TAS.js";
 import { tablaSimbolos as TS} from "../Analizador Lexico/tablaSimbolos.js";
 import { obtenerSiguienteCompLex } from "../Analizador Lexico/index.js"; 
 import {elementoPila, crearPila, Apilar, Desapilar} from "./manejoPila.js"
+import { evaluarPrograma } from "../Analizador Semantico/index.js";
 
 // Testing con DENO
 // @ts-ignore
@@ -15,6 +16,9 @@ import {elementoPila, crearPila, Apilar, Desapilar} from "./manejoPila.js"
 // import { tablaSimbolos as TS} from "../Analizador Lexico/tablaSimbolos.ts";
 // @ts-ignore
 // import { obtenerSiguienteCompLex } from "../Analizador Lexico/index.ts"; 
+// @ts-ignore
+// import { evaluarPrograma } from "../Analizador Semantico/index.ts"; 
+
 
 
 const arrayVariables = ['vPROGRAMA','vCUERPO','vSENTENCIAS','vSENTENCIA','vDECLARACION','vVARIABLES','vVARIABLE','vASIGNACION','vEXPARIT','vIZQARIT','vRAIZPOT','vPOT','vSUMARESTA','vMULTDIV','vOPERANDOS','vLECTURA','vESCRITURA','vSALIDAS','vSAUX','vSALIDA','vCONDICIONAL','vCONDICIONALFACT','vMIENTRAS','vCONDICION','vIZQCOND','vNEGACION','vCONJUNCION', 'vDISYUNCION']
@@ -121,6 +125,7 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
     } 
     if (exito){
         console.log('****** Sintaxis correcta ******');
+        evaluarPrograma(raiz)
         mostrarInfoSintactico([true],raiz)
     } else {
         console.log('******  Hay un error sintactico ******')

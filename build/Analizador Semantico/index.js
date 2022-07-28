@@ -1,0 +1,260 @@
+function mostrarEstado(estado) {
+    for (let elemento of estado) {
+        console.log('Variable: ' + elemento.variable);
+        console.log('Valor: ' + elemento.valor);
+    }
+}
+function agregarVariable(estado, dato) {
+    estado.push(dato);
+}
+function leerValor(estado, variable) {
+    for (let elemento of estado) {
+        if (elemento.variable == variable) {
+            return elemento.valor;
+        }
+    }
+}
+function asignarValor(estado, variable, valorAsignar) {
+    for (let elemento of estado) {
+        if (elemento.variable = variable) {
+            elemento.valor = valorAsignar;
+        }
+    }
+}
+// *** EVALUADORES ***
+// PROGRAMA → program id {CUERPO}
+export function evaluarPrograma(arbol) {
+    console.log(arbol);
+    let Estado = [];
+    console.log('evaluando programa');
+    evaluarCUERPO(arbol.hijos[3], Estado);
+}
+// CUERPO → SENTENCIA SENTENCIAS
+function evaluarCUERPO(arbol, estado) {
+    console.log('evaluando cuerpo');
+    console.log(arbol);
+    evaluarSENTENCIA(arbol.hijos[0], estado);
+    evaluarSENTENCIAS(arbol.hijos[1], estado);
+}
+// SENTENCIAS → ;CUERPO | epsilon 
+function evaluarSENTENCIAS(arbol, estado) {
+    console.log('evaluando SENTENCIAS');
+    console.log(arbol);
+    if (arbol.cantHijos !== 0) {
+        console.log('detecto mas de un hijo');
+        if (arbol.hijos[0].simbolo == "tPuntoComa") {
+            console.log('detecto punto y coma');
+            evaluarCUERPO(arbol.hijos[1], estado);
+        }
+    }
+}
+// SENTENCIA → DECLARACION | ASIGNACION | LECTURA | ESCRITURA | CONDICIONAL | MIENTRAS
+function evaluarSENTENCIA(arbol, estado) {
+    if (arbol.hijos[0].simbolo == "vDECLARACION") {
+        evaluarDECLARACION(arbol.hijos[0], estado);
+    }
+    else if (arbol.hijos[0].simbolo == "vASIGNACION") {
+        evaluarASIGNACION(arbol.hijos[0], estado);
+    }
+    else if (arbol.hijos[0].simbolo == "vLECTURA") {
+        evaluarLECTURA(arbol.hijos[0], estado);
+    }
+    else if (arbol.hijos[0].simbolo == "vESCRITURA") {
+        evaluarESCRITURA(arbol.hijos[0], estado);
+    }
+    else if (arbol.hijos[0].simbolo == "vCONDICIONAL") {
+        evaluarCONDICIONAL(arbol.hijos[0], estado);
+    }
+    else if (arbol.hijos[0].simbolo == "vMIENTRAS") {
+        evaluarMIENTRAS(arbol.hijos[0], estado);
+    }
+}
+// DECLARACION → var VARIABLES 
+function evaluarDECLARACION(arbol, estado) {
+    evaluarVARIABLES(arbol.hijos[1], estado);
+}
+// VARIABLES → id VARIABLE
+function evaluarVARIABLES(arbol, estado) {
+    agregarVariable(estado, { variable: arbol.hijos[0].lexema, valor: 0 }); // Guarda en la lista el id (y lo inicializa en 0)
+    console.log(estado);
+    evaluarVARIABLE(arbol.hijos[1], estado);
+}
+// VARIABLE → ,VARIABLES | epsilon
+function evaluarVARIABLE(arbol, estado) {
+    if (arbol.cantHijos !== 0) {
+        evaluarVARIABLES(arbol.hijos[1], estado);
+    }
+}
+// ASIGNACION → id opAsignacion EXPARIT  <<<<<<<<<<<<< 
+function evaluarASIGNACION(arbol, estado) {
+    let valorAsignar = [];
+    console.log('antes de llamar a EXPARIT');
+    evaluarEXPARIT(arbol.hijos[2], estado, valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
+    asignarValor(estado, arbol.hijos[0].lexema, valorAsignar[0]);
+}
+// LECTURA → Read (cadena, id)
+function evaluarLECTURA(arbol, estado) {
+    // @ts-ignore
+    let valorLeido = parseInt(prompt(arbol.hijos[2], '')); // Ojo con parseInt (parsea a entero? - revisar)
+    asignarValor(estado, arbol.hijos[4].lexema, valorLeido);
+}
+// ESCRITURA → Print (SALIDAS)
+function evaluarESCRITURA(arbol, estado) {
+    evaluarSALIDAS(arbol.hijos[2], estado);
+}
+// SALIDAS → SALIDA SAUX
+function evaluarSALIDAS(arbol, estado) {
+    let salida = evaluarSALIDA(arbol.hijos[0], estado);
+    console.log(salida); // Se mostrarian los outputs en consola (deberia poderse en el DOM)
+    evaluarSAUX(arbol.hijos[1], estado);
+}
+// SAUX → ,SALIDAS | epsilon
+function evaluarSAUX(arbol, estado) {
+    if (arbol.cantHijos !== 0) {
+        evaluarSALIDAS(arbol.hijos[1], estado);
+    }
+}
+// SALIDA → EXPARIT | cadena
+function evaluarSALIDA(arbol, estado) {
+    let terminal = ''; // Esta inicializacion como cadena no deberia pero creo no afecta.
+    console.log(arbol);
+    if (arbol.hijos[0].simbolo == "vEXPARIT") {
+        terminal == "test";
+        // terminal = evaluarEXPARIT(arbol.hijos[0],estado);
+    }
+    else if (arbol.hijos[0].simbolo == "tCadena") {
+        terminal = arbol.hijos[0].lexema;
+    }
+    return terminal;
+}
+// CONDICIONAL → if [CONDICION] {CUERPO} CONDICIONALFACT
+function evaluarCONDICIONAL(arbol, estado) {
+    let resultado = [];
+    evaluarCONDICION(arbol, estado, resultado);
+    if (resultado[0]) {
+        evaluarCUERPO(arbol.hijos[5], estado);
+    }
+    else {
+        evaluarCONDICIONALFACT(arbol.hijos[7], estado);
+    }
+}
+// CONDICIONALFACT → else {CUERPO} | epsilon
+function evaluarCONDICIONALFACT(arbol, estado) {
+    if (arbol.cantHijos !== 0) { // Este checkeo no deberia ser necesario por como esta planteado evalCONDICIONAL
+        evaluarCUERPO(arbol.hijos[0], estado);
+    }
+}
+// MIENTRAS → while [CONDICION] {CUERPO}
+function evaluarMIENTRAS(arbol, estado) {
+    let resultadoCond = [];
+    evaluarCONDICION(arbol.hijos[2], estado, resultadoCond);
+    while (resultadoCond) {
+        evaluarCUERPO(arbol.hijos[5], estado);
+        evaluarCONDICION(arbol.hijos[2], estado, resultadoCond);
+    }
+    // El array va por referencia entonces puede escribirlo.
+}
+// CONDICION → IZQCOND DISYUNCION
+function evaluarCONDICION(arbol, estado, resultado) {
+    let operando1 = [];
+    evaluarIZQCOND(arbol.hijos[0], estado, operando1);
+    evaluarDISYUNCION(arbol.hijos[1], estado, operando1, resultado);
+}
+// IZQCOND → NEGACION CONJUNCION
+function evaluarIZQCOND(arbol, estado, resultado) {
+    let temp = [];
+    evaluarNEGACION(arbol.hijos[0], estado, temp);
+    evaluarCONJUNCION(arbol.hijos[1], estado, temp, resultado);
+}
+// NEGACION → not NEGACION | EXPARIT opRel EXPARIT |  [CONDICION]
+function evaluarNEGACION(arbol, estado, resultado) {
+    let operador;
+    let operando1 = [];
+    let operando2 = [];
+    if (arbol.hijos[0].simbolo == "tNot") {
+        evaluarNEGACION(arbol.hijos[1], estado, resultado);
+        resultado[0] = !resultado[0];
+    }
+    else if (arbol.hijos[0].simbolo = "vEXPARIT") {
+        //evaluarEXPARIT(arbol.hijos[0],estados,operando1);
+        operador = arbol.hijos[1].lexema;
+        //evaluarEXPARIT(arbol.hijos[2],estados,operando2);
+        switch (operador) {
+            case "==":
+                resultado[0] = operando1[0] == operando2[0];
+                break;
+            case ">=":
+                resultado[0] = operando1[0] >= operando2[0];
+                break;
+            case "<=":
+                resultado[0] = operando1[0] <= operando2[0];
+                break;
+            case ">":
+                resultado[0] = operando1[0] > operando2[0];
+                break;
+            case "<":
+                resultado[0] = operando1[0] < operando2[0];
+                break;
+            case "<>":
+                resultado[0] = operando1[0] != operando2[0];
+                break;
+        }
+    }
+    else if (arbol.hijos[0].simbolo == "tCorcheteAbre") {
+        evaluarCONDICION(arbol.hijos[1], estado, resultado);
+    }
+}
+// CONJUNCION → and NEGACION CONJUNCION | epsilon
+function evaluarCONJUNCION(arbol, estado, operando1, resultado) {
+    if (arbol.cantHijos !== 0) { // puede no haber un and.
+        let resultadoNegacion = [];
+        evaluarNEGACION(arbol.hijos[1], estado, resultadoNegacion);
+        operando1[0] = operando1[0] && resultadoNegacion[0];
+        evaluarCONJUNCION(arbol.hijos[2], estado, operando1, resultado);
+    }
+    else {
+        resultado[0] = operando1[0];
+    }
+}
+// DISYUNCION → or IZQCOND DISYUNCION | epsilon
+function evaluarDISYUNCION(arbol, estado, operando1, resultado) {
+    let resultadoIZQCOND = [];
+    if (arbol.cantHijos == 0) { // puede no haber un or
+        resultado[0] = operando1[0];
+    }
+    else {
+        evaluarIZQCOND(arbol.hijos[1], estado, resultadoIZQCOND);
+        operando1[0] = operando1[0] || resultadoIZQCOND[0];
+        evaluarDISYUNCION(arbol.hijos[2], estado, operando1, resultado);
+    }
+}
+//EXPARIT -> IZQARIT SUMARESTA
+function evaluarEXPARIT(arbol, estado, resultado) {
+    let resultadoIZQARIT = [];
+    let resultadoSUMARESTA = [0.0];
+    // evaluarIZQARIT(arbol.hijos[0],estado,resultadoIZQARIT);
+    // evaluarSUMARESTA
+}
+// OPERANDOS → -OPERANDOS | constReal | id  | (EXPARIT)
+function evaluarOPERANDOS(arbol, estado, resultado) {
+    if (arbol.hijos[0].simbolo == "tConstReal") {
+        resultado[0] = arbol.hijos[0].lexema; // es una string lo que guarda.
+    }
+    else if (arbol.hijos[0].simbolo == "tParentesisAbre") {
+        // evaluarEXPARIT(raiz.hijos[1],estado,resultado)
+    }
+    else if (arbol.hijos[0].simbolo == "tMenos") {
+        resultado[0] = -1 * resultado[0];
+        evaluarOPERANDOS(arbol.hijos[1], estado, resultado);
+    }
+    else if (arbol.hijos[0].simbolo == "tId") { // HAY QUE VERIFICAR QUE ESTE DECLARADO
+        if (arbol.hijos[1].cantHijos == 0) {
+            resultado[0] = leerValor(estado, arbol.hijos[0].lexema);
+        }
+    }
+}
+/* el "estado" del programa es una lista con todas las variables que están declaradas en el programa fuente y sus valores
+actuales.esa lista parte como lista vacía
+cuando hay una declaración de variables, cada una de esas variables se agrega en la lista y se inicializa en 0.
+cuando en una expresión tenés un "id", ese id (el lexema asociado en realidad) se busca en el estado para conocer su valor.
+Si no se encuentra, devolvés un error que debe decir que la variable no fue declarada. */ 
