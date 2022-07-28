@@ -106,8 +106,10 @@ function evaluarVARIABLE(arbol:nodo,estado:Array<dato>){
 function evaluarASIGNACION(arbol:nodo,estado:Array<dato>){
     let valorAsignar:Array<number> = []
     console.log('antes de llamar a EXPARIT');
+    console.log(arbol)
     evaluarEXPARIT(arbol.hijos[2],estado,valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
     asignarValor(estado,arbol.hijos[0].lexema,valorAsignar[0])
+    console.log(estado);
 }
 
 // LECTURA → Read (cadena, id)
@@ -138,15 +140,14 @@ function evaluarSAUX(arbol:nodo,estado:Array<dato>){
 
 // SALIDA → EXPARIT | cadena
 function evaluarSALIDA(arbol:nodo,estado:Array<dato>):string|number{
-    let terminal:string|number = ''; // Esta inicializacion como cadena no deberia pero creo no afecta.
+    let terminal:Array<any> = []; // Esta inicializacion como cadena no deberia pero creo no afecta.
     console.log(arbol)
     if (arbol.hijos[0].simbolo == "vEXPARIT"){
-        terminal == "test";
-        // terminal = evaluarEXPARIT(arbol.hijos[0],estado);
+        evaluarEXPARIT(arbol.hijos[0],estado,terminal);
     } else if (arbol.hijos[0].simbolo == "tCadena"){
-        terminal = arbol.hijos[0].lexema;
+        terminal[0] = arbol.hijos[0].lexema;
     }
-    return terminal
+    return terminal[0]
 }
 
 // CONDICIONAL → if [CONDICION] {CUERPO} CONDICIONALFACT
@@ -163,7 +164,7 @@ function evaluarCONDICIONAL(arbol:nodo, estado:Array<dato>){
 // CONDICIONALFACT → else {CUERPO} | epsilon
 function evaluarCONDICIONALFACT(arbol:nodo,estado:Array<dato>){
     if (arbol.cantHijos !== 0){ // Este checkeo no deberia ser necesario por como esta planteado evalCONDICIONAL
-        evaluarCUERPO(arbol.hijos[0],estado);
+        evaluarCUERPO(arbol.hijos[2],estado);
     }
 }
 
@@ -201,9 +202,9 @@ function evaluarNEGACION(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>)
         evaluarNEGACION(arbol.hijos[1],estado,resultado);
         resultado[0] = !resultado[0];
     } else if(arbol.hijos[0].simbolo = "vEXPARIT"){
-        //evaluarEXPARIT(arbol.hijos[0],estados,operando1);
+        evaluarEXPARIT(arbol.hijos[0],estado,operando1);
         operador = arbol.hijos[1].lexema;
-        //evaluarEXPARIT(arbol.hijos[2],estados,operando2);
+        evaluarEXPARIT(arbol.hijos[2],estado,operando2);
         switch(operador){
             case "==":
                 resultado[0] = operando1[0] == operando2[0];
@@ -256,14 +257,93 @@ function evaluarDISYUNCION(arbol:nodo,estado:Array<dato>,operando1:Array<boolean
 
 //EXPARIT -> IZQARIT SUMARESTA
 function evaluarEXPARIT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
+    console.log("evaluando EXPARIT");
+    console.log(arbol);
     let resultadoIZQARIT:Array<number> = [];
     let resultadoSUMARESTA:Array<number> = [0.0];
-    // evaluarIZQARIT(arbol.hijos[0],estado,resultadoIZQARIT);
-    // evaluarSUMARESTA
+    evaluarIZQARIT(arbol.hijos[0],estado,resultadoIZQARIT);
+    evaluarSUMARESTA(arbol.hijos[1],estado,resultadoIZQARIT,resultadoSUMARESTA);
+    resultado[0] = resultadoSUMARESTA[0];
+}
+
+// IZQARIT → RAIZPOT MULTDIV
+function evaluarIZQARIT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
+    console.log('IZQPOT');
+    let resultadoRAIZPOT:Array<number> = [];
+    evaluarRAIZPOT(arbol.hijos[0],estado,resultadoRAIZPOT);
+    evaluarMULTDIV(arbol.hijos[1],estado,resultadoRAIZPOT,resultado);
+}
+
+// RAIZPOT → opRaiz (EXPARIT) POT | OPERANDOS POT
+function evaluarRAIZPOT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
+    console.log('RAIZPOT');
+    console.log(arbol)
+    let resultadoOPARIT:Array<number> = []
+    let base:Array<number> = []
+
+    if (arbol.hijos[0].simbolo = "tRaiz"){
+        console.log('ACA'); // Esta detectando como raiz??
+        evaluarEXPARIT(arbol.hijos[2],estado,resultadoOPARIT);
+        resultadoOPARIT[0] = Math.round(resultadoOPARIT[0]);
+        base[0] = Math.sqrt(resultadoOPARIT[0]);
+        evaluarPOT(arbol.hijos[4],estado,base,resultado); 
+    } else if (arbol.hijos[0].simbolo = "vOPERANDOS" ){
+        console.log('es vOPERANDOS')
+        evaluarOPERANDOS(arbol.hijos[0],estado,base);
+        evaluarPOT(arbol.hijos[1],estado,base,resultado);
+    }
+}
+
+// POT → ^ OPERANDOS | epsilon
+function evaluarPOT(arbol:nodo,estado:Array<dato>,base:Array<number>,resultado:Array<number>){
+    let exponente:Array<number> = [];
+    if (arbol.cantHijos == 0){
+        resultado[0] = base[0];
+    } else {
+        evaluarOPERANDOS(arbol.hijos[1],estado,exponente);
+        base[0] = Math.round(base[0]);
+        exponente[0] = Math.round(exponente[0]);
+        resultado[0] = Math.pow(base[0],exponente[0]);
+    }
+}
+
+// SUMARESTA → + OPERANDOS SUMARESTA |  - OPERANDOS SUMARESTA | epsilon
+function evaluarSUMARESTA(arbol:nodo,estado:Array<dato>,operandoIZQ:Array<number>,resultado:Array<number>){
+    let temp:Array<number> = [];
+    let operandoDER:Array<number> = [];
+    if (arbol.cantHijos == 0){
+        resultado[0] = operandoIZQ[0];
+    } else if (arbol.hijos[0].simbolo = "tMas"){
+        evaluarOPERANDOS(arbol.hijos[1],estado,operandoDER);
+        temp[0] = operandoIZQ[0] + operandoDER[0];
+        evaluarSUMARESTA(arbol.hijos[2],estado,temp,resultado);
+    } else if (arbol.hijos[0].simbolo = "tMenos"){
+        evaluarOPERANDOS(arbol.hijos[1],estado,operandoDER);
+        temp[0] = operandoIZQ[0] - operandoDER[0];
+        evaluarSUMARESTA(arbol.hijos[2],estado,temp,resultado);
+    }
+}
+
+// MULTDIV → * OPERANDOS MULTDIV |  / OPERANDOS MULTDIV | epsilon
+function evaluarMULTDIV(arbol:nodo,estado:Array<dato>, operandoIZQ:Array<number>,resultado:Array<number>){
+    let temp:Array<number> = [];
+    let operandoDER:Array<number> = [];
+    if (arbol.cantHijos == 0){
+        resultado[0] = operandoIZQ[0];
+    } else if (arbol.hijos[0].simbolo = "tProducto"){
+        evaluarOPERANDOS(arbol.hijos[1],estado,operandoDER);
+        temp[0] = operandoIZQ[0] * operandoDER[0];
+        evaluarMULTDIV(arbol.hijos[2],estado,temp,resultado);
+    } else if (arbol.hijos[0].simbolo = "tDivision"){
+        evaluarOPERANDOS(arbol.hijos[1],estado,operandoDER);
+        temp[0] = operandoIZQ[0] / operandoDER[0];
+        evaluarMULTDIV(arbol.hijos[2],estado,temp,resultado);
+    }
 }
 
 // OPERANDOS → -OPERANDOS | constReal | id  | (EXPARIT)
 function evaluarOPERANDOS (arbol:nodo,estado:Array<dato>,resultado:Array<number>){
+    console.log('OPERANDOS');
     if (arbol.hijos[0].simbolo == "tConstReal"){
         resultado[0] = arbol.hijos[0].lexema as any // es una string lo que guarda.
     } else if (arbol.hijos[0].simbolo == "tParentesisAbre"){
