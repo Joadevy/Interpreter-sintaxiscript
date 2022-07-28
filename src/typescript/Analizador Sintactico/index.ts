@@ -125,8 +125,8 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
     } 
     if (exito){
         console.log('****** Sintaxis correcta ******');
-        evaluarPrograma(raiz)
         mostrarInfoSintactico([true],raiz)
+        evaluarPrograma(raiz);
     } else {
         console.log('******  Hay un error sintactico ******')
         mostrarInfoSintactico([false,errorLog],raiz)

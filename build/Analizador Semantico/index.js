@@ -1,45 +1,54 @@
 function mostrarEstado(estado) {
-    for (let elemento of estado) {
-        console.log('Variable: ' + elemento.variable);
-        console.log('Valor: ' + elemento.valor);
+    for (let elemento in estado) {
+        console.log('Variable: ' + estado[elemento].variable);
+        console.log('Valor: ' + estado[elemento].valor);
     }
 }
 function agregarVariable(estado, dato) {
     estado.push(dato);
 }
 function leerValor(estado, variable) {
-    for (let elemento of estado) {
-        if (elemento.variable == variable) {
-            return elemento.valor;
+    console.log('llamado a leer valor');
+    for (let elemento in estado) {
+        if (estado[elemento].variable == variable) {
+            return estado[elemento].valor;
         }
     }
+    console.log("--- NO SE ENCONTRO LA VARIABLE Y POR TANTO NO SE PUDO LEER EL VALOR ---");
 }
 function asignarValor(estado, variable, valorAsignar) {
-    for (let elemento of estado) {
-        if (elemento.variable = variable) {
-            elemento.valor = valorAsignar;
+    console.log('llamado a asignar valor');
+    let flag = false;
+    for (let elemento in estado) {
+        if (estado[elemento].variable == variable) {
+            console.log('se va a asignar a ' + estado[elemento].variable + ' el ' + valorAsignar);
+            estado[elemento].valor = valorAsignar;
+            flag = true;
         }
+    }
+    if (!flag) {
+        console.log("--- NO SE ENCONTRO LA VARIABLE, NO HA SIDO DECLARADA ---");
     }
 }
 // *** EVALUADORES ***
 // PROGRAMA → program id {CUERPO}
 export function evaluarPrograma(arbol) {
     console.log(arbol);
-    let Estado = [];
+    let Estado = [{ variable: 'td', valor: 123 }];
     console.log('evaluando programa');
     evaluarCUERPO(arbol.hijos[3], Estado);
 }
 // CUERPO → SENTENCIA SENTENCIAS
 function evaluarCUERPO(arbol, estado) {
     console.log('evaluando cuerpo');
-    console.log(arbol);
+    // console.log(arbol)
     evaluarSENTENCIA(arbol.hijos[0], estado);
     evaluarSENTENCIAS(arbol.hijos[1], estado);
 }
 // SENTENCIAS → ;CUERPO | epsilon 
 function evaluarSENTENCIAS(arbol, estado) {
     console.log('evaluando SENTENCIAS');
-    console.log(arbol);
+    // console.log(arbol)
     if (arbol.cantHijos !== 0) {
         console.log('detecto mas de un hijo');
         if (arbol.hijos[0].simbolo == "tPuntoComa") {
@@ -89,8 +98,10 @@ function evaluarVARIABLE(arbol, estado) {
 function evaluarASIGNACION(arbol, estado) {
     let valorAsignar = [];
     console.log('antes de llamar a EXPARIT');
-    console.log(arbol);
-    evaluarEXPARIT(arbol.hijos[2], estado, valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
+    // console.log(arbol)
+    //evaluarEXPARIT(arbol.hijos[2],estado,valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
+    valorAsignar[0] = 123;
+    console.log('esta variable puede mutar ' + valorAsignar[0]);
     asignarValor(estado, arbol.hijos[0].lexema, valorAsignar[0]);
     console.log(estado);
 }
@@ -119,7 +130,7 @@ function evaluarSAUX(arbol, estado) {
 // SALIDA → EXPARIT | cadena
 function evaluarSALIDA(arbol, estado) {
     let terminal = []; // Esta inicializacion como cadena no deberia pero creo no afecta.
-    console.log(arbol);
+    // console.log(arbol)
     if (arbol.hijos[0].simbolo == "vEXPARIT") {
         evaluarEXPARIT(arbol.hijos[0], estado, terminal);
     }
@@ -321,7 +332,7 @@ function evaluarOPERANDOS(arbol, estado, resultado) {
         resultado[0] = arbol.hijos[0].lexema; // es una string lo que guarda.
     }
     else if (arbol.hijos[0].simbolo == "tParentesisAbre") {
-        // evaluarEXPARIT(raiz.hijos[1],estado,resultado)
+        evaluarEXPARIT(arbol.hijos[1], estado, resultado);
     }
     else if (arbol.hijos[0].simbolo == "tMenos") {
         resultado[0] = -1 * resultado[0];

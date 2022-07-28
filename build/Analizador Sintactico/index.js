@@ -124,8 +124,8 @@ export function analisisSintactico(codigoFuente, raiz) {
     }
     if (exito) {
         console.log('****** Sintaxis correcta ******');
-        evaluarPrograma(raiz);
         mostrarInfoSintactico([true], raiz);
+        evaluarPrograma(raiz);
     }
     else {
         console.log('******  Hay un error sintactico ******');
