@@ -141,7 +141,7 @@ function evaluarSALIDA(arbol, estado) {
 // CONDICIONAL → if [CONDICION] {CUERPO} CONDICIONALFACT
 function evaluarCONDICIONAL(arbol, estado) {
     let resultado = [];
-    evaluarCONDICION(arbol, estado, resultado);
+    evaluarCONDICION(arbol.hijos[2], estado, resultado);
     if (resultado[0]) {
         evaluarCUERPO(arbol.hijos[5], estado);
     }
@@ -168,17 +168,22 @@ function evaluarMIENTRAS(arbol, estado) {
 // CONDICION → IZQCOND DISYUNCION
 function evaluarCONDICION(arbol, estado, resultado) {
     let operando1 = [];
+    console.log('evaluando condicion'); // esta RECIBIENDO LO DE CONDICIONAL
+    console.log(arbol);
     evaluarIZQCOND(arbol.hijos[0], estado, operando1);
     evaluarDISYUNCION(arbol.hijos[1], estado, operando1, resultado);
 }
 // IZQCOND → NEGACION CONJUNCION
 function evaluarIZQCOND(arbol, estado, resultado) {
     let temp = [];
+    console.log('evaluando izquierda condicion');
+    console.log(arbol);
     evaluarNEGACION(arbol.hijos[0], estado, temp);
     evaluarCONJUNCION(arbol.hijos[1], estado, temp, resultado);
 }
 // NEGACION → not NEGACION | EXPARIT opRel EXPARIT |  [CONDICION]
 function evaluarNEGACION(arbol, estado, resultado) {
+    console.log(arbol);
     let operador;
     let operando1 = [];
     let operando2 = [];
@@ -243,10 +248,10 @@ function evaluarDISYUNCION(arbol, estado, operando1, resultado) {
 function evaluarEXPARIT(arbol, estado, resultado) {
     console.log("evaluando EXPARIT");
     console.log(arbol);
-    let resultadoIZQARIT = []; // Tiene que contener el valor de la parte izquierda (en el test actual seria 123)
-    let resultadoSUMARESTA = []; // Deberia contener el resutlado de la suma pero no cambia este valor, no se esta operando correctamente.
+    let resultadoIZQARIT = []; // Tiene que contener el valor de la parte izquierda de la op aritmetica.
+    let resultadoSUMARESTA = []; // Contiene el resultado total de la op aritmetica.
     evaluarIZQARIT(arbol.hijos[0], estado, resultadoIZQARIT);
-    console.log("IZQARIT es: " + resultadoIZQARIT[0]); // Esta tomando bien el valor de la izquierda.
+    console.log("IZQARIT es: " + resultadoIZQARIT[0]);
     evaluarSUMARESTA(arbol.hijos[1], estado, resultadoIZQARIT, resultadoSUMARESTA); // Le pasa el resultado de la izq y derecha vacio para que opere.
     resultado[0] = resultadoSUMARESTA[0];
 }
@@ -272,7 +277,7 @@ function evaluarRAIZPOT(arbol, estado, resultado) {
     }
     else if (arbol.hijos[0].simbolo == "vOPERANDOS") {
         evaluarOPERANDOS(arbol.hijos[0], estado, base);
-        evaluarPOT(arbol.hijos[1], estado, base, resultado); // hasta aca va bien
+        evaluarPOT(arbol.hijos[1], estado, base, resultado);
     }
 }
 // POT → ^ OPERANDOS | epsilon
@@ -280,7 +285,6 @@ function evaluarPOT(arbol, estado, base, resultado) {
     let exponente = [];
     if (arbol.cantHijos == 0) {
         resultado[0] = base[0];
-        console.log("TEST EL RESULTADO ES " + resultado[0]);
     }
     else {
         evaluarOPERANDOS(arbol.hijos[1], estado, exponente);
@@ -334,7 +338,6 @@ function evaluarOPERANDOS(arbol, estado, resultado) {
     console.log('OPERANDOS');
     if (arbol.hijos[0].simbolo == "tConstReal") {
         resultado[0] = parseFloat(arbol.hijos[0].lexema); // es una string lo que guarda, hay que convertir a numero flotante.
-        // Si se esta llevando el resultado correctamente.
     }
     else if (arbol.hijos[0].simbolo == "tParentesisAbre") {
         evaluarEXPARIT(arbol.hijos[1], estado, resultado);

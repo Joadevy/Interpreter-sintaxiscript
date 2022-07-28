@@ -163,7 +163,7 @@ function evaluarSALIDA(arbol:nodo,estado:Array<dato>):string|number{
 // CONDICIONAL → if [CONDICION] {CUERPO} CONDICIONALFACT
 function evaluarCONDICIONAL(arbol:nodo, estado:Array<dato>){
     let resultado:Array<boolean> = [];
-    evaluarCONDICION(arbol,estado,resultado);
+    evaluarCONDICION(arbol.hijos[2],estado,resultado);
     if (resultado[0]){
         evaluarCUERPO(arbol.hijos[5],estado);
     } else {
@@ -192,6 +192,8 @@ function evaluarMIENTRAS(arbol:nodo,estado:Array<dato>){
 // CONDICION → IZQCOND DISYUNCION
 function evaluarCONDICION(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>){
     let operando1:Array<boolean> = [];
+    console.log('evaluando condicion'); // esta RECIBIENDO LO DE CONDICIONAL
+    console.log(arbol);
     evaluarIZQCOND(arbol.hijos[0],estado,operando1);
     evaluarDISYUNCION(arbol.hijos[1],estado,operando1,resultado);
 }
@@ -199,12 +201,15 @@ function evaluarCONDICION(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>
 // IZQCOND → NEGACION CONJUNCION
 function evaluarIZQCOND(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>){
     let temp:Array<boolean> = [];
+    console.log('evaluando izquierda condicion');
+    console.log(arbol);
     evaluarNEGACION(arbol.hijos[0],estado,temp);
     evaluarCONJUNCION(arbol.hijos[1],estado,temp,resultado)
 }
 
 // NEGACION → not NEGACION | EXPARIT opRel EXPARIT |  [CONDICION]
 function evaluarNEGACION(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>){
+    console.log(arbol);
     let operador:string;
     let operando1:Array<number> = [];
     let operando2:Array<number> = [];
@@ -269,10 +274,10 @@ function evaluarDISYUNCION(arbol:nodo,estado:Array<dato>,operando1:Array<boolean
 function evaluarEXPARIT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
     console.log("evaluando EXPARIT");
     console.log(arbol);
-    let resultadoIZQARIT:Array<number> = []; // Tiene que contener el valor de la parte izquierda (en el test actual seria 123)
-    let resultadoSUMARESTA:Array<number> = []; // Deberia contener el resutlado de la suma pero no cambia este valor, no se esta operando correctamente.
+    let resultadoIZQARIT:Array<number> = []; // Tiene que contener el valor de la parte izquierda de la op aritmetica.
+    let resultadoSUMARESTA:Array<number> = []; // Contiene el resultado total de la op aritmetica.
     evaluarIZQARIT(arbol.hijos[0],estado,resultadoIZQARIT);
-    console.log("IZQARIT es: " + resultadoIZQARIT[0]); // Esta tomando bien el valor de la izquierda.
+    console.log("IZQARIT es: " + resultadoIZQARIT[0]);
     evaluarSUMARESTA(arbol.hijos[1],estado,resultadoIZQARIT,resultadoSUMARESTA); // Le pasa el resultado de la izq y derecha vacio para que opere.
     resultado[0] = resultadoSUMARESTA[0];
 }
@@ -300,7 +305,7 @@ function evaluarRAIZPOT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
         evaluarPOT(arbol.hijos[4],estado,base,resultado); 
     } else if (arbol.hijos[0].simbolo == "vOPERANDOS" ){
         evaluarOPERANDOS(arbol.hijos[0],estado,base);
-        evaluarPOT(arbol.hijos[1],estado,base,resultado); // hasta aca va bien
+        evaluarPOT(arbol.hijos[1],estado,base,resultado);
     }
 }
 
@@ -309,7 +314,6 @@ function evaluarPOT(arbol:nodo,estado:Array<dato>,base:Array<number>,resultado:A
     let exponente:Array<number> = [];
     if (arbol.cantHijos == 0){
         resultado[0] = base[0];
-        console.log("TEST EL RESULTADO ES " + resultado[0])
     } else {
         evaluarOPERANDOS(arbol.hijos[1],estado,exponente);
         base[0] = Math.round(base[0]);
@@ -361,7 +365,6 @@ function evaluarOPERANDOS (arbol:nodo,estado:Array<dato>,resultado:Array<number>
     console.log('OPERANDOS');
     if (arbol.hijos[0].simbolo == "tConstReal"){
         resultado[0] = parseFloat(arbol.hijos[0].lexema) // es una string lo que guarda, hay que convertir a numero flotante.
-        // Si se esta llevando el resultado correctamente.
     } else if (arbol.hijos[0].simbolo == "tParentesisAbre"){
         evaluarEXPARIT(arbol.hijos[1],estado,resultado)
     } else if (arbol.hijos[0].simbolo == "tResta"){
