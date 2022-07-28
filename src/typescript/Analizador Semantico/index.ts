@@ -271,7 +271,6 @@ function evaluarOPERANDOS (arbol:nodo,estado:Array<dato>,resultado:Array<number>
 /* el "estado" del programa es una lista con todas las variables que están declaradas en el programa fuente y sus valores 
 actuales.
 esa lista parte como lista vacía.
-
 cuando hay una declaración de variables, cada una de esas variables se agrega en la lista y se inicializa en 0.
 cuando en una expresión tenés un "id", ese id (el lexema asociado en realidad) se busca en el estado para conocer su valor. 
 Si no se encuentra, devolvés un error que debe decir que la variable no fue declarada. */
