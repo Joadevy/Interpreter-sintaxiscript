@@ -157,11 +157,17 @@ function evaluarCONDICIONALFACT(arbol, estado) {
 }
 // MIENTRAS → while [CONDICION] {CUERPO}
 function evaluarMIENTRAS(arbol, estado) {
+    let test = 0;
     let resultadoCond = [];
     evaluarCONDICION(arbol.hijos[2], estado, resultadoCond);
-    while (resultadoCond[0]) {
+    while (resultadoCond[0]) { // Esto esta actualizandose? - Verificar porque hay bucle infinito.
         evaluarCUERPO(arbol.hijos[5], estado);
         evaluarCONDICION(arbol.hijos[2], estado, resultadoCond);
+        console.log(resultadoCond[0]);
+        /* if (test == 5){
+            break
+        }
+        test++ */
     }
     // El array va por referencia entonces puede escribirlo.
 }

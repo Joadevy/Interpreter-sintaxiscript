@@ -182,7 +182,7 @@ function evaluarCONDICIONALFACT(arbol:nodo,estado:Array<dato>){
 function evaluarMIENTRAS(arbol:nodo,estado:Array<dato>){
     let resultadoCond: Array<boolean> = [];
     evaluarCONDICION(arbol.hijos[2],estado,resultadoCond);
-    while (resultadoCond[0]){ // Esto esta actualizandose? - Verificar porque hay bucle infinito.
+    while (resultadoCond[0]){ 
         evaluarCUERPO(arbol.hijos[5],estado);
         evaluarCONDICION(arbol.hijos[2],estado,resultadoCond);
     }
