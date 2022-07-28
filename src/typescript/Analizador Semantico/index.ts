@@ -117,9 +117,8 @@ function evaluarASIGNACION(arbol:nodo,estado:Array<dato>){
     console.log('antes de llamar a EXPARIT');
     // console.log(arbol)
     evaluarEXPARIT(arbol.hijos[2],estado,valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
-    valorAsignar[0] = 123;
-    console.log('esta variable puede mutar ' + valorAsignar[0]);
     asignarValor(estado,arbol.hijos[0].lexema,valorAsignar[0])
+    console.log("valor a asignar es: " + valorAsignar);
     console.log(estado);
 }
 
@@ -270,10 +269,11 @@ function evaluarDISYUNCION(arbol:nodo,estado:Array<dato>,operando1:Array<boolean
 function evaluarEXPARIT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
     console.log("evaluando EXPARIT");
     console.log(arbol);
-    let resultadoIZQARIT:Array<number> = [];
-    let resultadoSUMARESTA:Array<number> = [0.0];
+    let resultadoIZQARIT:Array<number> = []; // Tiene que contener el valor de la parte izquierda (en el test actual seria 123)
+    let resultadoSUMARESTA:Array<number> = []; // Deberia contener el resutlado de la suma pero no cambia este valor, no se esta operando correctamente.
     evaluarIZQARIT(arbol.hijos[0],estado,resultadoIZQARIT);
-    evaluarSUMARESTA(arbol.hijos[1],estado,resultadoIZQARIT,resultadoSUMARESTA);
+    console.log("IZQARIT es: " + resultadoIZQARIT[0]); // Esta tomando bien el valor de la izquierda.
+    evaluarSUMARESTA(arbol.hijos[1],estado,resultadoIZQARIT,resultadoSUMARESTA); // Le pasa el resultado de la izq y derecha vacio para que opere.
     resultado[0] = resultadoSUMARESTA[0];
 }
 
@@ -294,15 +294,13 @@ function evaluarRAIZPOT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
     let base:Array<number> = []
 
     if (arbol.hijos[0].simbolo == "tRaiz"){
-        console.log('ACA'); // Esta detectando como raiz??
         evaluarEXPARIT(arbol.hijos[2],estado,resultadoOPARIT);
         resultadoOPARIT[0] = Math.round(resultadoOPARIT[0]);
         base[0] = Math.sqrt(resultadoOPARIT[0]);
         evaluarPOT(arbol.hijos[4],estado,base,resultado); 
     } else if (arbol.hijos[0].simbolo == "vOPERANDOS" ){
-        console.log('es vOPERANDOS')
         evaluarOPERANDOS(arbol.hijos[0],estado,base);
-        evaluarPOT(arbol.hijos[1],estado,base,resultado);
+        evaluarPOT(arbol.hijos[1],estado,base,resultado); // hasta aca va bien
     }
 }
 
@@ -311,6 +309,7 @@ function evaluarPOT(arbol:nodo,estado:Array<dato>,base:Array<number>,resultado:A
     let exponente:Array<number> = [];
     if (arbol.cantHijos == 0){
         resultado[0] = base[0];
+        console.log("TEST EL RESULTADO ES " + resultado[0])
     } else {
         evaluarOPERANDOS(arbol.hijos[1],estado,exponente);
         base[0] = Math.round(base[0]);
@@ -321,15 +320,19 @@ function evaluarPOT(arbol:nodo,estado:Array<dato>,base:Array<number>,resultado:A
 
 // SUMARESTA → + OPERANDOS SUMARESTA |  - OPERANDOS SUMARESTA | epsilon
 function evaluarSUMARESTA(arbol:nodo,estado:Array<dato>,operandoIZQ:Array<number>,resultado:Array<number>){
+    console.log('SUMARESTA')
+    console.log(arbol);
     let temp:Array<number> = [];
     let operandoDER:Array<number> = [];
     if (arbol.cantHijos == 0){
         resultado[0] = operandoIZQ[0];
-    } else if (arbol.hijos[0].simbolo == "tMas"){
+    } else if (arbol.hijos[0].simbolo == "tSuma"){
+        console.log('sumando')
         evaluarOPERANDOS(arbol.hijos[1],estado,operandoDER);
         temp[0] = operandoIZQ[0] + operandoDER[0];
         evaluarSUMARESTA(arbol.hijos[2],estado,temp,resultado);
-    } else if (arbol.hijos[0].simbolo == "tMenos"){
+    } else if (arbol.hijos[0].simbolo == "tResta"){
+        console.log("restando")
         evaluarOPERANDOS(arbol.hijos[1],estado,operandoDER);
         temp[0] = operandoIZQ[0] - operandoDER[0];
         evaluarSUMARESTA(arbol.hijos[2],estado,temp,resultado);
@@ -357,10 +360,11 @@ function evaluarMULTDIV(arbol:nodo,estado:Array<dato>, operandoIZQ:Array<number>
 function evaluarOPERANDOS (arbol:nodo,estado:Array<dato>,resultado:Array<number>){
     console.log('OPERANDOS');
     if (arbol.hijos[0].simbolo == "tConstReal"){
-        resultado[0] = arbol.hijos[0].lexema as any // es una string lo que guarda.
+        resultado[0] = parseFloat(arbol.hijos[0].lexema) // es una string lo que guarda, hay que convertir a numero flotante.
+        // Si se esta llevando el resultado correctamente.
     } else if (arbol.hijos[0].simbolo == "tParentesisAbre"){
         evaluarEXPARIT(arbol.hijos[1],estado,resultado)
-    } else if (arbol.hijos[0].simbolo == "tMenos"){
+    } else if (arbol.hijos[0].simbolo == "tResta"){
         resultado[0] = -1*resultado[0];
         evaluarOPERANDOS(arbol.hijos[1],estado,resultado);
     } else if (arbol.hijos[0].simbolo == "tId"){ // HAY QUE VERIFICAR QUE ESTE DECLARADO
