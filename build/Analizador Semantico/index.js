@@ -159,7 +159,7 @@ function evaluarCONDICIONALFACT(arbol, estado) {
 function evaluarMIENTRAS(arbol, estado) {
     let resultadoCond = [];
     evaluarCONDICION(arbol.hijos[2], estado, resultadoCond);
-    while (resultadoCond) {
+    while (resultadoCond[0]) {
         evaluarCUERPO(arbol.hijos[5], estado);
         evaluarCONDICION(arbol.hijos[2], estado, resultadoCond);
     }
