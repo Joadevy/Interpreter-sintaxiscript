@@ -96,8 +96,9 @@ function evaluarVARIABLE(arbol:nodo,estado:Array<dato>){
 
 // ASIGNACION → id opAsignacion EXPARIT  <<<<<<<<<<<<< 
 function evaluarASIGNACION(arbol:nodo,estado:Array<dato>){
-    // let resultado:number = evaluarEXPARIT(arbol.hijos[2],estado); // ASINCRONISMO? debe hacer await del resultado?
-    //asignarValor(estado,arbol.hijos[0].lexema,resultado)
+    // let valorAsignar:Array<number> = []
+    // evaluarEXPARIT(arbol.hijos[2],estado,valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
+    //asignarValor(estado,arbol.hijos[0].lexema,valorAsignar)
 }
 
 // LECTURA → Read (cadena, id)
@@ -242,18 +243,26 @@ function evaluarDISYUNCION(arbol:nodo,estado:Array<dato>,operando1:Array<boolean
     }
 }
 
+//EXPARIT -> IZQARIT SUMARESTA
+function evaluarEXPARIT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
+    let resultadoIZQARIT:Array<number> = [];
+    let resultadoSUMARESTA:Array<number> = [0.0];
+    // evaluarIZQARIT(arbol.hijos[0],estado,resultadoIZQARIT);
+    // evaluarSUMARESTA
+}
+
 // OPERANDOS → -OPERANDOS | constReal | id  | (EXPARIT)
-function evaluarOPERANDOS (arbol:nodo,estado:Array<dato>,resultado:number){
+function evaluarOPERANDOS (arbol:nodo,estado:Array<dato>,resultado:Array<number>){
     if (arbol.hijos[0].simbolo == "tConstReal"){
-        resultado = arbol.hijos[0].lexema as any // es una string lo que guarda.
+        resultado[0] = arbol.hijos[0].lexema as any // es una string lo que guarda.
     } else if (arbol.hijos[0].simbolo == "tParentesisAbre"){
         // evaluarEXPARIT(raiz.hijos[1],estado,resultado)
     } else if (arbol.hijos[0].simbolo == "tMenos"){
-        resultado = -1*resultado;
+        resultado[0] = -1*resultado[0];
         evaluarOPERANDOS(arbol.hijos[1],estado,resultado);
     } else if (arbol.hijos[0].simbolo == "tId"){ // HAY QUE VERIFICAR QUE ESTE DECLARADO
         if (arbol.hijos[1].cantHijos == 0){
-            resultado = leerValor(estado,arbol.hijos[0].lexema);
+            resultado[0] = leerValor(estado,arbol.hijos[0].lexema);
         }
     }
 }
