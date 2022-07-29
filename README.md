@@ -12,7 +12,7 @@
   - [Feedback](#feedback)
 
 ## Vista general
-» El proyecto trata de construir un interprete para un lenguaje con caracteristicas especificas. Dicho interprete consta de un analizador lexico,primera etapa del proceso de compilacion, donde se evaluan las estructuras a nivel atomico y se reconocen cada uno de los componentes lexicos, un analizador sintactico en el cual se analiza la estructura del programa determinando que secuencia de componentes lexicos es valida y cuales no, y un analizador semantico que evalua el significado del programa para verificar que es lo que hace cada sentencia y si estas tienen sentido. Ests tres analizadores trabajan en conjunto en el interprete, que se encarga de analizar y ejecutar el codigo introducido como entrada y dar la salida correspondiente.
+» El proyecto trata de construir un interprete para un lenguaje con caracteristicas especificas. Dicho interprete consta de un analizador lexico,primera etapa del proceso de compilacion, donde se evaluan las estructuras a nivel atomico y se reconocen cada uno de los componentes lexicos, un analizador sintactico en el cual se analiza la estructura del programa determinando que secuencia de componentes lexicos es valida y cuales no, y un analizador semantico que evalua el significado del programa para verificar que es lo que hace cada sentencia y si estas tienen sentido. Estos tres analizadores trabajan en conjunto en el interprete, que se encarga de analizar y ejecutar el codigo introducido como entrada y dar la salida correspondiente.
   
   » La implementacion que he abordado para este concepto se trata de una aplicacion que toma un archivo de texto (formato .txt) donde este debe contener el codigo fuente del programa escrito siguiendo las normas de Sintaxiscript que se detallan mas abajo. 
 Una vez cargado un archivo valido se cuenta con tres opciones donde (asi sera la version final, actualmente solo lexico e interprete):
@@ -60,7 +60,7 @@ var variable1,variable2,variable3;
 ```
 
 #### Asignacion de variables
-» Toda asignacion se hara hacia una expresion aritmetica sobre numeros reales. Bajo este concepto seran admitidas asignaciones a otras variables (ya que contienen numeros reales) o cualquier operacion aritmetica valida antes mencionada. Se admite el uso de parentesis ( ) para modificar las prioridades de las operaciones. La asociatividad de las mismas ha sido definida por izquierda.
+» Toda asignacion se hara hacia una expresion aritmetica sobre numeros reales. Bajo este concepto seran admitidas asignaciones a otras variables (ya que contienen numeros reales) o cualquier operacion aritmetica valida antes mencionada. Debe tenerse en cuenta la utilizacion de parentesis ( ) para indicar prioridades en las operaciones aritmeticas.
 
 ```javascript
 var variable1,variable2,suma,resta,producto, cociente, potencia, radical, opCombinada;
@@ -110,7 +110,7 @@ var dinero,control;
 dinero = 0;
 control = 0;
 if [dinero == 0 or not[control <> 0]]{
-  dinero = dinero + 100.50;
+  dinero = dinero + (100.50 - 15); 		// Utilizacion de parentesis para indicar prioridades en las operaciones aritmeticas.
   Print("El dinero actual es: ",dinero);
   control = 1
 };
@@ -127,6 +127,27 @@ if [dinero <= 50]{
 }else{
 		Read("tipo de boleto",boleto);
 		Print(boleto,"ha sido adquirido")
+}
+```
+
+#### Ejemplo de un programa completo
+»  Se trata de un programa que calcula el maximo valor entre una lista de valores ingresados por el usuario.
+
+```javascript
+Program maximo{
+	var valor,maximo,control;
+	control = 1;
+	Read("Ingrese un valor: ",valor);
+	maximo = valor;
+	Read("Desea continuar?, ingrese 0 para salir",control);
+	while[control <> 0]{
+		Read("Ingrese un valor: ",valor);
+		if [valor>maximo]{
+			maximo = valor
+		};
+		Read("Desea continuar?, ingrese 0 para salir",control
+	};
+	Print("El valor maximo es: ",maximo)
 }
 ```
 
