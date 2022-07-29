@@ -58,16 +58,16 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
     tablaSimbolos = nodoCompLex[3];
     control = nodoCompLex[1]
 
-    console.log('compLex encontrado: ' + compLex)
-    console.log('lexema encontrado: ' + lexema)
-    console.log('tabla de simbolos ' + JSON.stringify(tablaSimbolos))
+    // console.log('compLex encontrado: ' + compLex)
+    // console.log('lexema encontrado: ' + lexema)
+    // console.log('tabla de simbolos ' + JSON.stringify(tablaSimbolos))
 
     let x: elementoPila;
     while(compLex !== 'errorLexico' && !exito){
         x = Desapilar(pila) as any // Obtengo un elemento de la pila de elementos a encontrar en el programa.
         
         if (arrayTerminales.includes(x.simbolo)){
-            console.log(x.simbolo + ' es terminal')
+            // console.log(x.simbolo + ' es terminal')
             if (x.simbolo == compLex){
                 if (x.arbolPila){
                     x.arbolPila.lexema = lexema // Si es distinto de undefined, lo asigna (esta comprobacion es por ts)
@@ -80,7 +80,7 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
                 }
                 lexema = nodoCompLex[2];
                 control = nodoCompLex[1]
-                console.log('Se obtuvo el elemento: ' + compLex)
+                // console.log('Se obtuvo el elemento: ' + compLex)
             } else {
                 errorLog = ' se esperaba ' + x.simbolo + ' y se encontro ' + compLex;
                 compLex = 'errorLexico'; // No es un error lexico pero sirve para cortar el while.
@@ -88,12 +88,12 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
         }
 
         else if (arrayVariables.includes(x.simbolo)){
-        console.log(x.simbolo + ' es una variable');
+        // console.log(x.simbolo + ' es una variable');
         let posicion1 = variables[x.simbolo as any]
         let posicion2 = terminales[compLex as any]
             if (TAS[posicion1 as any][posicion2 as any] === undefined){
                 errorLog = '<< TAS no definida para '+ x.simbolo + ' hacia ' + compLex + ' >>';
-                console.log('TAS NO DEFINIDA PARA '+ x.simbolo + ' HACIA ' + compLex)
+                // console.log('TAS NO DEFINIDA PARA '+ x.simbolo + ' HACIA ' + compLex)
                 compLex = 'errorLexico'; // No es un error lexico pero sirve para cortar el while.
             } else{
                 let contador:number= 0;
@@ -103,7 +103,7 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
                     let compL : simboloGramatical = TAS[posicion1 as any][posicion2 as any].elementos[contador]; // Guardo el elemento del array que contiene todos los elementos d la parte derecha.
                     let hijo = new nodo(compL,'',0,[]);
                     x.arbolPila?.insertarHijo(hijo);
-                    console.log('Nuevo nodo en el arbol ' + compL)
+                    // console.log('Nuevo nodo en el arbol ' + compL)
                     contador++
                 }
 
@@ -124,7 +124,7 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
         }
     } 
     if (exito){
-        console.log('****** Sintaxis correcta ******');
+        // console.log('****** Sintaxis correcta ******');
         mostrarInfoSintactico([true],raiz)
         evaluarPrograma(raiz);
     } else {
@@ -150,8 +150,9 @@ function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
         const arbolSintactico = document.createElement('div');
         arbolSintactico.classList.add('arbolSintactico');
         text.classList.add('output-text');
-        text.innerHTML = `No hay errores sintacticos, se ha generado el arbol sintactico: <br><br>`;
-        raiz.mostrarArbolConsola(raiz,''); // Muestra el arbol en la consola del navegador (con " ")
+        text.innerHTML = `» No hay errores semanticos. Acceda a la consola (F12 en el teclado) para ver el resultado del programa.<br>
+        » No hay errores sintacticos, se ha generado el arbol sintactico: <br><br>`;
+        // raiz.mostrarArbolConsola(raiz,''); // Muestra el arbol en la consola del navegador (con " ")
         if (output){
             output.appendChild(text);
             output.appendChild(arbolSintactico);                    
