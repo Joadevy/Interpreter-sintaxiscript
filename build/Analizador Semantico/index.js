@@ -13,8 +13,9 @@ function leerValor(estado, variable) {
             return estado[elemento].valor;
         }
     }
-    console.log("--- NO SE ENCONTRO LA VARIABLE, " + variable + " NO FUE DECLARADA Y POR TANTO NO SE PUDO LEER EL VALOR ---");
-    // errorSemantico();
+    const log = "-- no se encontro la variable " + variable + ", no ha sido declarada --";
+    console.log(log);
+    mostrarInfoSemantico(log);
 }
 function asignarValor(estado, variable, valorAsignar) {
     let flag = false;
@@ -25,7 +26,9 @@ function asignarValor(estado, variable, valorAsignar) {
         }
     }
     if (!flag) {
-        console.log("--- NO SE ENCONTRO LA VARIABLE " + variable + " NO HA SIDO DECLARADA ---");
+        const log = "-- no se encontro la variable " + variable + ", no ha sido declarada --";
+        console.log(log);
+        mostrarInfoSemantico(log);
     }
 }
 // *** EVALUADORES ***
@@ -322,4 +325,17 @@ function evaluarOPERANDOS(arbol, estado, resultado) {
 actuales.esa lista parte como lista vacía
 cuando hay una declaración de variables, cada una de esas variables se agrega en la lista y se inicializa en 0.
 cuando en una expresión tenés un "id", ese id (el lexema asociado en realidad) se busca en el estado para conocer su valor.
-Si no se encuentra, devolvés un error que debe decir que la variable no fue declarada. */ 
+Si no se encuentra, devolvés un error que debe decir que la variable no fue declarada. */
+function mostrarInfoSemantico(errorLog) {
+    let output = document.getElementById('output');
+    const text = document.createElement('p');
+    text.classList.add('output-text');
+    if (output) {
+        output.textContent = '';
+        let text = document.createElement('p');
+        text.classList.add('output-text');
+        text.innerHTML = `Ocurrio un <span class="error">error semantico</span>. Log: <span class="complex">${errorLog}</span>`;
+        output.appendChild(text);
+        output.classList.add('output-show');
+    }
+}
