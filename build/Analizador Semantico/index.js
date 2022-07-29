@@ -13,7 +13,8 @@ function leerValor(estado, variable) {
             return estado[elemento].valor;
         }
     }
-    console.log("--- NO SE ENCONTRO LA VARIABLE Y POR TANTO NO SE PUDO LEER EL VALOR ---");
+    console.log("--- NO SE ENCONTRO LA VARIABLE, " + variable + " NO FUE DECLARADA Y POR TANTO NO SE PUDO LEER EL VALOR ---");
+    // errorSemantico();
 }
 function asignarValor(estado, variable, valorAsignar) {
     let flag = false;
@@ -24,7 +25,7 @@ function asignarValor(estado, variable, valorAsignar) {
         }
     }
     if (!flag) {
-        console.log("--- NO SE ENCONTRO LA VARIABLE, NO HA SIDO DECLARADA ---");
+        console.log("--- NO SE ENCONTRO LA VARIABLE " + variable + " NO HA SIDO DECLARADA ---");
     }
 }
 // *** EVALUADORES ***

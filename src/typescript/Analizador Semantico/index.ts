@@ -25,7 +25,8 @@ function leerValor(estado:Array<dato>,variable:string):any{
             return estado[elemento].valor;
         }
     }
-    console.log("--- NO SE ENCONTRO LA VARIABLE Y POR TANTO NO SE PUDO LEER EL VALOR ---")
+    console.log("--- NO SE ENCONTRO LA VARIABLE, " + variable + " NO FUE DECLARADA Y POR TANTO NO SE PUDO LEER EL VALOR ---")
+    // errorSemantico();
 }
 
 function asignarValor(estado:Array<dato>,variable:string,valorAsignar:number):void{
@@ -37,7 +38,7 @@ function asignarValor(estado:Array<dato>,variable:string,valorAsignar:number):vo
         }
     }
     if (!flag){
-        console.log("--- NO SE ENCONTRO LA VARIABLE, NO HA SIDO DECLARADA ---")
+        console.log("--- NO SE ENCONTRO LA VARIABLE " + variable + " NO HA SIDO DECLARADA ---")
     }
 }
 
