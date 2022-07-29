@@ -8,7 +8,6 @@ function agregarVariable(estado, dato) {
     estado.push(dato);
 }
 function leerValor(estado, variable) {
-    console.log('llamado a leer valor');
     for (let elemento in estado) {
         if (estado[elemento].variable == variable) {
             return estado[elemento].valor;
@@ -17,11 +16,9 @@ function leerValor(estado, variable) {
     console.log("--- NO SE ENCONTRO LA VARIABLE Y POR TANTO NO SE PUDO LEER EL VALOR ---");
 }
 function asignarValor(estado, variable, valorAsignar) {
-    console.log('llamado a asignar valor');
     let flag = false;
     for (let elemento in estado) {
         if (estado[elemento].variable == variable) {
-            console.log('se va a asignar a ' + estado[elemento].variable + ' el ' + valorAsignar);
             estado[elemento].valor = valorAsignar;
             flag = true;
         }
@@ -33,26 +30,18 @@ function asignarValor(estado, variable, valorAsignar) {
 // *** EVALUADORES ***
 // PROGRAMA → program id {CUERPO}
 export function evaluarPrograma(arbol) {
-    console.log(arbol);
-    let Estado = [];
-    console.log('evaluando programa');
+    let Estado = []; // Inicializa el estado del programa a un Array vacio.
     evaluarCUERPO(arbol.hijos[3], Estado);
 }
 // CUERPO → SENTENCIA SENTENCIAS
 function evaluarCUERPO(arbol, estado) {
-    console.log('evaluando cuerpo');
-    // console.log(arbol)
     evaluarSENTENCIA(arbol.hijos[0], estado);
     evaluarSENTENCIAS(arbol.hijos[1], estado);
 }
 // SENTENCIAS → ;CUERPO | epsilon 
 function evaluarSENTENCIAS(arbol, estado) {
-    console.log('evaluando SENTENCIAS');
-    // console.log(arbol)
     if (arbol.cantHijos !== 0) {
-        console.log('detecto mas de un hijo');
         if (arbol.hijos[0].simbolo == "tPuntoComa") {
-            console.log('detecto punto y coma');
             evaluarCUERPO(arbol.hijos[1], estado);
         }
     }
@@ -85,7 +74,6 @@ function evaluarDECLARACION(arbol, estado) {
 // VARIABLES → id VARIABLE
 function evaluarVARIABLES(arbol, estado) {
     agregarVariable(estado, { variable: arbol.hijos[0].lexema, valor: 0 }); // Guarda en la lista el id (y lo inicializa en 0)
-    console.log(estado);
     evaluarVARIABLE(arbol.hijos[1], estado);
 }
 // VARIABLE → ,VARIABLES | epsilon
@@ -97,17 +85,13 @@ function evaluarVARIABLE(arbol, estado) {
 // ASIGNACION → id opAsignacion EXPARIT  <<<<<<<<<<<<< 
 function evaluarASIGNACION(arbol, estado) {
     let valorAsignar = [];
-    console.log('antes de llamar a EXPARIT');
-    // console.log(arbol)
     evaluarEXPARIT(arbol.hijos[2], estado, valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
     asignarValor(estado, arbol.hijos[0].lexema, valorAsignar[0]);
-    console.log("valor a asignar es: " + valorAsignar);
-    console.log(estado);
 }
 // LECTURA → Read (cadena, id)
 function evaluarLECTURA(arbol, estado) {
     // @ts-ignore
-    let valorLeido = parseInt(prompt(arbol.hijos[2], '')); // Ojo con parseInt (parsea a entero? - revisar)
+    let valorLeido = parseFloat(prompt(arbol.hijos[2].lexema, ''));
     asignarValor(estado, arbol.hijos[4].lexema, valorLeido);
 }
 // ESCRITURA → Print (SALIDAS)
@@ -128,8 +112,7 @@ function evaluarSAUX(arbol, estado) {
 }
 // SALIDA → EXPARIT | cadena
 function evaluarSALIDA(arbol, estado) {
-    let terminal = []; // Esta inicializacion como cadena no deberia pero creo no afecta.
-    // console.log(arbol)
+    let terminal = [];
     if (arbol.hijos[0].simbolo == "vEXPARIT") {
         evaluarEXPARIT(arbol.hijos[0], estado, terminal);
     }
@@ -157,39 +140,28 @@ function evaluarCONDICIONALFACT(arbol, estado) {
 }
 // MIENTRAS → while [CONDICION] {CUERPO}
 function evaluarMIENTRAS(arbol, estado) {
-    let test = 0;
     let resultadoCond = [];
     evaluarCONDICION(arbol.hijos[2], estado, resultadoCond);
-    while (resultadoCond[0]) { // Esto esta actualizandose? - Verificar porque hay bucle infinito.
+    while (resultadoCond[0]) {
         evaluarCUERPO(arbol.hijos[5], estado);
         evaluarCONDICION(arbol.hijos[2], estado, resultadoCond);
-        console.log(resultadoCond[0]);
-        /* if (test == 5){
-            break
-        }
-        test++ */
     }
     // El array va por referencia entonces puede escribirlo.
 }
 // CONDICION → IZQCOND DISYUNCION
 function evaluarCONDICION(arbol, estado, resultado) {
     let operando1 = [];
-    console.log('evaluando condicion'); // esta RECIBIENDO LO DE CONDICIONAL
-    console.log(arbol);
     evaluarIZQCOND(arbol.hijos[0], estado, operando1);
     evaluarDISYUNCION(arbol.hijos[1], estado, operando1, resultado);
 }
 // IZQCOND → NEGACION CONJUNCION
 function evaluarIZQCOND(arbol, estado, resultado) {
     let temp = [];
-    console.log('evaluando izquierda condicion');
-    console.log(arbol);
     evaluarNEGACION(arbol.hijos[0], estado, temp);
     evaluarCONJUNCION(arbol.hijos[1], estado, temp, resultado);
 }
 // NEGACION → not NEGACION | EXPARIT opRel EXPARIT |  [CONDICION]
 function evaluarNEGACION(arbol, estado, resultado) {
-    console.log(arbol);
     let operador;
     let operando1 = [];
     let operando2 = [];
@@ -252,27 +224,20 @@ function evaluarDISYUNCION(arbol, estado, operando1, resultado) {
 }
 //EXPARIT -> IZQARIT SUMARESTA
 function evaluarEXPARIT(arbol, estado, resultado) {
-    console.log("evaluando EXPARIT");
-    console.log(arbol);
     let resultadoIZQARIT = []; // Tiene que contener el valor de la parte izquierda de la op aritmetica.
     let resultadoSUMARESTA = []; // Contiene el resultado total de la op aritmetica.
     evaluarIZQARIT(arbol.hijos[0], estado, resultadoIZQARIT);
-    console.log("IZQARIT es: " + resultadoIZQARIT[0]);
     evaluarSUMARESTA(arbol.hijos[1], estado, resultadoIZQARIT, resultadoSUMARESTA); // Le pasa el resultado de la izq y derecha vacio para que opere.
     resultado[0] = resultadoSUMARESTA[0];
 }
 // IZQARIT → RAIZPOT MULTDIV
 function evaluarIZQARIT(arbol, estado, resultado) {
-    console.log('IZQPOT');
-    console.log(arbol);
     let resultadoRAIZPOT = [];
     evaluarRAIZPOT(arbol.hijos[0], estado, resultadoRAIZPOT);
     evaluarMULTDIV(arbol.hijos[1], estado, resultadoRAIZPOT, resultado);
 }
 // RAIZPOT → opRaiz (EXPARIT) POT | OPERANDOS POT
 function evaluarRAIZPOT(arbol, estado, resultado) {
-    console.log('RAIZPOT');
-    console.log(arbol);
     let resultadoOPARIT = [];
     let base = [];
     if (arbol.hijos[0].simbolo == "tRaiz") {
@@ -294,28 +259,23 @@ function evaluarPOT(arbol, estado, base, resultado) {
     }
     else {
         evaluarOPERANDOS(arbol.hijos[1], estado, exponente);
-        base[0] = Math.round(base[0]);
         exponente[0] = Math.round(exponente[0]);
         resultado[0] = Math.pow(base[0], exponente[0]);
     }
 }
 // SUMARESTA → + OPERANDOS SUMARESTA |  - OPERANDOS SUMARESTA | epsilon
 function evaluarSUMARESTA(arbol, estado, operandoIZQ, resultado) {
-    console.log('SUMARESTA');
-    console.log(arbol);
     let temp = [];
     let operandoDER = [];
     if (arbol.cantHijos == 0) {
         resultado[0] = operandoIZQ[0];
     }
     else if (arbol.hijos[0].simbolo == "tSuma") {
-        console.log('sumando');
         evaluarOPERANDOS(arbol.hijos[1], estado, operandoDER);
         temp[0] = operandoIZQ[0] + operandoDER[0];
         evaluarSUMARESTA(arbol.hijos[2], estado, temp, resultado);
     }
     else if (arbol.hijos[0].simbolo == "tResta") {
-        console.log("restando");
         evaluarOPERANDOS(arbol.hijos[1], estado, operandoDER);
         temp[0] = operandoIZQ[0] - operandoDER[0];
         evaluarSUMARESTA(arbol.hijos[2], estado, temp, resultado);
@@ -341,7 +301,6 @@ function evaluarMULTDIV(arbol, estado, operandoIZQ, resultado) {
 }
 // OPERANDOS → -OPERANDOS | constReal | id  | (EXPARIT)
 function evaluarOPERANDOS(arbol, estado, resultado) {
-    console.log('OPERANDOS');
     if (arbol.hijos[0].simbolo == "tConstReal") {
         resultado[0] = parseFloat(arbol.hijos[0].lexema); // es una string lo que guarda, hay que convertir a numero flotante.
     }

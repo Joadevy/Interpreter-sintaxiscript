@@ -20,7 +20,6 @@ function agregarVariable(estado:Array<dato>,dato:dato):void{
 }
 
 function leerValor(estado:Array<dato>,variable:string):any{
-    console.log('llamado a leer valor')
     for (let elemento in estado){
         if (estado[elemento].variable == variable){
             return estado[elemento].valor;
@@ -30,11 +29,9 @@ function leerValor(estado:Array<dato>,variable:string):any{
 }
 
 function asignarValor(estado:Array<dato>,variable:string,valorAsignar:number):void{
-    console.log('llamado a asignar valor')
     let flag:boolean = false;
     for (let elemento in estado){
         if (estado[elemento].variable == variable){
-            console.log('se va a asignar a ' + estado[elemento].variable + ' el ' + valorAsignar)
             estado[elemento].valor = valorAsignar;
             flag = true;
         }
@@ -48,28 +45,20 @@ function asignarValor(estado:Array<dato>,variable:string,valorAsignar:number):vo
 
 // PROGRAMA → program id {CUERPO}
 export function evaluarPrograma(arbol:Arbol){
-    console.log(arbol)
-    let Estado: Array<dato> = [];
-    console.log('evaluando programa');
+    let Estado: Array<dato> = []; // Inicializa el estado del programa a un Array vacio.
     evaluarCUERPO(arbol.hijos[3],Estado);
 }
 
 // CUERPO → SENTENCIA SENTENCIAS
 function evaluarCUERPO(arbol:nodo,estado:Array<dato>){
-    console.log('evaluando cuerpo');
-    // console.log(arbol)
     evaluarSENTENCIA(arbol.hijos[0],estado);
     evaluarSENTENCIAS(arbol.hijos[1],estado);
 }
 
 // SENTENCIAS → ;CUERPO | epsilon 
 function evaluarSENTENCIAS(arbol:nodo,estado:Array<dato>){
-    console.log('evaluando SENTENCIAS');
-    // console.log(arbol)
     if (arbol.cantHijos!==0){
-        console.log('detecto mas de un hijo');
         if(arbol.hijos[0].simbolo == "tPuntoComa"){
-            console.log('detecto punto y coma')
             evaluarCUERPO(arbol.hijos[1],estado);
         }
     }
@@ -100,7 +89,6 @@ function evaluarDECLARACION(arbol:nodo,estado:Array<dato>){
 // VARIABLES → id VARIABLE
 function evaluarVARIABLES(arbol:nodo,estado:Array<dato>){
     agregarVariable(estado,{variable:arbol.hijos[0].lexema,valor:0}) // Guarda en la lista el id (y lo inicializa en 0)
-    console.log(estado);
     evaluarVARIABLE(arbol.hijos[1],estado);
 }
 
@@ -114,18 +102,14 @@ function evaluarVARIABLE(arbol:nodo,estado:Array<dato>){
 // ASIGNACION → id opAsignacion EXPARIT  <<<<<<<<<<<<< 
 function evaluarASIGNACION(arbol:nodo,estado:Array<dato>){
     let valorAsignar:Array<number> = []
-    console.log('antes de llamar a EXPARIT');
-    // console.log(arbol)
     evaluarEXPARIT(arbol.hijos[2],estado,valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
     asignarValor(estado,arbol.hijos[0].lexema,valorAsignar[0])
-    console.log("valor a asignar es: " + valorAsignar);
-    console.log(estado);
 }
 
 // LECTURA → Read (cadena, id)
 function evaluarLECTURA(arbol:nodo,estado:Array<dato>){
     // @ts-ignore
-    let valorLeido:number = parseInt(prompt(arbol.hijos[2],'')); // Ojo con parseInt (parsea a entero? - revisar)
+    let valorLeido:number = parseFloat(prompt(arbol.hijos[2].lexema,''));
     asignarValor(estado,arbol.hijos[4].lexema,valorLeido)
 }
 
@@ -150,8 +134,7 @@ function evaluarSAUX(arbol:nodo,estado:Array<dato>){
 
 // SALIDA → EXPARIT | cadena
 function evaluarSALIDA(arbol:nodo,estado:Array<dato>):string|number{
-    let terminal:Array<any> = []; // Esta inicializacion como cadena no deberia pero creo no afecta.
-    // console.log(arbol)
+    let terminal:Array<any> = [];
     if (arbol.hijos[0].simbolo == "vEXPARIT"){
         evaluarEXPARIT(arbol.hijos[0],estado,terminal);
     } else if (arbol.hijos[0].simbolo == "tCadena"){
@@ -192,8 +175,6 @@ function evaluarMIENTRAS(arbol:nodo,estado:Array<dato>){
 // CONDICION → IZQCOND DISYUNCION
 function evaluarCONDICION(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>){
     let operando1:Array<boolean> = [];
-    console.log('evaluando condicion'); // esta RECIBIENDO LO DE CONDICIONAL
-    console.log(arbol);
     evaluarIZQCOND(arbol.hijos[0],estado,operando1);
     evaluarDISYUNCION(arbol.hijos[1],estado,operando1,resultado);
 }
@@ -201,15 +182,12 @@ function evaluarCONDICION(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>
 // IZQCOND → NEGACION CONJUNCION
 function evaluarIZQCOND(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>){
     let temp:Array<boolean> = [];
-    console.log('evaluando izquierda condicion');
-    console.log(arbol);
     evaluarNEGACION(arbol.hijos[0],estado,temp);
     evaluarCONJUNCION(arbol.hijos[1],estado,temp,resultado)
 }
 
 // NEGACION → not NEGACION | EXPARIT opRel EXPARIT |  [CONDICION]
 function evaluarNEGACION(arbol:nodo,estado:Array<dato>,resultado:Array<boolean>){
-    console.log(arbol);
     let operador:string;
     let operando1:Array<number> = [];
     let operando2:Array<number> = [];
@@ -272,20 +250,15 @@ function evaluarDISYUNCION(arbol:nodo,estado:Array<dato>,operando1:Array<boolean
 
 //EXPARIT -> IZQARIT SUMARESTA
 function evaluarEXPARIT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
-    console.log("evaluando EXPARIT");
-    console.log(arbol);
     let resultadoIZQARIT:Array<number> = []; // Tiene que contener el valor de la parte izquierda de la op aritmetica.
     let resultadoSUMARESTA:Array<number> = []; // Contiene el resultado total de la op aritmetica.
     evaluarIZQARIT(arbol.hijos[0],estado,resultadoIZQARIT);
-    console.log("IZQARIT es: " + resultadoIZQARIT[0]);
     evaluarSUMARESTA(arbol.hijos[1],estado,resultadoIZQARIT,resultadoSUMARESTA); // Le pasa el resultado de la izq y derecha vacio para que opere.
     resultado[0] = resultadoSUMARESTA[0];
 }
 
 // IZQARIT → RAIZPOT MULTDIV
 function evaluarIZQARIT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
-    console.log('IZQPOT');
-    console.log(arbol);
     let resultadoRAIZPOT:Array<number> = [];
     evaluarRAIZPOT(arbol.hijos[0],estado,resultadoRAIZPOT);
     evaluarMULTDIV(arbol.hijos[1],estado,resultadoRAIZPOT,resultado);
@@ -293,8 +266,6 @@ function evaluarIZQARIT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
 
 // RAIZPOT → opRaiz (EXPARIT) POT | OPERANDOS POT
 function evaluarRAIZPOT(arbol:nodo,estado:Array<dato>,resultado:Array<number>){
-    console.log('RAIZPOT');
-    console.log(arbol)
     let resultadoOPARIT:Array<number> = []
     let base:Array<number> = []
 
@@ -316,7 +287,6 @@ function evaluarPOT(arbol:nodo,estado:Array<dato>,base:Array<number>,resultado:A
         resultado[0] = base[0];
     } else {
         evaluarOPERANDOS(arbol.hijos[1],estado,exponente);
-        base[0] = Math.round(base[0]);
         exponente[0] = Math.round(exponente[0]);
         resultado[0] = Math.pow(base[0],exponente[0]);
     }
@@ -324,19 +294,15 @@ function evaluarPOT(arbol:nodo,estado:Array<dato>,base:Array<number>,resultado:A
 
 // SUMARESTA → + OPERANDOS SUMARESTA |  - OPERANDOS SUMARESTA | epsilon
 function evaluarSUMARESTA(arbol:nodo,estado:Array<dato>,operandoIZQ:Array<number>,resultado:Array<number>){
-    console.log('SUMARESTA')
-    console.log(arbol);
     let temp:Array<number> = [];
     let operandoDER:Array<number> = [];
     if (arbol.cantHijos == 0){
         resultado[0] = operandoIZQ[0];
     } else if (arbol.hijos[0].simbolo == "tSuma"){
-        console.log('sumando')
         evaluarOPERANDOS(arbol.hijos[1],estado,operandoDER);
         temp[0] = operandoIZQ[0] + operandoDER[0];
         evaluarSUMARESTA(arbol.hijos[2],estado,temp,resultado);
     } else if (arbol.hijos[0].simbolo == "tResta"){
-        console.log("restando")
         evaluarOPERANDOS(arbol.hijos[1],estado,operandoDER);
         temp[0] = operandoIZQ[0] - operandoDER[0];
         evaluarSUMARESTA(arbol.hijos[2],estado,temp,resultado);
@@ -362,7 +328,6 @@ function evaluarMULTDIV(arbol:nodo,estado:Array<dato>, operandoIZQ:Array<number>
 
 // OPERANDOS → -OPERANDOS | constReal | id  | (EXPARIT)
 function evaluarOPERANDOS (arbol:nodo,estado:Array<dato>,resultado:Array<number>){
-    console.log('OPERANDOS');
     if (arbol.hijos[0].simbolo == "tConstReal"){
         resultado[0] = parseFloat(arbol.hijos[0].lexema) // es una string lo que guarda, hay que convertir a numero flotante.
     } else if (arbol.hijos[0].simbolo == "tParentesisAbre"){
