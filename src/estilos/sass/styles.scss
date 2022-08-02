@@ -124,22 +124,23 @@ body {
         
         .opciones{
             display: flex;
+            flex-direction: column;
             gap: .75rem;
-            // border: 1px solid white;
             justify-content: center;
         
-            .opcion-lexico, .opcion-sintactico{
+            .opcion-lexico, .opcion-sintactico,.opcion-interprete{
                 border: 1px solid transparent;
-                padding: .5rem;
-                border-radius: 5px;
-                text-shadow: 1px 1px #fff;
-                background: var(--light-white);
+                padding: .65rem;
+                border-radius: 7px;
+                background: var(--light-black) !important; // Colisiona con el verificador que esta hidden
                 font-size: .75rem;
+                color: var(--light-white);
+                border: 1px solid var(--black);
         
                 &:hover{
                     cursor: pointer;
                     opacity: .75;
-                    border: 1px solid var(--primary-purple);
+                    border: 1px solid var(--primary-variant) !important; // Colisiona con el verificador que esta hidden;
                 }
             }
         }
@@ -176,8 +177,9 @@ body {
 
             .arbolSintactico{
                 .desplazamiento{
-                    color: var(--light-black);
-                }}
+                    color: var(--light-black) !important 
+                }
+            }
         
             .error{
                 color: var(--error-light);
