@@ -119,7 +119,7 @@ body {
       flex-wrap: wrap;
       background-color: var(--light-black);
       border: 1px solid var(--primary-variant);
-      width: 50%; }
+      width: 65%; }
       @media screen and (max-width: 768px) {
         body #main .verificador__output {
           width: 95%; } }
