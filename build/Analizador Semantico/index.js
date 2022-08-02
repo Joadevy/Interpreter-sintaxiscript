@@ -89,7 +89,7 @@ function evaluarVARIABLE(arbol, estado) {
 // ASIGNACION → id opAsignacion EXPARIT  <<<<<<<<<<<<< 
 function evaluarASIGNACION(arbol, estado) {
     let valorAsignar = [];
-    evaluarEXPARIT(arbol.hijos[2], estado, valorAsignar); // ASINCRONISMO? debe hacer await del resultado?
+    evaluarEXPARIT(arbol.hijos[2], estado, valorAsignar);
     asignarValor(estado, arbol.hijos[0].lexema, valorAsignar[0]);
 }
 // LECTURA → Read (cadena, id)
@@ -105,7 +105,7 @@ function evaluarESCRITURA(arbol, estado) {
 // SALIDAS → SALIDA SAUX
 function evaluarSALIDAS(arbol, estado) {
     let salida = evaluarSALIDA(arbol.hijos[0], estado);
-    console.log(salida); // Se mostrarian los outputs en consola (deberia poderse en el DOM)
+    mostrarSalida(salida); // Funcion que maneja el DOM para mostrar las salidas en el navegador.
     evaluarSAUX(arbol.hijos[1], estado);
 }
 // SAUX → ,SALIDAS | epsilon
@@ -321,11 +321,16 @@ function evaluarOPERANDOS(arbol, estado, resultado) {
         }
     }
 }
-/* el "estado" del programa es una lista con todas las variables que están declaradas en el programa fuente y sus valores
-actuales.esa lista parte como lista vacía
-cuando hay una declaración de variables, cada una de esas variables se agrega en la lista y se inicializa en 0.
-cuando en una expresión tenés un "id", ese id (el lexema asociado en realidad) se busca en el estado para conocer su valor.
-Si no se encuentra, devolvés un error que debe decir que la variable no fue declarada. */
+function mostrarSalida(salida) {
+    let output = document.getElementById('output');
+    const text = document.createElement('p');
+    text.classList.add('output-text');
+    text.textContent = salida;
+    if (output) {
+        output.appendChild(text);
+        output.classList.add('output-show');
+    }
+}
 function mostrarInfoSemantico(errorLog) {
     let output = document.getElementById('output');
     const text = document.createElement('p');

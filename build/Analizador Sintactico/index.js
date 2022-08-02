@@ -118,7 +118,7 @@ export function analisisSintactico(codigoFuente, raiz, interprete) {
         if (interprete) {
             evaluarPrograma(raiz); // En caso de que se haya elegido la opcion de ejecutar interprete
         }
-        else {
+        else { // En caso de que se haya elegido la opcion ejecutar sintactico
             mostrarInfoSintactico([true], raiz);
         }
     }
