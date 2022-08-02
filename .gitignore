@@ -4,3 +4,4 @@ funcionamiento.txt
 node_modules
 package.json
 package-lock.json
+.sass-cache*
