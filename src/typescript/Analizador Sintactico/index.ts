@@ -114,9 +114,10 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol,interprete:b
         }
     } 
     if (exito){
-        mostrarInfoSintactico([true],raiz);
         if (interprete){
             evaluarPrograma(raiz); // En caso de que se haya elegido la opcion de ejecutar interprete
+        } else { // En caso de que se haya elegido la opcion ejecutar sintactico
+            mostrarInfoSintactico([true],raiz);
         }
     } else {
         console.log('******  Hay un error sintactico ******')
@@ -142,8 +143,7 @@ function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
         const arbolSintactico = document.createElement('div');
         arbolSintactico.classList.add('arbolSintactico');
         text.classList.add('output-text');
-        text.innerHTML = `» No hay errores semanticos. Acceda a la consola (F12 en el teclado) para ver el resultado del programa.<br>
-        » No hay errores sintacticos, se ha generado el arbol sintactico: <br><br>`;
+        text.innerHTML = `» No hay errores sintacticos, se ha generado el arbol sintactico: <br><br>`;
         if (output){
             output.appendChild(text);
             output.appendChild(arbolSintactico);                    
