@@ -40,7 +40,7 @@ function inicializarPila(pila:Array<elementoPila>,raiz:nodo):Array<elementoPila>
     return pila
 }
 
-export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
+export function analisisSintactico(codigoFuente:string , raiz:Arbol,interprete:boolean):void{
     let exito:boolean = false;
     let errorLog:string = '';
     let control: number = 0;
@@ -114,21 +114,24 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol):void{
         }
     } 
     if (exito){
-        mostrarInfoSintactico([true],raiz)
-        evaluarPrograma(raiz);
+        mostrarInfoSintactico([true],raiz);
+        if (interprete){
+            evaluarPrograma(raiz); // En caso de que se haya elegido la opcion de ejecutar interprete
+        }
     } else {
         console.log('******  Hay un error sintactico ******')
         mostrarInfoSintactico([false,errorLog],raiz)
     }
 }
 
-export async function analizadorSintactico (archivo:File){
+export async function analizadorSintactico (archivo:File,interprete:boolean){
+    // Interprete se usa para controlar si se quiere mostrar el interprete o solo el semantico.
     // codigoFuente va a guardar toda la cadena, es decir, todo el codigo del programa.
     //.trim() para remover espacios en blanco al nodoCompLex y al final del archivo.
     let codigoFuente:string = (await archivo.text()).trim();
     const raiz = new nodo('vPROGRAMA','',0,[]);
     const arbol = new Arbol(raiz);
-    analisisSintactico(codigoFuente,arbol);
+    analisisSintactico(codigoFuente,arbol,interprete);
 }
 
 function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){

@@ -52,7 +52,9 @@ function manejarOpciones(archivos:any){
   let opcionLexico = document.querySelector('.opcion-lexico');
   opcionLexico?.addEventListener('click', () => llamarLexico(archivos));
   let opcionSintactico = document.querySelector('.opcion-sintactico');
-  opcionSintactico?.addEventListener('click', () => llamarSintactico(archivos));
+  opcionSintactico?.addEventListener('click', () => llamarSintactico(archivos,false));
+  let opcionInterprete = document.querySelector('.opcion-interprete');
+  opcionInterprete?.addEventListener('click', () => llamarSintactico(archivos,true));
 }
 
 function llamarLexico(archivos:any){
@@ -74,7 +76,7 @@ function eliminarOpciones(){
   }
 }
 
-function llamarSintactico(archivos:any){
+function llamarSintactico(archivos:any,interprete:boolean){
   eliminarOpciones();
   const main = document.getElementById('main');
   
@@ -83,8 +85,9 @@ function llamarSintactico(archivos:any){
   const output = templateOutput.content.cloneNode(true);
     // @ts-ignore
   main.appendChild(output)
-  analizadorSintactico(archivos[0]);
+  analizadorSintactico(archivos[0],interprete);
 }
+
 
 
 

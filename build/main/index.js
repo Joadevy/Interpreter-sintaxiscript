@@ -44,7 +44,9 @@ function manejarOpciones(archivos) {
     let opcionLexico = document.querySelector('.opcion-lexico');
     opcionLexico === null || opcionLexico === void 0 ? void 0 : opcionLexico.addEventListener('click', () => llamarLexico(archivos));
     let opcionSintactico = document.querySelector('.opcion-sintactico');
-    opcionSintactico === null || opcionSintactico === void 0 ? void 0 : opcionSintactico.addEventListener('click', () => llamarSintactico(archivos));
+    opcionSintactico === null || opcionSintactico === void 0 ? void 0 : opcionSintactico.addEventListener('click', () => llamarSintactico(archivos, false));
+    let opcionInterprete = document.querySelector('.opcion-interprete');
+    opcionInterprete === null || opcionInterprete === void 0 ? void 0 : opcionInterprete.addEventListener('click', () => llamarSintactico(archivos, true));
 }
 function llamarLexico(archivos) {
     eliminarOpciones();
@@ -62,7 +64,7 @@ function eliminarOpciones() {
         opciones.classList.add('hide'); // Seria mejor modificarlo con style
     }
 }
-function llamarSintactico(archivos) {
+function llamarSintactico(archivos, interprete) {
     eliminarOpciones();
     const main = document.getElementById('main');
     const templateOutput = document.getElementById('template-output');
@@ -70,5 +72,5 @@ function llamarSintactico(archivos) {
     const output = templateOutput.content.cloneNode(true);
     // @ts-ignore
     main.appendChild(output);
-    analizadorSintactico(archivos[0]);
+    analizadorSintactico(archivos[0], interprete);
 }

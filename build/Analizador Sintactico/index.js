@@ -43,13 +43,13 @@ function inicializarPila(pila, raiz) {
     Apilar(pila, simboloInicial);
     return pila;
 }
-export function analisisSintactico(codigoFuente, raiz) {
+export function analisisSintactico(codigoFuente, raiz, interprete) {
     var _a, _b, _c, _d;
     let exito = false;
     let errorLog = '';
     let control = 0;
     let lexema = '';
-    let compLex; // tiene que ser de tipo simboloGramatical
+    let compLex;
     let TAS = creaTAS();
     let pila = crearPila();
     let tablaSimbolos = TS; // Igual a la que importamos (esto es para poder ir actualizandola)
@@ -60,14 +60,10 @@ export function analisisSintactico(codigoFuente, raiz) {
     lexema = nodoCompLex[2]; // Guarda el lexema devuelto por el analizador lexico.
     tablaSimbolos = nodoCompLex[3];
     control = nodoCompLex[1];
-    // console.log('compLex encontrado: ' + compLex)
-    // console.log('lexema encontrado: ' + lexema)
-    // console.log('tabla de simbolos ' + JSON.stringify(tablaSimbolos))
     let x;
     while (compLex !== 'errorLexico' && !exito) {
         x = Desapilar(pila); // Obtengo un elemento de la pila de elementos a encontrar en el programa.
         if (arrayTerminales.includes(x.simbolo)) {
-            // console.log(x.simbolo + ' es terminal')
             if (x.simbolo == compLex) {
                 if (x.arbolPila) {
                     x.arbolPila.lexema = lexema; // Si es distinto de undefined, lo asigna (esta comprobacion es por ts)
@@ -80,7 +76,6 @@ export function analisisSintactico(codigoFuente, raiz) {
                 }
                 lexema = nodoCompLex[2];
                 control = nodoCompLex[1];
-                // console.log('Se obtuvo el elemento: ' + compLex)
             }
             else {
                 errorLog = ' se esperaba ' + x.simbolo + ' y se encontro ' + compLex;
@@ -88,12 +83,10 @@ export function analisisSintactico(codigoFuente, raiz) {
             }
         }
         else if (arrayVariables.includes(x.simbolo)) {
-            // console.log(x.simbolo + ' es una variable');
             let posicion1 = variables[x.simbolo];
             let posicion2 = terminales[compLex];
             if (TAS[posicion1][posicion2] === undefined) {
                 errorLog = '<< TAS no definida para ' + x.simbolo + ' hacia ' + compLex + ' >>';
-                // console.log('TAS NO DEFINIDA PARA '+ x.simbolo + ' HACIA ' + compLex)
                 compLex = 'errorLexico'; // No es un error lexico pero sirve para cortar el while.
             }
             else {
@@ -103,7 +96,6 @@ export function analisisSintactico(codigoFuente, raiz) {
                     let compL = TAS[posicion1][posicion2].elementos[contador]; // Guardo el elemento del array que contiene todos los elementos d la parte derecha.
                     let hijo = new nodo(compL, '', 0, []);
                     (_a = x.arbolPila) === null || _a === void 0 ? void 0 : _a.insertarHijo(hijo);
-                    // console.log('Nuevo nodo en el arbol ' + compL)
                     contador++;
                 }
                 while (cantidad >= 0) {
@@ -123,23 +115,25 @@ export function analisisSintactico(codigoFuente, raiz) {
         }
     }
     if (exito) {
-        // console.log('****** Sintaxis correcta ******');
         mostrarInfoSintactico([true], raiz);
-        evaluarPrograma(raiz);
+        if (interprete) {
+            evaluarPrograma(raiz); // En caso de que se haya elegido la opcion de ejecutar interprete
+        }
     }
     else {
         console.log('******  Hay un error sintactico ******');
         mostrarInfoSintactico([false, errorLog], raiz);
     }
 }
-export function analizadorSintactico(archivo) {
+export function analizadorSintactico(archivo, interprete) {
     return __awaiter(this, void 0, void 0, function* () {
+        // Interprete se usa para controlar si se quiere mostrar el interprete o solo el semantico.
         // codigoFuente va a guardar toda la cadena, es decir, todo el codigo del programa.
         //.trim() para remover espacios en blanco al nodoCompLex y al final del archivo.
         let codigoFuente = (yield archivo.text()).trim();
         const raiz = new nodo('vPROGRAMA', '', 0, []);
         const arbol = new Arbol(raiz);
-        analisisSintactico(codigoFuente, arbol);
+        analisisSintactico(codigoFuente, arbol, interprete);
     });
 }
 function mostrarInfoSintactico(resultado, raiz) {
