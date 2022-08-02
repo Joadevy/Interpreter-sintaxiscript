@@ -152,7 +152,6 @@ function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
         text.classList.add('output-text');
         text.innerHTML = `» No hay errores semanticos. Acceda a la consola (F12 en el teclado) para ver el resultado del programa.<br>
         » No hay errores sintacticos, se ha generado el arbol sintactico: <br><br>`;
-        // raiz.mostrarArbolConsola(raiz,''); // Muestra el arbol en la consola del navegador (con " ")
         if (output){
             output.appendChild(text);
             output.appendChild(arbolSintactico);                    
