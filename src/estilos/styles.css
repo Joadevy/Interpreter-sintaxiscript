@@ -50,7 +50,7 @@ body {
       body .header {
         margin-top: 0rem; }
         body .header .header__contenedor-logo {
-          margin-bottom: 0rem; } }
+          margin-bottom: -2.5rem; } }
   body #main {
     display: flex;
     flex-direction: column;
