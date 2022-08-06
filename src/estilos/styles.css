@@ -46,6 +46,11 @@ body {
         width: 100%; }
     body .header .header__subtitulo {
       margin-bottom: 1rem; }
+    @media screen and (max-width: 768px) {
+      body .header {
+        margin-top: 0rem; }
+        body .header .header__contenedor-logo {
+          margin-bottom: 0rem; } }
   body #main {
     display: flex;
     flex-direction: column;

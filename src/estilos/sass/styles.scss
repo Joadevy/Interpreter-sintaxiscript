@@ -61,6 +61,14 @@ body {
         .header__subtitulo{
             margin-bottom: 1rem;
         }
+
+        @media screen and (max-width:768px) {
+            margin-top: 0rem;
+    
+            .header__contenedor-logo{
+                margin-bottom: 0rem;
+            }
+        }
     }
 
     #main {
