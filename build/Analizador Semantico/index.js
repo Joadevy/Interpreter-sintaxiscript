@@ -323,8 +323,23 @@ function evaluarOPERANDOS(arbol, estado, resultado) {
 }
 function mostrarSalida(salida) {
     let output = document.getElementById('output');
+    let regex = /[^"]/gi;
+    // Si no esta el contenedor (nunca esta si es la primera vez que pasa por esta funcion) lo crea.
+    if (!output) {
+        console.log("Output creada");
+        const main = document.getElementById('main');
+        const templateOutput = document.getElementById('template-output');
+        // @ts-ignore
+        const outputContainer = templateOutput.content.cloneNode(true);
+        // @ts-ignore
+        main.appendChild(outputContainer);
+        output = document.getElementById('output'); // Asigno ya que sino output esta vacio porque no capturo nada.
+    }
+    // agrega la salida correspondiente en el contenedor.
     const text = document.createElement('p');
     text.classList.add('output-text');
+    console.log(typeof salida);
+    salida = salida.toString().match(regex).join(''); // Le quita las " " a la;s cadenas asi no se muestran como salida.
     text.textContent = salida;
     if (output) {
         output.appendChild(text);

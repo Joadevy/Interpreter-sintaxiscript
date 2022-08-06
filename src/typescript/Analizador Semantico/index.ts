@@ -1,8 +1,5 @@
 import { nodo, Arbol, simboloGramatical } from "../Analizador Sintactico/manejoArbol.js";
 
-// @ts-ignore
-//  import { nodo, Arbol, simboloGramatical} from "../Analizador Sintactico/manejoArbol.ts";
-
 type dato = {
     variable:string;
     valor: number;
@@ -348,9 +345,22 @@ function evaluarOPERANDOS (arbol:nodo,estado:Array<dato>,resultado:Array<number>
 
 function mostrarSalida(salida:any){
     let output = document.getElementById('output');
+    let regex = /[^"]/gi;
 
+    // Si no esta el contenedor (nunca esta si es la primera vez que pasa por esta funcion) lo crea.
+    if (!output){
+        const main = document.getElementById('main');
+        const templateOutput= document.getElementById('template-output')
+        // @ts-ignore
+        const outputContainer = templateOutput.content.cloneNode(true);
+        // @ts-ignore
+        main.appendChild(outputContainer);
+        output = document.getElementById('output'); // Asigno ya que sino output esta vacio porque no capturo nada.
+    }
+    // agrega la salida correspondiente en el contenedor.
     const text = document.createElement('p');
     text.classList.add('output-text');
+    salida = salida.toString().match(regex).join(''); // Le quita las " " a la;s cadenas asi no se muestran como salida.
     text.textContent = salida;
         if (output){
             output.appendChild(text);                 
