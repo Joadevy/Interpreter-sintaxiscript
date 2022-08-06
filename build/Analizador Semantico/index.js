@@ -326,7 +326,6 @@ function mostrarSalida(salida) {
     let regex = /[^"]/gi;
     // Si no esta el contenedor (nunca esta si es la primera vez que pasa por esta funcion) lo crea.
     if (!output) {
-        console.log("Output creada");
         const main = document.getElementById('main');
         const templateOutput = document.getElementById('template-output');
         // @ts-ignore
@@ -338,7 +337,6 @@ function mostrarSalida(salida) {
     // agrega la salida correspondiente en el contenedor.
     const text = document.createElement('p');
     text.classList.add('output-text');
-    console.log(typeof salida);
     salida = salida.toString().match(regex).join(''); // Le quita las " " a la;s cadenas asi no se muestran como salida.
     text.textContent = salida;
     if (output) {
