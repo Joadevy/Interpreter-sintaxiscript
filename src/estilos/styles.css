@@ -133,7 +133,8 @@ body {
         border-radius: 15px;
         border: 1px solid var(--black); }
       body #main .verificador__output .output-text {
-        margin-top: .25rem; }
+        margin-top: .25rem;
+        margin-right: .25rem; }
       body #main .verificador__output .arbolSintactico .desplazamiento {
         color: var(--light-black) !important; }
       body #main .verificador__output .error {
