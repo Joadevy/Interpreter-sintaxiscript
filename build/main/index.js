@@ -1,6 +1,5 @@
 import { analizadorLexico } from '../Analizador Lexico/index.js';
 import { analizadorSintactico } from '../Analizador Sintactico/index.js';
-// Este modulo tiene como responsabilidad el manejo del input file.
 // Tomamos el elemento HTML del input file.
 const input = document.getElementById('input');
 // Establecemos las acciones inmediatas luego de que se sube un archivo.
@@ -16,12 +15,8 @@ input === null || input === void 0 ? void 0 : input.addEventListener('change', (
             if (output) {
                 output.textContent = ''; // Limpia el contenedor del output para poder mostrar el resultado del analisis correctamente.
             }
-            // Llamamos a la funcion que se encargara del manejo del compilador.
             mostrarOpciones();
             manejarOpciones(archivos);
-            // Podria llamar a un cartel donde si selecciona analizador lexico, le muestra el lexico.
-            // Si selecciona sintactico que muestre ambos
-            // DEBE BORRAR EL CARTEL DE SELECCIONAR EL ARCHIVO (SINO SE PUEDE SEGUIR INPUTEANDO COSAS)
         }
         else {
             alert('Porfavor, introduce un archivo de texto .TXT');
@@ -66,11 +61,16 @@ function eliminarOpciones() {
 }
 function llamarSintactico(archivos, interprete) {
     eliminarOpciones();
-    const main = document.getElementById('main');
-    const templateOutput = document.getElementById('template-output');
-    // @ts-ignore
-    const output = templateOutput.content.cloneNode(true);
-    // @ts-ignore
-    main.appendChild(output);
+    // Si no hay que ejecutar el interprete, entonces crea ya el contenedor.
+    // Si hay que ejecutarlo, lo crea mas tarde porque sino queda vacio en la pantalla 
+    // hasta que se procesen las salidas y queda mal.
+    if (!interprete) {
+        const main = document.getElementById('main');
+        const templateOutput = document.getElementById('template-output');
+        // @ts-ignore
+        const output = templateOutput.content.cloneNode(true);
+        // @ts-ignore
+        main.appendChild(output);
+    }
     analizadorSintactico(archivos[0], interprete);
 }
