@@ -306,8 +306,8 @@ function evaluarOPERANDOS(arbol, estado, resultado) {
         evaluarEXPARIT(arbol.hijos[1], estado, resultado);
     }
     else if (arbol.hijos[0].simbolo == "tResta") {
-        resultado[0] = -1 * resultado[0];
         evaluarOPERANDOS(arbol.hijos[1], estado, resultado);
+        resultado[0] = -resultado[0];
     }
     else if (arbol.hijos[0].simbolo == "tId") { // HAY QUE VERIFICAR QUE ESTE DECLARADO
         if (arbol.hijos[0].cantHijos == 0) {

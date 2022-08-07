@@ -327,8 +327,8 @@ function evaluarOPERANDOS (arbol:nodo,estado:Array<dato>,resultado:Array<number>
     } else if (arbol.hijos[0].simbolo == "tParentesisAbre"){
         evaluarEXPARIT(arbol.hijos[1],estado,resultado)
     } else if (arbol.hijos[0].simbolo == "tResta"){
-        resultado[0] = -1*resultado[0];
         evaluarOPERANDOS(arbol.hijos[1],estado,resultado);
+        resultado[0] = -resultado[0];
     } else if (arbol.hijos[0].simbolo == "tId"){ // HAY QUE VERIFICAR QUE ESTE DECLARADO
         if (arbol.hijos[0].cantHijos == 0){
             resultado[0] = leerValor(estado,arbol.hijos[0].lexema);
