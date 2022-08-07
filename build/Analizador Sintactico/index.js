@@ -140,7 +140,6 @@ export function analizadorSintactico(archivo, interprete) {
 }
 function mostrarInfoSintactico(resultado, raiz) {
     let output = document.getElementById('output');
-    console.log(output);
     if (resultado[0]) { // En caso de que haya resultado en exito el analizador sintactico.
         const text = document.createElement('p');
         const arbolSintactico = document.createElement('div');

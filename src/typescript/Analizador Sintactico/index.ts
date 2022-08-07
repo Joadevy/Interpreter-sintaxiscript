@@ -137,7 +137,6 @@ export async function analizadorSintactico (archivo:File,interprete:boolean){
 
 function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
     let output = document.getElementById('output');
-    console.log(output);
 
     if (resultado[0]){ // En caso de que haya resultado en exito el analizador sintactico.
         const text = document.createElement('p');
