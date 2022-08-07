@@ -145,7 +145,7 @@ Program maximo{
 		if [valor>maximo]{
 			maximo = valor
 		};
-		Read("Desea continuar?, ingrese 0 para salir",control
+		Read("Desea continuar?, ingrese 0 para salir",control)
 	};
 	Print("El valor maximo es: ",maximo)
 }
