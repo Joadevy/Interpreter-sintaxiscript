@@ -1,9 +1,3 @@
-function mostrarEstado(estado) {
-    for (let elemento in estado) {
-        console.log('Variable: ' + estado[elemento].variable);
-        console.log('Valor: ' + estado[elemento].valor);
-    }
-}
 function agregarVariable(estado, dato) {
     estado.push(dato);
 }
@@ -322,6 +316,7 @@ function evaluarOPERANDOS(arbol, estado, resultado) {
     }
 }
 function mostrarSalida(salida) {
+    var _a;
     let output = document.getElementById('output');
     let regex = /[^"]/gi;
     // Si no esta el contenedor (nunca esta si es la primera vez que pasa por esta funcion) lo crea.
@@ -337,21 +332,30 @@ function mostrarSalida(salida) {
     // agrega la salida correspondiente en el contenedor.
     const text = document.createElement('p');
     text.classList.add('output-text');
-    salida = salida.toString().match(regex).join(''); // Le quita las " " a la;s cadenas asi no se muestran como salida.
+    salida = salida.toString().match(regex).join(''); // Le quita las " " a las cadenas asi no se muestran como salida.
     text.textContent = salida;
-    if (output) {
+    if (output && !((_a = output.firstElementChild) === null || _a === void 0 ? void 0 : _a.classList.contains("wrong"))) {
         output.appendChild(text);
         output.classList.add('output-show');
     }
 }
 function mostrarInfoSemantico(errorLog) {
     let output = document.getElementById('output');
-    const text = document.createElement('p');
-    text.classList.add('output-text');
+    // Si no esta el contenedor (nunca esta si es la primera vez que pasa por esta funcion) lo crea.
+    if (!output) { // Este bloque podria (deberia) ser una funcion aparte porque esta duplicado.
+        const main = document.getElementById('main');
+        const templateOutput = document.getElementById('template-output');
+        // @ts-ignore
+        const outputContainer = templateOutput.content.cloneNode(true);
+        // @ts-ignore
+        main.appendChild(outputContainer);
+        output = document.getElementById('output'); // Asigno ya que sino output esta vacio porque no capturo nada.
+    }
     if (output) {
         output.textContent = '';
         let text = document.createElement('p');
         text.classList.add('output-text');
+        text.classList.add('wrong');
         text.innerHTML = `Ocurrio un <span class="error">error semantico</span>. Log: <span class="complex">${errorLog}</span>`;
         output.appendChild(text);
         output.classList.add('output-show');
