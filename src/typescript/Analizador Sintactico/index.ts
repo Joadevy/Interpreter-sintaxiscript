@@ -137,6 +137,7 @@ export async function analizadorSintactico (archivo:File,interprete:boolean){
 
 function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
     let output = document.getElementById('output');
+    console.log(output);
 
     if (resultado[0]){ // En caso de que haya resultado en exito el analizador sintactico.
         const text = document.createElement('p');
@@ -151,6 +152,15 @@ function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
             raiz.mostrarArbol(raiz,''); // Muestra el arbol en la web (con "-")
         }
     } else {
+        if (!output){ // Este bloque podria (deberia) ser una funcion aparte porque esta duplicado.
+            const main = document.getElementById('main');
+            const templateOutput= document.getElementById('template-output')
+            // @ts-ignore
+            const outputContainer = templateOutput.content.cloneNode(true);
+            // @ts-ignore
+            main.appendChild(outputContainer);
+            output = document.getElementById('output'); // Asigno ya que sino output esta vacio porque no capturo nada.
+        }
         if(output){
             let text = document.createElement('p');
             text.classList.add('output-text');

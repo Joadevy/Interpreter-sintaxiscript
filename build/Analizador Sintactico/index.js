@@ -140,6 +140,7 @@ export function analizadorSintactico(archivo, interprete) {
 }
 function mostrarInfoSintactico(resultado, raiz) {
     let output = document.getElementById('output');
+    console.log(output);
     if (resultado[0]) { // En caso de que haya resultado en exito el analizador sintactico.
         const text = document.createElement('p');
         const arbolSintactico = document.createElement('div');
@@ -154,6 +155,15 @@ function mostrarInfoSintactico(resultado, raiz) {
         }
     }
     else {
+        if (!output) { // Este bloque podria (deberia) ser una funcion aparte porque esta duplicado.
+            const main = document.getElementById('main');
+            const templateOutput = document.getElementById('template-output');
+            // @ts-ignore
+            const outputContainer = templateOutput.content.cloneNode(true);
+            // @ts-ignore
+            main.appendChild(outputContainer);
+            output = document.getElementById('output'); // Asigno ya que sino output esta vacio porque no capturo nada.
+        }
         if (output) {
             let text = document.createElement('p');
             text.classList.add('output-text');
