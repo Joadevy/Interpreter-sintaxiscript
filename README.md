@@ -2,7 +2,7 @@
 # Proyecto final sintaxis & semantica de los lenguajes
 
 ## Live Site 🚀
-» Live site - (version en desarrollo): https://joadevy.github.io/sintaxis-final-project/
+» Live site: https://joadevy.github.io/sintaxis-final-project/
 
 ## Tabla de contenidos
   - [Vista general](#vista-general)
