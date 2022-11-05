@@ -1,7 +1,7 @@
 
 # Sintaxiscript interpreter
 
-* You also can read this in: [version en español](README.es.md)
+* You can also read this in: [version en español](README.es.md)
 
 
 ## Live Site 🚀
