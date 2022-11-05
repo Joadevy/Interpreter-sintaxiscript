@@ -1,119 +1,121 @@
 
-# Proyecto final sintaxis & semantica de los lenguajes
+# Sintaxiscript interpreter
+
+* You also can read this in: [version en español](README.es.md)
+
 
 ## Live Site 🚀
 » Live site: https://joadevy.github.io/sintaxis-final-project/
 
-## Tabla de contenidos
-  - [Vista general](#vista-general)
-  - [Documentacion](#documentacion-del-lenguaje)
-  - [Herramientas utilizadas](#herramientas-y-metodologia-de-desarrollo)
-  - [Autor](#autor)
+## Table of contents
+  - [Overview](#overview)
+  - [Documentation](#language-documentation)
+  - [Tools](#tools)
+  - [Author](#author)
   - [Feedback](#feedback)
 
-## Vista general
-» El proyecto consiste en construir un interprete para un lenguaje con caracteristicas especificas. Dicho interprete consta de un analizador lexico,primera etapa del proceso de compilacion, donde se evaluan las estructuras a nivel atomico y se reconocen cada uno de los componentes lexicos, un analizador sintactico en el cual se analiza la estructura del programa determinando que secuencia de componentes lexicos es valida y cuales no, y un analizador semantico que evalua el significado del programa para verificar que es lo que hace cada sentencia y si estas tienen sentido. Estos tres analizadores trabajan en conjunto en el interprete, que se encarga de analizar y ejecutar el codigo introducido como entrada y dar la salida correspondiente.
-  
-  » La implementacion que he abordado para este concepto se trata de una aplicacion que toma un archivo de texto (formato .txt) donde este debe contener el codigo fuente del programa escrito siguiendo las normas de Sintaxiscript que se detallan en la parte inferior de este documento. 
-Una vez cargado un archivo valido se cuenta con tres opciones donde:
+## Overview
+» The project consists of building an interpreter for a language with specific characteristics. This interpreter consists of a lexical analyzer, the first stage of the compilation process, where the structures are evaluated at the atomic level and each of the lexical components are recognized, a syntactic analyzer in which the structure of the program is analyzed to determine which sequence of lexical components is valid and which are not, and a semantic analyzer that evaluates the meaning of the program to verify what each sentence does and if they make sense. These three parsers work together in the interpreter, which is responsible for parsing and executing the code entered as input and providing the corresponding output.
 
-- Ejecutar analizador lexico: devolvera en pantalla los componentes lexicos que ha encontrado, esto es cada uno de los componentes atomicos del programa que tienen el mismo significado a nivel sintactico: identificador, constante real, operador relacional, etc.
-- Ejecutar analizador sintactico: trabajando en conjunto con el analizador lexico, detectara posibles errores a nivel sintactico, es decir, en la forma que se ha escrito el codigo del programa, verificando si este cumple las reglas definidas por el lenguaje (por ejemplo que haya ; luego de cada sentencia) En caso de detectar un error mostrara un log con informacion del mismo. En caso de exito, se mostrara el arbol sintactico que representa la estructura sintactica que tiene el estado del programa y el orden en que se ejecutan las operaciones simples.
-- Ejecutar interprete: realiza la respectiva interpretacion y ejecucioon del codigo a partir del arbol generado como salida del analizador sintactico. En caso de haber un error (por ejemplo si una variable es usada sin haber sido declarada previamente) se muestra en pantalla, en caso de exito, se imprime el resultado del programa.
+» The implementation that I have approached for this concept is an application that takes a text file (.txt format) where it must contain the source code of the program written following the Syntaxiscript rules detailed at the bottom of this document. Once a valid file is loaded you have three options:
 
-## Documentacion del lenguaje
-Sintaxiscript es un lenguaje donde un programa es una secuencia de sentencias. Cada sentencia puede ser una declaracion de variables, una asignacion, una escritura, una lectura, un condicional (if / if else) o un ciclo while.
+- Execute lexical analyzer as the "Ejecutar analizador lexico" option: it will return on screen the lexical components it has found, that is each of the atomic components of the program that have the same meaning at the syntactic level: identifier, real constant, relational operator, etc.
+- Execute syntactic analyzer as the "Ejecutar analizador sintactico" option: working together with the lexical analyzer, it will detect possible errors at the syntactic level, that is, in the way the program code has been written, verifying if it complies with the rules defined by the language (for example that there is ; after each statement). In case of success, it will show the syntactic tree that represents the syntactic structure that has the state of the program and the order in which the simple operations are executed.
+- Execute interpreter as the "Ejecutar interprete" option: performs the respective interpretation and execution of the code from the tree generated as output of the syntactic analyzer. In case of an error (for example if a variable is used without having been previously declared) it is displayed on the screen, in case of success, the result of the program is printed.
 
-Otras caracteristicas importantes son:
-- Todas las variables en un programa son del tipo constante real y no es necesario indicarlo.
-- Una expresion aritmetica puede incluir los operadores aritmeticos: + para indicar suma, - para indicar resta, * para indicar producto, / para indicar division, ^ para indicar potenciacion, RAIZ para indicar una raiz.
+## Language documentation
+Sintaxiscript is a language where a program is a sequence of statements. Each statement can be a variable declaration, an assignment, a write, a read, a conditional (if/if else), or a while loop.
 
-#### Escribiendo un programa en Sintaxiscript
-» Para iniciar la declaracion de un programa se utiliza la palabra reservada Program junto a un identificador del programa. El cuerpo del programa se encerrara mediante llaves {CUERPO}.
+Other important features are:
+- All variables in a program are of the type real constant and need not be indicated.
+- An arithmetic expression can include the arithmetic operators: + to indicate addition, - to indicate subtraction, * to indicate a product, / to indicate division, ^ to indicate power, and RAIZ (spanish word = ROOT) to indicate a root.
+
+#### Writing a program in Sintaxiscript
+» To start the declaration of a program, the keyword Program is used together with a program identifier. The body of the program is enclosed in curly braces { BODY }.
 
 ```javascript
 Program demo { 
-  // Cuerpo del programa
+  // Program body
 }
 ```
 
-#### Declaracion de una sentencia
-» Para declarar sentencias en Sintaxiscript se debe tener en cuenta la utilizacion de ; como separador de sentencias, es decir, siempre que esta sentencia no represente la ultima antes de un cierre mediante llave } 
+#### Statement declaration
+» To declare statements in Sintaxiscript you must take into account the use of ; as a statement separator, i.e., whenever this statement does not represent the last one before a closing curly brace } 
 
 ```javascript
-variable1 = 100.54;	// Se utiliza . para denotar decimales en una constante real
+variable1 = 100.54;	// . is used to denote decimals in a real constant.
 variable2 = 110;
-suma = variable1 + variable2;
+add = variable1 + variable2;
 control = -10;  
-if [suma>=200]{
+if [add >= 200]{
   control = 1
 };
-suma = 0
+add = 0
 ```
 
-#### Declaracion de variables
-» Toda variable debe ser declarada ANTES de ser utilizada. Dichas declaraciones se haran mediante la palabra reservada var y luego la lista de variables que se quieran declarar separadas mediante coma.
+#### Variable declaration
+» Every variable must be declared BEFORE it is used. These declarations will be made using the var keyword and then the list of variables to be declared separated by commas.
 
 ```javascript
 var variable1,variable2,variable3;
 ```
 
-#### Asignacion de variables
-» Toda asignacion se hara hacia una expresion aritmetica sobre numeros reales. Bajo este concepto seran admitidas asignaciones a otras variables (ya que contienen numeros reales) o cualquier operacion aritmetica valida antes mencionada. Debe tenerse en cuenta la utilizacion de parentesis ( ) para indicar prioridades en las operaciones aritmeticas.
+#### Variable assignment
+» Any assignment will be made to an arithmetic expression on real numbers. Under this concept, assignments to other variables (since they contain real numbers) or any valid arithmetic operation mentioned above will be admitted. Note the use of parentheses ( ) to indicate priorities in arithmetic operations.
 
 ```javascript
-var variable1,variable2,suma,resta,producto, cociente, potencia, radical, opCombinada;
+var variable1,variable2,add,sub,product, quo, pow, rad, combOp;
 variable1 = 25;
 variable2 = 5;
-suma = variable1 + variable2;
-resta = variable1 - variable2;
-producto = variable1 * variable2;
-cociente = variable1 / variable2;
-potencia = variable1 ^ variable2;
-radical = RAIZ (variable1);			// El radicando debe ir entre parentesis: RAIZ (radicando)
-opCombinada = variable1 * (variable2 + variable1)
+add = variable1 + variable2;
+sub = variable1 - variable2;
+product = variable1 * variable2;
+quo = variable1 / variable2;
+power = variable1 ^ variable2;
+rad = RAIZ (variable1);			// The radicand must be enclosed in parentheses: RAIZ (radicand)
+combOp = variable1 * (variable2 + variable1)
 ```
 
-#### Sentencias condicionales
-» Para declarar una sentencia condicional se utilizan las palabras reservadas if y else. La condicion se representara entre corchetes [CONDICION]. Es posible utilizar operadores logicos (and, or, not)
+#### Conditional statements
+» To declare a conditional statement, the keywords if and else are used. The condition will be represented in square brackets [CONDITION]. It is also possible to use logical operators (and, or, not). 
 
 ```javascript
-var control,cambio;
+var control,change;
 control = 1;
-cambio = 10.20;
-if [control == 1 or cambio>10]{
-  control = cambio - 10
+change = 10.20;
+if [control == 1 or change>10]{
+  control = change - 10
 } else {
-  control = cambio + 10
+  control = change + 10
 }
 ```
 
-#### Declaracion de un ciclo while
-» El ciclo while funcionara de manera similar, sintacticamente, a la estructura condicional. La condicion quedara tambien encerrada entre corchetes [CONDICION]. Es posible utilizar operadores logicos (and, or, not)
+#### While loop declaration
+» The while loop will function similarly, syntactically, to the conditional structure. The condition will also be enclosed in square brackets [CONDITION]. Then it is also possible to use logical operators (and, or, or, not).
 
 ```javascript
-var control,cambio;
-cambio = 0;
+var control,change;
+change = 0;
 control = 0;
-while [cambio < 100 and not[control == 1]]{
-  cambio = cambio + 10
+while [change < 100 and not[control == 1]]{
+  change = change + 10
 };
 control = 1
 ```
 
-#### Escritura en pantalla
-» Para realizar impresiones en pantalla se utiliza la palabra reservada Print que recibe como argumentos,separados por comas, a cadenas, que se escriben encerrandolas con "ejemplo cadena", y expresiones aritmeticas, identificadores o constantes reales. 
+#### On-screen printing
+» The Print keyword is used to print on the screen, which takes as arguments, separated by commas, strings (which are written enclosing them with double quotes: "example string"), arithmetic expressions, identifiers or real constants. 
 
 ```javascript
-var dinero,control;
-dinero = 0;
+var money,control;
+money = 0;
 control = 0;
-if [dinero == 0 or not[control <> 0]]{
-  dinero = dinero + (100.50 - 15); 		// Utilizacion de parentesis para indicar prioridades en las operaciones aritmeticas.
-  Print("El dinero actual es: ",dinero);
+if [money == 0 or not[control <> 0]]{
+  money = money + (100.50 - 15); 		// Use of parentheses to indicate priorities in arithmetic operations.
+  Print("The current balance is: ", money);
   control = 1
 };
-Print("El doble del dinero actual es: ",dinero*2,"fin de programa")
+Print("The doble of current balance is: ",money*2," this is a string to show that it's the end of the program")
 ```
 #### Lectura de una variable
 » Para leer una variable se utiliza la palabra reservada Read que recibe como argumentos ("cadena",id). Donde cadena es una cadena que se muestra en pantalla e id es la variable a leer.
@@ -150,7 +152,7 @@ Program maximo{
 }
 ```
 
-## Herramientas y metodologia de desarrollo
+## Tools
  
 - TypeScript
 - Sass
@@ -158,7 +160,7 @@ Program maximo{
 - Mobile first workflow
 - Responsive design
 
-## Autor
+## Author
 
 - Twitter - [@JoaquinArlettaz](https://twitter.com/JoaquinArlettaz)
 - LinkedIn - [@joaquin-arlettaz](https://www.linkedin.com/in/joaqu%C3%ADn-arlettaz/)
