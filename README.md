@@ -117,38 +117,40 @@ if [money == 0 or not[control <> 0]]{
 };
 Print("The doble of current balance is: ",money*2," this is a string to show that it's the end of the program")
 ```
-#### Lectura de una variable
-» Para leer una variable se utiliza la palabra reservada Read que recibe como argumentos ("cadena",id). Donde cadena es una cadena que se muestra en pantalla e id es la variable a leer.
+
+#### Reading a variable
+» Read keyword is used to read a variable and receives two arguments ("string", id), where "string" is a string to be displayed on the screen and id is the variable to be read.
 
 ```javascript
-var dinero,boleto;
-Read("dinero disponible",dinero);
-if [dinero <= 50]{
-		Print("Para 50 aun faltan: ",50-dinero)
+var balance, ticket;
+Read("Current balance: ",balance);
+if [balance <= 50]{
+		Print("For 50 still missing: ",50-balance)
 }else{
-		Read("tipo de boleto",boleto);
-		Print(boleto,"ha sido adquirido")
+		Read("Type of ticket: ",ticket);
+		Print(ticket," has been purchased")
 }
 ```
 
-#### Ejemplo de un programa completo
-»  Se trata de un programa que calcula el maximo valor entre una lista de valores ingresados por el usuario.
+#### Example of a complete program syntax
+»  This is a program that calculates the highest value from a list of numbers entered by the user.
 
 ```javascript
-Program maximo{
-	var valor,maximo,control;
+Program maximum{
+	var value,max,control,amount;
 	control = 1;
-	Read("Ingrese un valor: ",valor);
-	maximo = valor;
-	Read("Desea continuar?, ingrese 0 para salir",control);
-	while[control <> 0]{
-		Read("Ingrese un valor: ",valor);
-		if [valor>maximo]{
-			maximo = valor
-		};
-		Read("Desea continuar?, ingrese 0 para salir",control)
+	Read("Enter amount of numbers to check the maximum: ", amount);
+	Read("Enter a value: ",value);
+	max = value;
+	if [amount == 1] {control = 0};
+	while[control <> 0 and control < amount]{
+		control = control + 1;
+		Read("Enter a value: ",value);
+		if [value>max]{
+			max = value
+		}
 	};
-	Print("El valor maximo es: ",maximo)
+	Print("The highest value entered was: ",max)
 }
 ```
 
@@ -156,7 +158,7 @@ Program maximo{
  
 - TypeScript
 - Sass
-- Control de versiones del proyecto usando Git
+- Git
 - Mobile first workflow
 - Responsive design
 
@@ -166,6 +168,6 @@ Program maximo{
 - LinkedIn - [@joaquin-arlettaz](https://www.linkedin.com/in/joaqu%C3%ADn-arlettaz/)
 
 ## Feedback
-Cualquier comentario y/o sugerencia/apreciacion acerca del proyecto, asi como tambien cualquier duda respecto del mismo puede ser consultada a cualquiera de mis redes/formas de contacto y estare contento de responderlas.
+Any comments and/or suggestions/appreciations about the project, as well as any doubt about it can be consulted to any of my networks/contact forms and I will be happy to answer them.
 
-** Gracias por leer, que tengas un buen dia! ** 🚀
+** Thanks for reading, have a nice day! ** 🚀
