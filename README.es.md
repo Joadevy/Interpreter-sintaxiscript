@@ -1,7 +1,7 @@
 
 # Proyecto final sintaxis & semantica de los lenguajes
 
-* Puedes leer esta documentacion en: [English version](README.md)
+* _Puedes leer esta documentacion en: [English version](README.md)_
 
 ## Live Site 🚀
 » Live site: https://joadevy.github.io/sintaxis-final-project/
