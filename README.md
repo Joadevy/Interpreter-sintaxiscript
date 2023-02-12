@@ -5,7 +5,7 @@
 
 
 ## Live Site 🚀
-» Live site: https://joadevy.github.io/sintaxis-final-project/
+» Live site: https://joadevy.github.io/Interpreter-sintaxiscript/
 
 ## Table of contents
   - [Overview](#overview)
