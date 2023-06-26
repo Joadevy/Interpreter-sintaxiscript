@@ -50,66 +50,86 @@
                <h4 id="escribiendo-un-programa-en-sintaxiscript">Escribiendo un programa en Sintaxiscript</h4>
                 <hr>
                 <p>» Para iniciar la declaracion de un programa se utiliza la palabra reservada Program junto a un identificador del programa. El cuerpo del programa se encerrara mediante llaves {CUERPO}.</p>
-                <pre><code class="lang-javascript">Program <span class="hljs-class">demo </span>{ 
-                <span class="hljs-comment">// Cuerpo del programa</span>
-                }
-                </code></pre>
+                <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
+                <code>
+                    <span class="keyword">Program</span> <span class="identifier-class">demo</span> {
+                        <span class="comment">// Cuerpo del programa</span>
+                    }</code>            
+                </pre>
             </section>
 
 
             <section class="documentacion__seccion">
                 <h4 id="declaracion-de-una-sentencia">Declaracion de una sentencia</h4>
                 <hr>
-                <p>» Para declarar sentencias en Sintaxiscript se debe tener en cuenta la utilizacion de ; como separador de sentencias, es decir, siempre que esta sentencia no represente la ultima antes de un cierre mediante llave } </p>
-                <pre><code class="lang-javascript">variable1 = <span class="hljs-number">100.54</span>;    <span class="hljs-comment">// Se utiliza . para denotar decimales en una constante real</span>
-                variable2 = <span class="hljs-number">110</span>;
-                suma = variable1 + variable2;
-                <span class="hljs-section">control</span> = <span class="hljs-number">-10</span>;  
-                if [suma&gt;=<span class="hljs-number">200</span>]{
-                <span class="hljs-section">control</span> = <span class="hljs-number">1</span>
+                <p>» Para declarar sentencias en Sintaxiscript se debe tener en cuenta la utilizacion del punto y coma ; como separador de sentencias, es decir, siempre que esta sentencia no represente la ultima antes de un cierre mediante llave }</p>
+            <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
+            <code>
+                <span></span>
+                <span class="identifier-class">variable1</span> = <span class="unit">100.54</span>; <span class="comment">// Se utiliza . para denotar decimales en una constante real</span>
+                <span class="identifier-class">variable2</span> = <span class="unit">110</span>;
+                <span class="identifier-class">suma</span> = <span class="property">variable1</span> <span class="operand">+</span> <span class="property">variable2</span>;
+                <span class="identifier-class">control</span> = <span class="unit">-10</span>;
+                <span class="keyword">if</span> [<span class="property">suma</span><span class="operand">&gt;=</span><span class="unit">200</span>]{
+                <span class="property"> control</span> = <span class="unit">1</span>
                 };
-                suma = <span class="hljs-number">0</span>
-                </code></pre>
+                <span class="identifier-class">suma</span> = <span class="unit">0</span>
+            </code>
+            </pre>
+
             </section>
 
             <section class="documentacion__seccion">
                 <h4 id="declaracion-de-variables">Declaracion de variables</h4>
                 <hr>
                 <p>» Toda variable debe ser declarada ANTES de ser utilizada. Dichas declaraciones se haran mediante la palabra reservada var y luego la lista de variables que se quieran declarar separadas mediante coma.</p>
-                <pre><code class="lang-javascript">var <span class="hljs-keyword">variable</span><span class="hljs-number">1</span>,<span class="hljs-keyword">variable</span><span class="hljs-number">2</span>,<span class="hljs-keyword">variable</span><span class="hljs-number">3</span>;
-                </code></pre>
+                 
+            <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
+            <code>
+                <span class="keyword">var</span> <span class="property">variable1</span>,<span class="property">variable2</span>,<span class="property">variable3</span>;
+            </code>
+            </pre>
             </section>
 
             <section class="documentacion__seccion">   
                 <h4 id="asignacion-de-variables">Asignacion de variables</h4>
                 <hr>
                 <p>» Toda asignacion se hara hacia una expresion aritmetica sobre numeros reales. Bajo este concepto seran admitidas asignaciones a otras variables (ya que contienen numeros reales) o cualquier operacion aritmetica valida antes mencionada. Debe tenerse en cuenta la utilizacion de parentesis ( ) para indicar prioridades en las operaciones aritmeticas.</p>
-                <pre><code class="lang-javascript">var <span class="hljs-keyword">variable</span><span class="hljs-number">1</span>,<span class="hljs-keyword">variable</span><span class="hljs-number">2</span>,suma,resta,producto, cociente, potencia, radical, opCombinada;
-                <span class="hljs-keyword">variable</span><span class="hljs-number">1</span> = <span class="hljs-number">25</span>;
-                <span class="hljs-keyword">variable</span><span class="hljs-number">2</span> = <span class="hljs-number">5</span>;
-                suma = <span class="hljs-keyword">variable</span><span class="hljs-number">1</span> + <span class="hljs-keyword">variable</span><span class="hljs-number">2</span>;
-                resta = <span class="hljs-keyword">variable</span><span class="hljs-number">1</span> - <span class="hljs-keyword">variable</span><span class="hljs-number">2</span>;
-                producto = <span class="hljs-keyword">variable</span><span class="hljs-number">1</span> * <span class="hljs-keyword">variable</span><span class="hljs-number">2</span>;
-                cociente = <span class="hljs-keyword">variable</span><span class="hljs-number">1</span> / <span class="hljs-keyword">variable</span><span class="hljs-number">2</span>;
-                potencia = <span class="hljs-keyword">variable</span><span class="hljs-number">1</span> ^ <span class="hljs-keyword">variable</span><span class="hljs-number">2</span>;
-                radical = RAIZ (<span class="hljs-keyword">variable</span><span class="hljs-number">1</span>);            <span class="hljs-comment">// El radicando debe ir entre parentesis: RAIZ (radicando)</span>
-                opCombinada = <span class="hljs-keyword">variable</span><span class="hljs-number">1</span> * (<span class="hljs-keyword">variable</span><span class="hljs-number">2</span> + <span class="hljs-keyword">variable</span><span class="hljs-number">1</span>)
-                </code></pre>
+              
+                <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
+                <code>
+                <span></span>
+                <span class="keyword">var</span> <span class="property">variable1</span>,<span class="property">variable2</span>,<span class="property">suma</span>,<span class="property">resta</span>,<span class="property">producto</span>,<span class="property">cociente</span>,<span class="property">potencia</span>,<span class="property">radical</span>,<span class="property">opCombinada</span>;
+                <span class="identifier-class">variable1</span> = <span class="unit">25</span>;
+                <span class="identifier-class">variable2</span> = <span class="unit">5</span>;
+                <span class="identifier-class">suma</span> = <span class="property">variable1</span> <span class="operand">+</span> <span class="property">variable2</span>;
+                <span class="identifier-class">resta</span> = <span class="property">variable1</span> <span class="operand">-</span> <span class="property">variable2</span>;
+                <span class="identifier-class">producto</span> = <span class="property">variable1</span> <span class="operand">*</span> <span class="property">variable2</span>;
+                <span class="identifier-class">cociente</span> = <span class="property">variable1</span> <span class="operand">/</span> <span class="property">variable2</span>;
+                <span class="identifier-class">potencia</span> = <span class="property">variable1</span> <span class="operand">^</span> <span class="property">variable2</span>;
+                <span class="identifier-class">radical</span> = <span class="operand">RAIZ</span>(<span class="property">variable2</span>); <span class="comment">// El radicando debe ir entre parentesis: RAIZ (radicando)</span>
+                <span class="identifier-class">opCombinada</span> = <span class="property">variable1</span> <span class="operand">*</span> (<span class="property">variable1</span> <span class="operand">+</span> <span class="property">variable2</span>) <span class="comment">// Parentesis para indicar prioridad en operaciones algebraicas</span>
+             </code>
+                </pre>
             </section>
 
              <section class="documentacion__seccion">
                 <h4 id="sentencias-condicionales">Sentencias condicionales</h4>
                 <hr>
                 <p>» Para declarar una sentencia condicional se utilizan las palabras reservadas if y else. La condicion se representara entre corchetes [CONDICION]. Es posible utilizar operadores logicos (and, or, not)</p>
-                <pre><code class="lang-javascript">var <span class="hljs-section">control</span>,cambio;
-                <span class="hljs-section">control</span> = <span class="hljs-number">1</span>;
-                cambio = <span class="hljs-number">10.20</span>;
-                if [<span class="hljs-section">control</span> == <span class="hljs-number">1</span> or cambio&gt;<span class="hljs-number">10</span>]{
-                <span class="hljs-section">control</span> = cambio - <span class="hljs-number">10</span>
-                } else {
-                <span class="hljs-section">control</span> = cambio + <span class="hljs-number">10</span>
+                
+                <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
+                <code>
+                <span class="keyword">var</span> <span class="property">control</span>,<span class="property">cambio</span>;
+                <span class="identifier-class">variable1</span> = <span class="unit">1</span>;
+                <span class="identifier-class">variable2</span> = <span class="unit">10.20</span>;
+                <span class="keyword">if</span> [<span class="property">control</span><span class="operand"> == </span> <span class="unit">1</span> <span class="keyword">or</span> <span class="property">cambio</span><span class="operand">></span><span class="unit">10</span>]{
+                <span class="property"> control</span> = <span class="property">cambio</span> <span class="operand">-</span> <span class="unit">10</span>;
+                } <span class="keyword">else</span> {
+                <span class="property"> control</span> = <span class="property">cambio</span> <span class="operand">+</span> <span class="unit">10</span>;
                 }
-                </code></pre>
+                </code>
+                </pre>
             </section>  
 
             <section class="documentacion__seccion">
@@ -180,7 +200,7 @@
             </pre>
             </section>
 
-            <!-- <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
+             <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
             <code>
             <span class="comment">// Example JS Class</span>
             <span class="keyword">class</span> <span class="identifier-class">Rectangle</span> {
@@ -200,7 +220,7 @@
             <span class="keyword">const</span> <span class="identifier-constant">square</span> = <span class="keyword">new</span> <span class="identifier-class">Rectangle</span>(<span class="unit">10</span>, <span class="unit">10</span>);
             <span class="identifier-class">console</span>.<span class="identifier-native">log</span>(<span class="object">square</span>.<span class="property">area</span>); <span class="comment"> //100</span>
             </code>
-            </pre> -->
+            </pre>
         </article>
     </main>
 </body>
