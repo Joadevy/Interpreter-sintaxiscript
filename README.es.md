@@ -111,7 +111,7 @@ var dinero,control;
 dinero = 0;
 control = 0;
 if [dinero == 0 or not[control <> 0]]{
-  dinero = dinero + (100.50 - 15); 		// Utilizacion de parentesis para indicar prioridades en las operaciones aritmeticas.
+  dinero = dinero + (100.50 * 2.5); 		// Utilizacion de parentesis para indicar prioridades en las operaciones aritmeticas.
   Print("El dinero actual es: ",dinero);
   control = 1
 };
