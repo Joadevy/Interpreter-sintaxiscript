@@ -188,46 +188,24 @@
                <h4 id="ejemplo-de-un-programa-completo">Ejemplo de un programa completo</h4>
                 <hr>
                 <p>»  Se trata de un programa que calcula el maximo valor entre una lista de valores ingresados por el usuario.</p>
-                <pre><code class="lang-javascript"><span class="hljs-keyword">Program</span> maximo{
-                <span class="hljs-keyword">var</span> valor,maximo,control;
-                control = 1;
-                <span class="hljs-keyword">Read</span>(<span class="hljs-string">"Ingrese un valor: "</span>,valor);
-                maximo = valor;
-                <span class="hljs-keyword">Read</span>(<span class="hljs-string">"Desea continuar?, ingrese 0 para salir"</span>,control);
-                <span class="hljs-keyword">while</span>[control &lt;&gt; 0]{
-                    <span class="hljs-keyword">Read</span>(<span class="hljs-string">"Ingrese un valor: "</span>,valor);
-                    <span class="hljs-keyword">if</span> [valor&gt;maximo]{
-                        maximo = valor
-                    };
-                    <span class="hljs-keyword">Read</span>(<span class="hljs-string">"Desea continuar?, ingrese 0 para salir"</span>,control)
-                };
-                <span class="hljs-keyword">Print</span>(<span class="hljs-string">"El valor maximo es: "</span>,maximo)
-                }
-                </code>
-            </pre>
+            <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
+                <code>
+                    <span class="keyword">Program</span> <span class="identifier-class">maximo</span> {
+                     <span class="keyword">var</span> <span class="property">valor</span>,<span class="property">maximo</span>,<span class="property">control</span>;
+                     <span class="identifier-class">control</span> = <span class="unit">1</span>;
+                     <span class="keyword">Read</span>(<span class="identifier-namespace">"Ingrese un valor: "</span>,<span class="property">maximo</span>);
+                     <span class="keyword">Read</span>(<span class="identifier-namespace">"Desea continuar?, ingrese 0 para salir"</span>,<span class="property">control</span>);
+                     <span class="keyword">while</span> [<span class="property">control</span><span class="operand"> <> </span><span class="unit">0</span>]{
+                      <span class="keyword">Read</span>(<span class="identifier-namespace">"Ingrese un valor: "</span>,<span class="property">valor</span>);
+                       <span class="keyword">if</span> [<span class="property">valor</span><span class="operand"> > </span><span class="property">maximo</span></span>]{
+                        <span class="identifier-class">maximo</span> = <span class="property">valor</span>
+                       };
+                       <span class="keyword">Read</span>(<span class="identifier-namespace">"Desea continuar?, ingrese 0 para salir"</span>,<span class="property">control</span>)
+                     };  
+                     <span class="keyword">Print</span>(<span class="identifier-namespace">"El valor maximo es: "</span>,<span class="property">maximo</span>)
+                    }</code>            
+                </pre>
             </section>
-
-             <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
-            <code>
-            <span class="comment">// Example JS Class</span>
-            <span class="keyword">class</span> <span class="identifier-class">Rectangle</span> {
-                <span class="identifier">constructor</span>(<span class="parameter">height</span>, <span class="parameter">width</span>) {
-                <span class="object">this</span>.<span class="property">height</span> <span class="operand">=</span> height;
-                <span class="object">this</span>.<span class="property">width</span> <span class="operand">=</span> width;
-                }
-                <span class="comment">// Getter</span>
-                <span class="identifier-native">get</span> <span class="identifier-udf">area</span>() {
-                <span class="keyword">return</span> <span class="object">this</span>.<span class="identifier-udf">calcArea</span>();
-                }
-                <span class="comment">// Method</span>
-                <span class="identifier-udf">calcArea</span>() {
-                <span class="keyword">return</span> <span class="object">this</span>.<span class="property">height</span> <span class="operand">*</span> <span class="object">this</span>.<span class="property">width</span>;
-                }
-            }
-            <span class="keyword">const</span> <span class="identifier-constant">square</span> = <span class="keyword">new</span> <span class="identifier-class">Rectangle</span>(<span class="unit">10</span>, <span class="unit">10</span>);
-            <span class="identifier-class">console</span>.<span class="identifier-native">log</span>(<span class="object">square</span>.<span class="property">area</span>); <span class="comment"> //100</span>
-            </code>
-            </pre>
         </article>
     </main>
 </body>
