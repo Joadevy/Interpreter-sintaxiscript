@@ -111,7 +111,7 @@ var money,control;
 money = 0;
 control = 0;
 if [money == 0 or not[control <> 0]]{
-  money = money + (100.50 - 15); 		// Use of parentheses to indicate priorities in arithmetic operations.
+  money = money + (100.50 * 2.5); 		// Use of parentheses to indicate priorities in arithmetic operations.
   Print("The current balance is: ", money);
   control = 1
 };
