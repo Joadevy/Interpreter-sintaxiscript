@@ -121,12 +121,12 @@
                 <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
                 <code>
                 <span class="keyword">var</span> <span class="property">control</span>,<span class="property">cambio</span>;
-                <span class="identifier-class">variable1</span> = <span class="unit">1</span>;
-                <span class="identifier-class">variable2</span> = <span class="unit">10.20</span>;
+                <span class="identifier-class">control</span> = <span class="unit">1</span>;
+                <span class="identifier-class">cambio</span> = <span class="unit">10.20</span>;
                 <span class="keyword">if</span> [<span class="property">control</span><span class="operand"> == </span> <span class="unit">1</span> <span class="keyword">or</span> <span class="property">cambio</span><span class="operand">></span><span class="unit">10</span>]{
-                <span class="property"> control</span> = <span class="property">cambio</span> <span class="operand">-</span> <span class="unit">10</span>;
+                <span class="property"> control</span> = <span class="property">cambio</span> <span class="operand">-</span> <span class="unit">10</span>
                 } <span class="keyword">else</span> {
-                <span class="property"> control</span> = <span class="property">cambio</span> <span class="operand">+</span> <span class="unit">10</span>;
+                <span class="property"> control</span> = <span class="property">cambio</span> <span class="operand">+</span> <span class="unit">10</span>
                 }
                 </code>
                 </pre>
@@ -136,14 +136,17 @@
                 <h4 id="declaracion-de-un-ciclo-while">Declaracion de un ciclo while</h4>
                 <hr>
                 <p>» El ciclo while funcionara de manera similar, sintacticamente, a la estructura condicional. La condicion quedara tambien encerrada entre corchetes [CONDICION]. Es posible utilizar operadores logicos (and, or, not)</p>
-                <pre><code class="lang-javascript">var <span class="hljs-section">control</span>,cambio;
-                cambio = <span class="hljs-number">0</span>;
-                <span class="hljs-section">control</span> = <span class="hljs-number">0</span>;
-                while [cambio &lt; <span class="hljs-number">100</span> and not[<span class="hljs-section">control</span> == <span class="hljs-number">1</span>]]{
-                cambio = cambio + <span class="hljs-number">10</span>
+                 <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
+                <code>
+                <span class="keyword">var</span> <span class="property">control</span>,<span class="property">cambio</span>;
+                <span class="identifier-class">cambio</span> = <span class="unit">0</span>;
+                <span class="identifier-class">control</span> = <span class="unit">0</span>;
+                <span class="keyword">while</span> [<span class="property">cambio</span><span class="operand"> < </span><span class="unit">100</span> <span class="keyword">and not</span> [<span class="property">control</span><span class="operand">==</span><span class="unit">1</span>]]{
+                <span class="property"> cambio</span> = <span class="property">cambio</span> <span class="operand">+</span> <span class="unit">10</span>
                 };
-                <span class="hljs-section">control</span> = <span class="hljs-number">1</span>
-                </code></pre>
+                <span class="property">control</span> = <span class="unit">1</span>
+                </code>
+                </pre>
             </section>      
             
             <section class="documentacion__seccion">     
