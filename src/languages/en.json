@@ -21,11 +21,24 @@
     "documentacion2":{
         "titulo":"Statement declaration",
         "descripcion":"» To declare statements in Sintaxiscript you must take into account the use of ; as a statement separator, i.e., whenever this statement does not represent the last one before a closing curly brace }",
-        "codigo": {
-            "1":"// . is used to denote decimals in a real constant.",
-            "2":"add",
-            "3":"add",
-            "4":"add"
-        }
+        "c1":"// . is used to denote decimals in a real constant.",
+        "c2":"add" 
+    },
+    "documentacion3":{
+        "titulo":"Variable declaration",
+        "descripcion":"» Every variable must be declared BEFORE it is used. These declarations will be made using the var keyword and then the list of variables to be declared separated by commas."
+    },
+     "documentacion4":{
+        "titulo":"Variable assignment",
+        "descripcion":"» Any assignment will be made to an arithmetic expression on real numbers. Under this concept, assignments to other variables (since they contain real numbers) or any valid arithmetic operation mentioned above will be admitted. Note the use of parentheses ( ) to indicate priorities in arithmetic operations.",
+        "c1":"add",
+        "c2":"sub",
+        "c3":"mult",
+        "c4":"quo",
+        "c5":"exp",
+        "c6":"square",
+        "c7":"compOperation",
+        "c8":"// The radicand must be enclosed in parentheses: RAIZ (radicand)",
+        "c9":"// Use of parentheses to indicate priorities in arithmetic operations."
     }
 }

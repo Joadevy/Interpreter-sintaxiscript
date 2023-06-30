@@ -21,11 +21,24 @@
     "documentacion2":{
         "titulo":"Declaracion de una sentencias",
         "descripcion":"» Para declarar sentencias en Sintaxiscript se debe tener en cuenta la utilizacion del punto y coma ; como separador de sentencias, es decir, siempre que esta sentencia no represente la ultima antes de un cierre mediante llave }",
-        "codigo": {
-            "1":"// Se utiliza . para denotar decimales en una constante real",
-            "2":"suma",
-            "3":"suma",
-            "4":"suma"
-        }
+        "c1":"// Se utiliza . para denotar decimales en una constante real",
+        "c2":"suma"
+    },
+     "documentacion3":{
+        "titulo":"Declaracion de variables",
+        "descripcion":"» Toda variable debe ser declarada ANTES de ser utilizada. Dichas declaraciones se haran mediante la palabra reservada var y luego la lista de variables que se quieran declarar separadas mediante coma."
+    },
+    "documentacion4":{
+        "titulo":"Asignacion de variables",
+        "descripcion":"» Toda asignacion se hara hacia una expresion aritmetica sobre numeros reales. Bajo este concepto seran admitidas asignaciones a otras variables (ya que contienen numeros reales) o cualquier operacion aritmetica valida antes mencionada. Debe tenerse en cuenta la utilizacion de parentesis ( ) para indicar prioridades en las operaciones aritmeticas.",
+        "c1":"suma",
+        "c2":"resta",
+        "c3":"producto",
+        "c4":"cociente",
+        "c5":"potencia",
+        "c6":"radical",
+        "c7":"opCombinada",
+        "c8":"// El radicando debe ir entre parentesis: RAIZ (radicando)",
+        "c9":"// Parentesis para indicar prioridad en operaciones algebraicas"
     }
 }

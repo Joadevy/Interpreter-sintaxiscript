@@ -69,29 +69,29 @@
 
 
             <section class="documentacion__seccion">
-                <h4 id="declaracion-de-una-sentencia">Declaracion de una sentencia</h4>
+                <h4 id="declaracion-de-una-sentencia" data-section="documentacion2" data-value="titulo">Declaracion de una sentencia</h4>
                 <hr>
-                <p>» Para declarar sentencias en Sintaxiscript se debe tener en cuenta la utilizacion del punto y coma ; como separador de sentencias, es decir, siempre que esta sentencia no represente la ultima antes de un cierre mediante llave }</p>
+                <p data-section="documentacion2" data-value="descripcion">» Para declarar sentencias en Sintaxiscript se debe tener en cuenta la utilizacion del punto y coma ; como separador de sentencias, es decir, siempre que esta sentencia no represente la ultima antes de un cierre mediante llave }</p>
             <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
             <code>
                 <span></span>
-                <span class="identifier-class">variable1</span> = <span class="unit">100.54</span>; <span class="comment">// Se utiliza . para denotar decimales en una constante real</span>
+                <span class="identifier-class">variable1</span> = <span class="unit">100.54</span>; <span class="comment" data-section="documentacion2" data-value="c1">// Se utiliza . para denotar decimales en una constante real</span>
                 <span class="identifier-class">variable2</span> = <span class="unit">110</span>;
-                <span class="identifier-class">suma</span> = <span class="property">variable1</span> <span class="operand">+</span> <span class="property">variable2</span>;
+                <span class="identifier-class" data-section="documentacion2" data-value="c2">suma</span> = <span class="property">variable1</span> <span class="operand">+</span> <span class="property">variable2</span>;
                 <span class="identifier-class">control</span> = <span class="unit">-10</span>;
-                <span class="keyword">if</span> [<span class="property">suma</span><span class="operand">&gt;=</span><span class="unit">200</span>]{
+                <span class="keyword">if</span> [<span class="property" data-section="documentacion2" data-value="c2">suma</span><span class="operand">&gt;=</span><span class="unit">200</span>]{
                 <span class="property"> control</span> = <span class="unit">1</span>
                 };
-                <span class="identifier-class">suma</span> = <span class="unit">0</span>
+                <span class="identifier-class" data-section="documentacion2" data-value="c2">suma</span> = <span class="unit">0</span>
             </code>
             </pre>
 
             </section>
 
             <section class="documentacion__seccion">
-                <h4 id="declaracion-de-variables">Declaracion de variables</h4>
+                <h4 id="declaracion-de-variables" data-section="documentacion3" data-value="titulo" >Declaracion de variables</h4>
                 <hr>
-                <p>» Toda variable debe ser declarada ANTES de ser utilizada. Dichas declaraciones se haran mediante la palabra reservada var y luego la lista de variables que se quieran declarar separadas mediante coma.</p>
+                <p data-section="documentacion3" data-value="descripcion">» Toda variable debe ser declarada ANTES de ser utilizada. Dichas declaraciones se haran mediante la palabra reservada var y luego la lista de variables que se quieran declarar separadas mediante coma.</p>
                  
             <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
             <code>
@@ -101,23 +101,23 @@
             </section>
 
             <section class="documentacion__seccion">   
-                <h4 id="asignacion-de-variables">Asignacion de variables</h4>
+                <h4 id="asignacion-de-variables" data-section="documentacion4" data-value="titulo">Asignacion de variables</h4>
                 <hr>
-                <p>» Toda asignacion se hara hacia una expresion aritmetica sobre numeros reales. Bajo este concepto seran admitidas asignaciones a otras variables (ya que contienen numeros reales) o cualquier operacion aritmetica valida antes mencionada. Debe tenerse en cuenta la utilizacion de parentesis ( ) para indicar prioridades en las operaciones aritmeticas.</p>
+                <p data-section="documentacion4" data-value="descripcion">» Toda asignacion se hara hacia una expresion aritmetica sobre numeros reales. Bajo este concepto seran admitidas asignaciones a otras variables (ya que contienen numeros reales) o cualquier operacion aritmetica valida antes mencionada. Debe tenerse en cuenta la utilizacion de parentesis ( ) para indicar prioridades en las operaciones aritmeticas.</p>
               
                 <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
                 <code>
                 <span></span>
-                <span class="keyword">var</span> <span class="property">variable1</span>,<span class="property">variable2</span>,<span class="property">suma</span>,<span class="property">resta</span>,<span class="property">producto</span>,<span class="property">cociente</span>,<span class="property">potencia</span>,<span class="property">radical</span>,<span class="property">opCombinada</span>;
+                <span class="keyword">var</span> <span class="property">variable1</span>,<span class="property">variable2</span>,<span class="property" data-section="documentacion4" data-value="c1">suma</span>,<span class="property" data-section="documentacion4" data-value="c2">resta</span>,<span class="property" data-section="documentacion4" data-value="c3">producto</span>,<span class="property" data-section="documentacion4" data-value="c4">cociente</span>,<span class="property" data-section="documentacion4" data-value="c5">potencia</span>,<span class="property" data-section="documentacion4" data-value="c6">radical</span>,<span class="property" data-section="documentacion4" data-value="c7">opCombinada</span>;
                 <span class="identifier-class">variable1</span> = <span class="unit">25</span>;
                 <span class="identifier-class">variable2</span> = <span class="unit">5</span>;
-                <span class="identifier-class">suma</span> = <span class="property">variable1</span> <span class="operand">+</span> <span class="property">variable2</span>;
-                <span class="identifier-class">resta</span> = <span class="property">variable1</span> <span class="operand">-</span> <span class="property">variable2</span>;
-                <span class="identifier-class">producto</span> = <span class="property">variable1</span> <span class="operand">*</span> <span class="property">variable2</span>;
-                <span class="identifier-class">cociente</span> = <span class="property">variable1</span> <span class="operand">/</span> <span class="property">variable2</span>;
-                <span class="identifier-class">potencia</span> = <span class="property">variable1</span> <span class="operand">^</span> <span class="property">variable2</span>;
-                <span class="identifier-class">radical</span> = <span class="operand">RAIZ</span>(<span class="property">variable2</span>); <span class="comment">// El radicando debe ir entre parentesis: RAIZ (radicando)</span>
-                <span class="identifier-class">opCombinada</span> = <span class="property">variable1</span> <span class="operand">*</span> (<span class="property">variable1</span> <span class="operand">+</span> <span class="property">variable2</span>) <span class="comment">// Parentesis para indicar prioridad en operaciones algebraicas</span>
+                <span class="identifier-class" data-section="documentacion4" data-value="c1">suma</span> = <span class="property">variable1</span> <span class="operand">+</span> <span class="property">variable2</span>;
+                <span class="identifier-class" data-section="documentacion4" data-value="c2">resta</span> = <span class="property">variable1</span> <span class="operand">-</span> <span class="property">variable2</span>;
+                <span class="identifier-class" data-section="documentacion4" data-value="c3">producto</span> = <span class="property">variable1</span> <span class="operand">*</span> <span class="property">variable2</span>;
+                <span class="identifier-class" data-section="documentacion4" data-value="c4">cociente</span> = <span class="property">variable1</span> <span class="operand">/</span> <span class="property">variable2</span>;
+                <span class="identifier-class" data-section="documentacion4" data-value="c5">potencia</span> = <span class="property">variable1</span> <span class="operand">^</span> <span class="property">variable2</span>;
+                <span class="identifier-class" data-section="documentacion4" data-value="c6">radical</span> = <span class="operand">RAIZ</span>(<span class="property">variable2</span>); <span class="comment" data-section="documentacion4" data-value="c8">// El radicando debe ir entre parentesis: RAIZ (radicando)</span>
+                <span class="identifier-class" data-section="documentacion4" data-value="c7">opCombinada</span> = <span class="property">variable1</span> <span class="operand">*</span> (<span class="property">variable1</span> <span class="operand">+</span> <span class="property">variable2</span>) <span class="comment" data-section="documentacion4" data-value="c9">// Parentesis para indicar prioridad en operaciones algebraicas</span>
              </code>
                 </pre>
             </section>
