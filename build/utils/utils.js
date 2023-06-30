@@ -1,7 +1,7 @@
 const togglerLanguage = document.querySelectorAll('.togglerLanguage');
 
 const toggleLanguage = async (language) => {
-    const response = await fetch(`../src/languages/${language}.json`);
+    const response = await fetch(`../../src/languages/${language}.json`);
     const translation = await (response.json());
 
     const textToChange = document.querySelectorAll("[data-section]");
