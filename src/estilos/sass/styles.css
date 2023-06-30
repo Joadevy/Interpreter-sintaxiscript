@@ -65,6 +65,27 @@ body .header .header__subtitulo {
     margin-bottom: -2.5rem;
   }
 }
+body .language_selector {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 5px;
+}
+body .language_selector .language_es, body .language_selector .language_en {
+  width: 35px;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  overflow: hidden;
+}
+body .language_selector .language_es img, body .language_selector .language_en img {
+  display: block;
+  width: 100%;
+}
+body .language_selector .language_es img:hover, body .language_selector .language_en img:hover {
+  cursor: pointer;
+  opacity: 75%;
+}
 body #main_container {
   display: flex;
   flex-direction: column;
@@ -115,27 +136,21 @@ body #main_container .verificador {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-body #main_container .verificador .verificador__input-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background-color: var(--light-black);
   border: 1px solid var(--primary-variant);
   border-radius: 10px;
   padding: 0.75rem;
   gap: 0.75rem;
 }
-body #main_container .verificador .verificador__input-label .verificador__input {
+body #main_container .verificador .verificador__input {
   color: transparent;
   width: 175px;
 }
-body #main_container .verificador .verificador__input-label .verificador__input::-webkit-file-upload-button {
+body #main_container .verificador .verificador__input::-webkit-file-upload-button {
   visibility: hidden;
 }
-body #main_container .verificador .verificador__input-label .verificador__input::before {
-  content: "Selecciona el archivo";
+body #main_container .verificador .verificador__input::before {
+  content: attr(data-content);
   color: black;
   width: 150px;
   text-align: center;
@@ -154,13 +169,13 @@ body #main_container .verificador .verificador__input-label .verificador__input:
   font-weight: 700;
   font-size: 10pt;
 }
-body #main_container .verificador .verificador__input-label .verificador__input:hover::before {
+body #main_container .verificador .verificador__input:hover::before {
   border-color: var(--white);
 }
-body #main_container .verificador .verificador__input-label .verificador__input:active {
+body #main_container .verificador .verificador__input:active {
   outline: 0;
 }
-body #main_container .verificador .verificador__input-label .verificador__input:active::before {
+body #main_container .verificador .verificador__input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 body #main_container .opciones {

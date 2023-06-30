@@ -10,23 +10,34 @@
     <link rel ="stylesheet" href="src/estilos/sass/syntax.css">
     <link rel="shortcut icon" href="src/estilos/assets/icon/favicon.png" type="image/x-icon">
     <script type="module" src="build/main/index.js"></script>
+    <script type="module" src="build/utils/utils.js"></script>
 </head>
 <body>
+    <article class="language_selector">
+        <div class="language_es" data-language="es">
+            <img src="./src/estilos/assets/icon/es.svg" class="togglerLanguage" id="es_img" alt="Cambiar lenguaje a espaniol">
+        </div>
+        <div class="language_en" data-language="en">
+            <img src="./src/estilos/assets/icon/en.svg" class="togglerLanguage" id="en_img" alt="Switch language to english">
+        </div>
+    </article>
+
     <header class="header">
         <div class="header__contenedor-logo">
             <img src="src/estilos/assets/icon/logo-sintaxisript.png" alt="sintaxiscript">
         </div>
-        <h1 class="header__titulo titulo">Interprete de programas</h1>
-        <p class="header__subtitulo parrafo">Ejecute su programa escrito en Sintaxiscript.</p>
+        <h1 class="header__titulo titulo" data-section="header" data-value="titulo">Interprete de programas</h1>
+        <p class="header__subtitulo parrafo" data-section="header" data-value="subtitulo">Ejecute su programa escrito en Sintaxiscript.</p>
     </header>
 
 
     <main id="main_container">
         <article class="verificador">
             <!-- Carga el archivo que sera el programa input del analizador lexico -->
-            <label for="input" class="verificador__input-label parrafo">
-                Ingrese su programa en un archivo .TXT<input class="verificador__input" id="input" type="file" accept=".txt">
+            <label for="input" class="verificador__input-label parrafo" data-section="verificador" data-value="label">
+                Ingrese su programa en un archivo .TXT
             </label>
+            <input class="verificador__input" id="input" type="file" accept=".txt" data-content="Selecciona el archivo">
         </article>
 
         <div id="main">
@@ -34,24 +45,24 @@
 
         <article class="documentacion__container parrafo">
             <section class="documentacion__seccion">
-                <h2 id="documentacion-del-lenguaje">Documentacion del lenguaje</h2>
+                <h2 id="documentacion-del-lenguaje" data-section="documentacion_header" data-value="titulo">Documentacion del lenguaje</h2>
                 <hr>
-                <p>Sintaxiscript es un lenguaje donde un programa es una secuencia de sentencias. Cada sentencia puede ser una declaracion de variables, una asignacion, una escritura, una lectura, un condicional (if / if else) o un ciclo while.</p>
-                <p>Otras caracteristicas importantes son:</p>
+                <p data-section="documentacion_header" data-value="descripcion">Sintaxiscript es un lenguaje donde un programa es una secuencia de sentencias. Cada sentencia puede ser una declaracion de variables, una asignacion, una escritura, una lectura, un condicional (if / if else) o un ciclo while.</p>
+                <p data-section="documentacion_header" data-value="caracteristicas_titulo">Otras caracteristicas importantes son:</p>
                 <ul>
-                <li>Todas las variables en un programa son del tipo constante real y no es necesario indicarlo.</li>
-                <li>Una expresion aritmetica puede incluir los operadores aritmeticos: + para indicar suma, - para indicar resta, * para indicar producto, / para indicar division, ^ para indicar potenciacion, RAIZ para indicar una raiz.</li>
+                <li data-section="documentacion_header" data-value="caracteristica_1">Todas las variables en un programa son del tipo constante real y no es necesario indicarlo.</li>
+                <li data-section="documentacion_header" data-value="caracteristica_2">Una expresion aritmetica puede incluir los operadores aritmeticos: + para indicar suma, - para indicar resta, * para indicar producto, / para indicar division, ^ para indicar potenciacion, RAIZ para indicar una raiz.</li>
                 </ul>
             </section>
 
              <section class="documentacion__seccion">
-               <h4 id="escribiendo-un-programa-en-sintaxiscript">Escribiendo un programa en Sintaxiscript</h4>
+               <h4 id="escribiendo-un-programa-en-sintaxiscript" data-section="documentacion1" data-value="titulo">Escribiendo un programa en Sintaxiscript</h4>
                 <hr>
-                <p>» Para iniciar la declaracion de un programa se utiliza la palabra reservada Program junto a un identificador del programa. El cuerpo del programa se encerrara mediante llaves {CUERPO}.</p>
+                <p data-section="documentacion1" data-value="descripcion">» Para iniciar la declaracion de un programa se utiliza la palabra reservada Program junto a un identificador del programa. El cuerpo del programa se encerrara mediante llaves {CUERPO}.</p>
                 <pre class="ft-syntax-highlight" data-syntax="SintaxiScript" data-syntax-theme="midnight" data-showTooltips="true">
                 <code>
                     <span class="keyword">Program</span> <span class="identifier-class">demo</span> {
-                        <span class="comment">// Cuerpo del programa</span>
+                        <span class="comment" data-section="documentacion1" data-value="c1">// Cuerpo del programa</span>
                     }</code>            
                 </pre>
             </section>

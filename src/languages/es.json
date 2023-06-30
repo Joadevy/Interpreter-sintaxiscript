@@ -1,0 +1,31 @@
+{
+    "header":{
+        "titulo":"Interprete de programas",
+        "subtitulo":"Ejecute su programa escrito en Sintaxiscript."
+    },
+    "verificador":{
+        "label":"Ingrese su programa en un archivo .TXT"
+    },
+    "documentacion_header":{
+        "titulo":"Documentacion del lenguaje",
+        "descripcion":"Sintaxiscript es un lenguaje donde un programa es una secuencia de sentencias. Cada sentencia puede ser una declaracion de variables, una asignacion, una escritura, una lectura, un condicional (if / if else) o un ciclo while.",
+        "caracteristicas_titulo":"Otras caracteristicas importantes son:",
+        "caracteristica_1":"Todas las variables en un programa son del tipo constante real y no es necesario indicarlo.",
+        "caracteristica_2":"Una expresion aritmetica puede incluir los operadores aritmeticos: + para indicar suma, - para indicar resta, * para indicar producto, / para indicar division, ^ para indicar potenciacion, RAIZ para indicar una raiz."
+    },
+    "documentacion1":{
+        "titulo":"Escribiendo un programa en Sintaxiscript",
+        "descripcion":"» Para iniciar la declaracion de un programa se utiliza la palabra reservada Program junto a un identificador del programa. El cuerpo del programa se encerrara mediante llaves {CUERPO}.",
+        "c1":"// Cuerpo del programa"
+    },
+    "documentacion2":{
+        "titulo":"Declaracion de una sentencias",
+        "descripcion":"» Para declarar sentencias en Sintaxiscript se debe tener en cuenta la utilizacion del punto y coma ; como separador de sentencias, es decir, siempre que esta sentencia no represente la ultima antes de un cierre mediante llave }",
+        "codigo": {
+            "1":"// Se utiliza . para denotar decimales en una constante real",
+            "2":"suma",
+            "3":"suma",
+            "4":"suma"
+        }
+    }
+}

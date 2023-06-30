@@ -71,6 +71,32 @@ body {
         }
     }
 
+    .language_selector{
+        margin-top: .5rem;
+        display: flex; 
+        // border: 1px solid white;
+        justify-content: end;
+        align-items: center;
+        gap:5px;
+
+        .language_es, .language_en{
+             width: 35px;
+             border: 2px solid transparent;
+             border-radius: 3px;
+             overflow: hidden;
+
+             img{
+                display: block;
+                width: 100%;
+                
+                &:hover{
+                    cursor: pointer;
+                    opacity: 75%;
+                }
+             }
+        }
+    }
+
     #main_container {
         display: flex;
         flex-direction: column;
@@ -127,19 +153,13 @@ body {
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-color: var(--light-black);
+            border: 1px solid var(--primary-variant);
+            border-radius: 10px;
+            padding: .75rem;
+            gap: .75rem;
         
-            .verificador__input-label{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                background-color: var(--light-black);
-                border: 1px solid var(--primary-variant);
-                border-radius: 10px;
-                padding: .75rem;
-                gap: .75rem;
-        
-                .verificador__input {
+         .verificador__input {
                     color: transparent;
                     width: 175px;
                 }
@@ -147,7 +167,9 @@ body {
                     visibility: hidden;
                 }
                 .verificador__input::before {
-                    content: 'Selecciona el archivo';
+                    // content: 'Selecciona el archivo';
+                    // content: var(--before-content);
+                    content: attr(data-content);
                     color: black;
                     width: 150px;
                     text-align: center;
@@ -174,7 +196,7 @@ body {
                     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
                 }
             }
-        }
+        
         
         .opciones{
             display: flex;

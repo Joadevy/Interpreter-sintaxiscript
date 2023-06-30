@@ -1,0 +1,31 @@
+{
+    "header":{
+        "titulo":"Program Interpreter",
+        "subtitulo":"Run your program written on Sintaxiscript."
+    },
+    "verificador":{
+        "label":"Enter your program on a .TXT file"
+    },
+    "documentacion_header":{
+        "titulo":"Language Documentation",
+        "descripcion":"Sintaxiscript is a language where a program is a sequence of statements. Each statement can be a variable declaration, an assignment, a write, a read, a conditional (if/if else), or a while loop.",
+        "caracteristicas_titulo":"Other important features are:",
+        "caracteristica_1":"All variables in a program are of the type real constant and need not be indicated.",
+        "caracteristica_2":"An arithmetic expression can include the arithmetic operators: + to indicate addition, - to indicate subtraction, * to indicate a product, / to indicate division, ^ to indicate power, and RAIZ (spanish word = ROOT) to indicate a root."
+    },
+    "documentacion1":{
+        "titulo":"Writing a program in Sintaxiscript",
+        "descripcion":"» To start the declaration of a program, the keyword Program is used together with a program identifier. The body of the program is enclosed in curly braces { BODY }.",
+        "c1":"// Program body"
+    },
+    "documentacion2":{
+        "titulo":"Statement declaration",
+        "descripcion":"» To declare statements in Sintaxiscript you must take into account the use of ; as a statement separator, i.e., whenever this statement does not represent the last one before a closing curly brace }",
+        "codigo": {
+            "1":"// . is used to denote decimals in a real constant.",
+            "2":"add",
+            "3":"add",
+            "4":"add"
+        }
+    }
+}
