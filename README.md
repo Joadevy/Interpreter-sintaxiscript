@@ -125,10 +125,10 @@ Print("The doble of current balance is: ",money*2," this is a string to show tha
 var balance, ticket;
 Read("Current balance: ",balance);
 if [balance <= 50]{
-		Print("For 50 still missing: ",50-balance)
+ Print("For 50 still missing: ",50-balance)
 }else{
-		Read("Type of ticket: ",ticket);
-		Print(ticket," has been purchased")
+ Read("Type of ticket: ",ticket);
+ Print(ticket," has been purchased")
 }
 ```
 
@@ -136,21 +136,19 @@ if [balance <= 50]{
 »  This is a program that calculates the highest value from a list of numbers entered by the user.
 
 ```javascript
-Program maximum{
-	var value,max,control,amount;
-	control = 1;
-	Read("Enter amount of numbers to check the maximum: ", amount);
-	Read("Enter a value: ",value);
-	max = value;
-	if [amount == 1] {control = 0};
-	while[control <> 0 and control < amount]{
-		control = control + 1;
-		Read("Enter a value: ",value);
-		if [value>max]{
-			max = value
-		}
-	};
-	Print("The highest value entered was: ",max)
+Program maximum {
+ var value,maximum,control;
+ control = 1;
+ Read("Enter a value: ",maximum);
+ Read("Do you want to continue?, type 0 to exit",control);
+ while [control <> 0]{
+   Read("Enter a value: ",value);
+   if [value > maximum]{
+    maximum = value
+   };
+   Read("Do you want to continue?, type 0 to exit",control)
+ };  
+ Print("The maximum value is: ",maximum)
 }
 ```
 
