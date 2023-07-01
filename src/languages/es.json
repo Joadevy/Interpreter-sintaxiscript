@@ -40,5 +40,48 @@
         "c7":"opCombinada",
         "c8":"// El radicando debe ir entre parentesis: RAIZ (radicando)",
         "c9":"// Parentesis para indicar prioridad en operaciones algebraicas"
+    },
+    "documentacion5":{
+        "titulo":"Sentencias condicionales",
+        "descripcion":"» Para declarar una sentencia condicional se utilizan las palabras reservadas if y else. La condicion se representara entre corchetes [CONDICION]. Es posible utilizar operadores logicos (and, or, not)",
+        "c1":"cambio"
+    },
+    "documentacion6":{
+        "titulo":"Declaracion de un ciclo while",
+        "descripcion":"» El ciclo while funcionara de manera similar, sintacticamente, a la estructura condicional. La condicion quedara tambien encerrada entre corchetes [CONDICION]. Es posible utilizar operadores logicos (and, or, not)",
+        "c1":"cambio"
+    },
+     "documentacion7":{
+        "titulo":"Escritura en pantalla",
+        "descripcion":"» Para realizar impresiones en pantalla se utiliza la palabra reservada Print que recibe como argumentos,separados por comas, a cadenas, que se escriben encerrandolas con \"ejemplo cadena\", y expresiones aritmeticas, identificadores o constantes reales.",
+        "c1":"dinero",
+        "c2":"// Parentesis para indicar prioridad en operaciones algebraicas",
+        "c3":"\"El dinero actual es: \"",
+        "c4":"\"El doble del dinero actual es: \"",
+        "c5":"\"fin de programa\""
+    },
+    "documentacion8":{
+        "titulo":"Lectura de una variable",
+        "descripcion":"» Para leer una variable se utiliza la palabra reservada Read que recibe como argumentos (\"cadena\",id). Donde cadena es una cadena que se muestra en pantalla e id es la variable a leer.",
+        "c1":"dinero",
+        "c2":"boleto",
+        "c3":"\"dinero disponible\"",
+        "c4":"\"Para 50 aun faltan: \"",
+        "c5":"\"tipo de boleto\"",
+        "c6":"\"ha sido adquirido\""
+    },
+     "documentacion9":{
+        "titulo":"Ejemplo de un programa completo",
+        "descripcion":"» Se trata de un programa que calcula el maximo valor entre una lista de valores ingresados por el usuario.",
+        "c1":"maximo",
+        "c2":"valor",
+        "c3":"\"Ingrese un valor: \"",
+        "c4":"\"Desea continuar?, ingrese 0 para salir\"",
+        "c5":"\"El valor maximo es: \""
+    },
+    "menu":{
+        "1": "Ejecutar Analizador Lexico",
+        "2": "Ejecutar Analizador Sintactico",
+        "3": "Ejecutar Interprete"
     }
 }

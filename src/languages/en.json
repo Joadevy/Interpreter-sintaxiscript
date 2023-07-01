@@ -40,5 +40,48 @@
         "c7":"compOperation",
         "c8":"// The radicand must be enclosed in parentheses: RAIZ (radicand)",
         "c9":"// Use of parentheses to indicate priorities in arithmetic operations."
+    },
+    "documentacion5":{
+        "titulo":"Conditional statements",
+        "descripcion":"» To declare a conditional statement, the keywords if and else are used. The condition will be represented in square brackets [CONDITION]. It is also possible to use logical operators (and, or, not).",
+        "c1":"change"
+    },
+    "documentacion6":{
+        "titulo":"While loop declaration",
+        "descripcion":"» The while loop will function similarly, syntactically, to the conditional structure. The condition will also be enclosed in square brackets [CONDITION]. Then it is also possible to use logical operators (and, or, or, not).",
+        "c1":"change"
+    },
+    "documentacion7":{
+        "titulo":"On-screen printing",
+        "descripcion":"» The Print keyword is used to print on the screen, which takes as arguments, separated by commas, strings (which are written enclosing them with double quotes: \"example string\"), arithmetic expressions, identifiers or real constants.",
+        "c1":"money",
+        "c2":"// Use of parentheses to indicate priorities in arithmetic operations.",
+        "c3":"\"The current balance is: \"",
+        "c4":"\"The double of current balance is: \"",
+        "c5":"\" this is a string to show that it's the end of the program\""
+    },
+     "documentacion8":{
+        "titulo":"Reading a variable",
+        "descripcion":"» Read keyword is used to read a variable and receives two arguments (\"string\", id), where \"string\" is a string to be displayed on the screen and id is the variable to be read.",
+        "c1":"balance",
+        "c2":"ticket",
+        "c3":"\"Current balance: \"",
+        "c4":"\"For 50 still missing: \"",
+        "c5":"\"Type of ticket: \"",
+        "c6":"\" has been purchased\""
+    },
+   "documentacion9":{
+        "titulo":"Example of a complete program syntax",
+        "descripcion":"» This is a program that calculates the highest value from a list of numbers entered by the user.",
+        "c1":"maximum",
+        "c2":"value",
+        "c3":"\"Enter a value: \"",
+        "c4":"\"Do you want to continue?, type 0 to exit\"",
+        "c5":"\"The maximum value is: \""
+    },
+    "menu":{
+        "1": "Execute Lexical Analyzer",
+        "2": "Execute Syntactic Analyzer",
+        "3": "Execute Interpreter"
     }
 }
