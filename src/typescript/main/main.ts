@@ -1,5 +1,7 @@
 import { analizadorLexico } from '../Analizador Lexico/index.js';
 import { analizadorSintactico } from '../Analizador Sintactico/index.js';
+// @ts-ignore
+import { toggleLanguage } from '../../../build/utils/utils.js'
 
 // Tomamos el elemento HTML del input file.
 const input = document.getElementById('input');
@@ -26,6 +28,7 @@ input?.addEventListener('change', (e) => {
 })
 
 function mostrarOpciones(){
+  toggleLanguage(localStorage.getItem('language'));
   const main = document.getElementById('main');
   
   const contenedor = document.querySelector('.verificador');
@@ -83,7 +86,5 @@ function llamarSintactico(archivos:any,interprete:boolean){
   }
   analizadorSintactico(archivos[0],interprete);
 }
-
-
 
 
