@@ -1,6 +1,6 @@
 const togglerLanguage = document.querySelectorAll('.togglerLanguage');
 
-const toggleLanguage = async (language) => {
+export const toggleLanguage = async (language) => {
     const response = await fetch(`./src/languages/${language}.json`);
     const translation = await (response.json());
 
@@ -14,6 +14,8 @@ const toggleLanguage = async (language) => {
     changeInputLanguage(language);
 }
 
+localStorage.getItem('language') === null ? localStorage.setItem('language', 'es') : toggleLanguage(localStorage.getItem('language'));
+
 const changeInputLanguage = (language) => {
   const selectBtn = document.querySelector('.verificador__input');
   if (language === 'es') {
@@ -25,7 +27,7 @@ const changeInputLanguage = (language) => {
 
 for (const toggler of togglerLanguage) {
     toggler.addEventListener('click', (e) => {
-        console.log(e.target.parentElement.dataset.language);
-        toggleLanguage(e.target.parentElement.dataset.language)
+        toggleLanguage(e.target.parentElement.dataset.language);
+        localStorage.setItem('language', e.target.parentElement.dataset.language);
     })
 }
