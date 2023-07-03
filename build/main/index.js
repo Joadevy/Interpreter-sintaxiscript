@@ -1,7 +1,7 @@
 import { analizadorLexico } from '../Analizador Lexico/index.js';
 import { analizadorSintactico } from '../Analizador Sintactico/index.js';
 // @ts-ignore
-import { toggleLanguage } from '../../../build/utils/utils.js';
+import { toggleLanguage } from '../utils/utils.js';
 // Tomamos el elemento HTML del input file.
 const input = document.getElementById('input');
 const language = localStorage.getItem('language') || "es";
