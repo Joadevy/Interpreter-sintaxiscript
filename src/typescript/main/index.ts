@@ -5,6 +5,7 @@ import { toggleLanguage } from '../../../build/utils/utils.js'
 
 // Tomamos el elemento HTML del input file.
 const input = document.getElementById('input');
+const language:string = localStorage.getItem('language')||"es";
 
 // Establecemos las acciones inmediatas luego de que se sube un archivo.
 input?.addEventListener('change', (e) => {
@@ -22,13 +23,13 @@ input?.addEventListener('change', (e) => {
         mostrarOpciones();
         manejarOpciones(archivos);
       } else {
-        alert('Porfavor, introduce un archivo de texto .TXT')
+        alert(language == 'en' ? 'Please, enter a .TXT file':'Porfavor, introduce un archivo de texto .TXT');
       }
     }
 })
 
 function mostrarOpciones(){
-  toggleLanguage(localStorage.getItem('language')||"es");
+  toggleLanguage(language);
   const main = document.getElementById('main');
   
   const contenedor = document.querySelector('.verificador');
