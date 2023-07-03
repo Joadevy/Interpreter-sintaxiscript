@@ -1,4 +1,5 @@
-import { nodo, Arbol, simboloGramatical } from "../Analizador Sintactico/manejoArbol.js";
+import { nodo, Arbol } from "../Analizador Sintactico/manejoArbol.js";
+const language =  (localStorage.getItem('language')||'es');
 
 type dato = {
     variable:string;
@@ -15,8 +16,11 @@ function leerValor(estado:Array<dato>,variable:string):any{
             return estado[elemento].valor;
         }
     }
-    const log = "-- no se encontro la variable " + variable + ", no ha sido declarada --"
-    console.log(log)
+
+    const log = 
+   language == 'en' ? 
+    "-- the variable " + variable + " was not found, it has not been declared --" :
+    "-- no se encontro la variable " + variable + ", no ha sido declarada --"
     mostrarInfoSemantico(log)
 }
 
@@ -29,8 +33,10 @@ function asignarValor(estado:Array<dato>,variable:string,valorAsignar:number):vo
         }
     }
     if (!flag){
-        const log = "-- no se encontro la variable " + variable + ", no ha sido declarada --"
-        console.log(log);
+        const log = 
+       language == 'en' ?
+        "-- the variable " + variable + " was not found, it has not been declared --" :
+        "-- no se encontro la variable " + variable + ", no ha sido declarada --"
         mostrarInfoSemantico(log)
     }
 }
@@ -378,6 +384,8 @@ function mostrarInfoSemantico(errorLog:string){
             let text = document.createElement('p');
             text.classList.add('output-text');
             text.classList.add('wrong');
+           language == 'en' ?
+            text.innerHTML = `A <span class="error">semantic error</span> occurred. Log: <span class="complex">${errorLog}</span>` :
             text.innerHTML = `Ocurrio un <span class="error">error semantico</span>. Log: <span class="complex">${errorLog}</span>`
             output.appendChild(text);
             output.classList.add('output-show');

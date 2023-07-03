@@ -1,1 +1,6 @@
-export function creaTabla(a,e){for(let o=0;o<e;o++)a.push([])}
+export function creaTabla(tablaTransiciones, cantidadEstados) {
+    // Creando cada subArray para cargar los datos en la tabla
+    for (let celdas = 0; celdas < cantidadEstados; celdas++) {
+        tablaTransiciones.push([]);
+    }
+}

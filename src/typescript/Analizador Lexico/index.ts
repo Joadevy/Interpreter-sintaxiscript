@@ -17,6 +17,7 @@ import {esCadena} from '../Analizador Lexico/Automatas/cadena.js';
 import {tablaSimbolos} from '../Analizador Lexico/tablaSimbolos.js';
 // @ts-ignore
 // import {tablaSimbolos} from '../Analizador Lexico/tablaSimbolos.ts';
+const language:string = (localStorage.getItem('language')||'es');
 
 export function mostrarInfo(resultado:Array<any>):void{
     let output = document.getElementById('output');
@@ -25,10 +26,16 @@ export function mostrarInfo(resultado:Array<any>):void{
       let text = document.createElement('p');
       text.classList.add('output-text');
       if (resultado[0] == "errorLexico"){
+        language == 'en' ?
+        text.innerHTML = ` The compLex <span class="error">${resultado[0]} was found</span>` :
         text.innerHTML = ` Se encontro el compLex: <span class="error">${resultado[0]}</span>`;
       } else if (resultado[0] == "pesos"){
+        language == 'en' ?
+        text.innerHTML = ` The compLex: <span class="complex">${resultado[0]}</span> was found and represents the end of file.`:
         text.innerHTML = ` Se encontro el compLex: <span class="complex">${resultado[0]}</span> y representa el fin de archivo.`;
       } else {
+         language == 'en' ?
+        text.innerHTML = ` The compLex: <span class="error">${resultado[0]}</span> was found and the associated lexeme is <span class="lexema">${resultado[2]}</span>`:
         text.innerHTML = ` Se encontro el compLex: <span class="complex">${resultado[0]}</span> y el lexema asociado es <span class="lexema">${resultado[2]}</span>`;
       }
       output.appendChild(text);

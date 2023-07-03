@@ -1,1 +1,61 @@
-import{creaTabla}from"./funciones.js";const carAsimb=o=>['"'].includes(o)?"comillas":null==o?"undefined":"otro";export function esCadena(o,l){let n,e;!function(o){o[o.comillas=0]="comillas",o[o.otro=1]="otro",o[o[void 0]=2]="undefined"}(n||(n={})),function(o){o[o.q0=0]="q0",o[o.q1=1]="q1",o[o.q2=2]="q2"}(e||(e={}));let i=Object.keys(e).length/2,c=[];creaTabla(c,i),c[e.q0][n.comillas]=1,c[e.q0][n.otro]=3,c[e.q1][n.comillas]=2,c[e.q1][n.otro]=1,c[e.q1][n.undefined]=3;let t=l,a="",r=[e.q2],s=e.q0;for(;0==s||1==s;)s=c[s][n[(u=o[l],['"'].includes(u)?"comillas":null==u?"undefined":"otro")]],0!=s&&1!=s&&2!=s||(a+=o[l]),l++;var u;return r.includes(s)?[!0,l,a]:[!1,t]}
+import { creaTabla } from "./funciones.js";
+// @ts-ignore
+// import {creaTabla} from "./funciones.ts";
+// Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
+const carAsimb = (caracter) => {
+    let comillas = ['"'];
+    if (comillas.includes(caracter)) {
+        return 'comillas';
+    }
+    else if (caracter == undefined) { // Refiere al caso de que no se cierre las comillas y no haya mas caracteres (sino seria bucle infinito)
+        return 'undefined';
+    }
+    return 'otro';
+};
+export function esCadena(codigoFuente, control) {
+    let simbolo;
+    (function (simbolo) {
+        simbolo[simbolo["comillas"] = 0] = "comillas";
+        simbolo[simbolo["otro"] = 1] = "otro";
+        simbolo[simbolo["undefined"] = 2] = "undefined";
+    })(simbolo || (simbolo = {}));
+    let estado;
+    (function (estado) {
+        estado[estado["q0"] = 0] = "q0";
+        estado[estado["q1"] = 1] = "q1";
+        estado[estado["q2"] = 2] = "q2";
+    })(estado || (estado = {}));
+    let cantidadEstados = (Object.keys(estado).length / 2); // Porque es un enum numerico.
+    let tablaTransiciones = [];
+    creaTabla(tablaTransiciones, cantidadEstados);
+    // ***** CARGA DE LA TABLA DE TRANSICIONES *****
+    tablaTransiciones[estado.q0][simbolo.comillas] = 1;
+    tablaTransiciones[estado.q0][simbolo.otro] = 3;
+    tablaTransiciones[estado.q1][simbolo.comillas] = 2;
+    tablaTransiciones[estado.q1][simbolo.otro] = 1;
+    tablaTransiciones[estado.q1][simbolo.undefined] = 3; // Undefined seria si se deja abierto el string.
+    // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
+    // Elementos del analizador lexico
+    let controlAnt = control;
+    let lexema = '';
+    // Definicin de elementos necesarios para el automata
+    let estadosFinales = [estado.q2];
+    let estadoInicial = estado.q0;
+    // Inicializando estado actual en el inicial.
+    let estadoActual = estadoInicial;
+    // estadoActual contendra el estado al que llego el automata tras analizar el caracter del codigo fuente.
+    while (estadoActual == 0 || estadoActual == 1) {
+        // Toma un caracter del archivo y busca el estado siguiente en la tabla de transiciones.
+        estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(codigoFuente[control])]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
+        if (estadoActual == 0 || estadoActual == 1 || estadoActual == 2) {
+            lexema += codigoFuente[control];
+        }
+        control++;
+    }
+    if (estadosFinales.includes(estadoActual)) {
+        return [true, control, lexema]; // DEBE ser control ya que hay que pasar por encima de la ultima " (sino es bucle infinito)
+    }
+    else {
+        return [false, controlAnt];
+    }
+}

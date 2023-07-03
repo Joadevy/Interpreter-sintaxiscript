@@ -1,1 +1,64 @@
-import{creaTabla}from"./funciones.js";const carAsimb=t=>["0","1","2","3","4","5","6","7","8","9"].includes(t)?"digito":["a","b","c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"].includes(t)?"letra":"otro";export function esIdentificador(t,o){let i,e;!function(t){t[t.digito=0]="digito",t[t.letra=1]="letra",t[t.otro=2]="otro"}(i||(i={})),function(t){t[t.q0=0]="q0",t[t.q1=1]="q1",t[t.q2=2]="q2",t[t.q3=3]="q3"}(e||(e={}));let r=Object.keys(e).length/2,l=[];creaTabla(l,r),l[e.q0][i.digito]=2,l[e.q0][i.otro]=2,l[e.q0][i.letra]=1,l[e.q1][i.digito]=1,l[e.q1][i.letra]=1,l[e.q1][i.otro]=3;let n=o,q="",a=[e.q3],c=e.q0;for(;0==c||1==c;)c=l[c][i[(d=t[o],["0","1","2","3","4","5","6","7","8","9"].includes(d)?"digito":["a","b","c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"].includes(d)?"letra":"otro")]],0!=c&&1!=c||(q+=t[o]),o++;var d;return a.includes(c)?[!0,o-1,q]:[!1,n]}
+import { creaTabla } from "./funciones.js";
+// @ts-ignore
+// import {creaTabla} from "./funciones.ts";
+// Convierte un simbolo de entrada en el equivalente en el alfabeto que se esta trabajando.
+const carAsimb = (caracter) => {
+    let letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    let numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    if (numeros.includes(caracter)) {
+        return 'digito';
+    }
+    else if (letras.includes(caracter)) {
+        return 'letra';
+    }
+    return 'otro';
+};
+export function esIdentificador(codigoFuente, control) {
+    let simbolo;
+    (function (simbolo) {
+        simbolo[simbolo["digito"] = 0] = "digito";
+        simbolo[simbolo["letra"] = 1] = "letra";
+        simbolo[simbolo["otro"] = 2] = "otro";
+    })(simbolo || (simbolo = {}));
+    let estado;
+    (function (estado) {
+        estado[estado["q0"] = 0] = "q0";
+        estado[estado["q1"] = 1] = "q1";
+        estado[estado["q2"] = 2] = "q2";
+        estado[estado["q3"] = 3] = "q3";
+    })(estado || (estado = {}));
+    let cantidadEstados = (Object.keys(estado).length / 2); // Porque es un enum numerico.
+    let tablaTransiciones = [];
+    creaTabla(tablaTransiciones, cantidadEstados);
+    // ***** CARGA DE LA TABLA DE TRANSICIONES *****
+    tablaTransiciones[estado.q0][simbolo.digito] = 2;
+    tablaTransiciones[estado.q0][simbolo.otro] = 2;
+    tablaTransiciones[estado.q0][simbolo.letra] = 1;
+    tablaTransiciones[estado.q1][simbolo.digito] = 1;
+    tablaTransiciones[estado.q1][simbolo.letra] = 1;
+    tablaTransiciones[estado.q1][simbolo.otro] = 3;
+    // ***** FIN CARGA DE LA TABLA DE TRANSICIONES *****
+    // Elementos del analizador lexico
+    let controlAnt = control;
+    let lexema = '';
+    // Definicin de elementos necesarios para el automata
+    let estadosFinales = [estado.q3];
+    let estadoInicial = estado.q0;
+    // Inicializando estado actual en el inicial.
+    let estadoActual = estadoInicial;
+    // estadoActual contendra el estado al que llego el automata tras analizar el caracter del codigo fuente.
+    while (estadoActual == 0 || estadoActual == 1) {
+        // Toma un caracter del archivo y busca el estado siguiente en la tabla de transiciones.
+        estadoActual = tablaTransiciones[estadoActual][simbolo[carAsimb(codigoFuente[control])]]; // as any esta ya que carAsimb devuelve un string, y se accede al index del enum con una string
+        if (estadoActual == 0 || estadoActual == 1) {
+            lexema += codigoFuente[control];
+        }
+        control++;
+    }
+    if (estadosFinales.includes(estadoActual)) {
+        return [true, control - 1, lexema]; // DEBE ser control-1 porque se analiza el siguiente caracter en el reconocimiento.
+    }
+    else {
+        return [false, controlAnt];
+    }
+}

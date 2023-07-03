@@ -28,7 +28,7 @@ input?.addEventListener('change', (e) => {
 })
 
 function mostrarOpciones(){
-  toggleLanguage(localStorage.getItem('language'));
+  toggleLanguage(localStorage.getItem('language')||"es");
   const main = document.getElementById('main');
   
   const contenedor = document.querySelector('.verificador');

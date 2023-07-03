@@ -5,20 +5,7 @@ import { obtenerSiguienteCompLex } from "../Analizador Lexico/index.js";
 import {elementoPila, crearPila, Apilar, Desapilar} from "./manejoPila.js"
 import { evaluarPrograma } from "../Analizador Semantico/index.js";
 
-// Testing con DENO
-// @ts-ignore
-// import { creaTAS,cargarTAS,variables, terminales } from "./TAS.ts";
-// @ts-ignore
-// import {elementoPila, crearPila, Apilar, Desapilar} from "./manejoPila.ts" 
-// @ts-ignore
-//  import { nodo, Arbol, simboloGramatical} from "./manejoArbol.ts";
-// @ts-ignore
-// import { tablaSimbolos as TS} from "../Analizador Lexico/tablaSimbolos.ts";
-// @ts-ignore
-// import { obtenerSiguienteCompLex } from "../Analizador Lexico/index.ts"; 
-// @ts-ignore
-// import { evaluarPrograma } from "../Analizador Semantico/index.ts"; 
-
+const language:string =  (localStorage.getItem('language')||'es');
 
 const arrayVariables = ['vPROGRAMA','vCUERPO','vSENTENCIAS','vSENTENCIA','vDECLARACION','vVARIABLES','vVARIABLE','vASIGNACION','vEXPARIT','vIZQARIT','vRAIZPOT','vPOT','vSUMARESTA','vMULTDIV','vOPERANDOS','vLECTURA','vESCRITURA','vSALIDAS','vSAUX','vSALIDA','vCONDICIONAL','vCONDICIONALFACT','vMIENTRAS','vCONDICION','vIZQCOND','vNEGACION','vCONJUNCION', 'vDISYUNCION']
   
@@ -75,7 +62,10 @@ export function analisisSintactico(codigoFuente:string , raiz:Arbol,interprete:b
                 lexema = nodoCompLex[2];
                 control = nodoCompLex[1]
             } else {
-                errorLog = ' se esperaba ' + x.simbolo + ' y se encontro ' + compLex;
+                errorLog = 
+               language == 'en' ?
+                ' expected ' + x.simbolo + ' and found ' + compLex :
+                ' se esperaba ' + x.simbolo + ' y se encontro ' + compLex 
                 compLex = 'errorLexico'; // No es un error lexico pero sirve para cortar el while.
             }
         }
@@ -143,7 +133,7 @@ function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
         const arbolSintactico = document.createElement('div');
         arbolSintactico.classList.add('arbolSintactico');
         text.classList.add('output-text');
-        text.innerHTML = `» No hay errores sintacticos, se ha generado el arbol sintactico: <br><br>`;
+       language == 'en' ? text.innerHTML = `» There are no syntax errors, the syntax tree has been generated: <br><br>`:text.innerHTML = `» No hay errores sintacticos, se ha generado el arbol sintactico: <br><br>`;
         if (output){
             output.appendChild(text);
             output.appendChild(arbolSintactico);                    
@@ -163,6 +153,7 @@ function mostrarInfoSintactico(resultado:Array<any>, raiz:Arbol){
         if(output){
             let text = document.createElement('p');
             text.classList.add('output-text');
+           language == 'en' ? text.innerHTML = `A <span class="error">syntax error</span> occurred. Log: <span class="complex">${resultado[1]}</span>` :
             text.innerHTML = `Ocurrio un <span class="error">error sintactico.</span> Log: <span class="complex">${resultado[1]}</span>`
             output.appendChild(text);
             output.classList.add('output-show');

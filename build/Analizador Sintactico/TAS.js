@@ -1,1 +1,217 @@
-export var variables;!function(e){e[e.vPROGRAMA=0]="vPROGRAMA",e[e.vCUERPO=1]="vCUERPO",e[e.vSENTENCIAS=2]="vSENTENCIAS",e[e.vSENTENCIA=3]="vSENTENCIA",e[e.vDECLARACION=4]="vDECLARACION",e[e.vVARIABLES=5]="vVARIABLES",e[e.vVARIABLE=6]="vVARIABLE",e[e.vASIGNACION=7]="vASIGNACION",e[e.vEXPARIT=8]="vEXPARIT",e[e.vIZQARIT=9]="vIZQARIT",e[e.vRAIZPOT=10]="vRAIZPOT",e[e.vPOT=11]="vPOT",e[e.vSUMARESTA=12]="vSUMARESTA",e[e.vMULTDIV=13]="vMULTDIV",e[e.vOPERANDOS=14]="vOPERANDOS",e[e.vLECTURA=15]="vLECTURA",e[e.vESCRITURA=16]="vESCRITURA",e[e.vSALIDAS=17]="vSALIDAS",e[e.vSAUX=18]="vSAUX",e[e.vSALIDA=19]="vSALIDA",e[e.vCONDICIONAL=20]="vCONDICIONAL",e[e.vCONDICIONALFACT=21]="vCONDICIONALFACT",e[e.vMIENTRAS=22]="vMIENTRAS",e[e.vCONDICION=23]="vCONDICION",e[e.vIZQCOND=24]="vIZQCOND",e[e.vNEGACION=25]="vNEGACION",e[e.vCONJUNCION=26]="vCONJUNCION",e[e.vDISYUNCION=27]="vDISYUNCION"}(variables||(variables={}));export var terminales;!function(e){e[e.tPrograma=0]="tPrograma",e[e.tEscribir=1]="tEscribir",e[e.tVariables=2]="tVariables",e[e.tLeer=3]="tLeer",e[e.tWhile=4]="tWhile",e[e.tIf=5]="tIf",e[e.tElse=6]="tElse",e[e.tAnd=7]="tAnd",e[e.tOr=8]="tOr",e[e.tNot=9]="tNot",e[e.tId=10]="tId",e[e.tCadena=11]="tCadena",e[e.tConstReal=12]="tConstReal",e[e.tPuntoComa=13]="tPuntoComa",e[e.tComa=14]="tComa",e[e.tOpRel=15]="tOpRel",e[e.tOpAsignacion=16]="tOpAsignacion",e[e.tSuma=17]="tSuma",e[e.tResta=18]="tResta",e[e.tProducto=19]="tProducto",e[e.tDivision=20]="tDivision",e[e.tPotencia=21]="tPotencia",e[e.tRaiz=22]="tRaiz",e[e.tParentesisAbre=23]="tParentesisAbre",e[e.tParentesisCierra=24]="tParentesisCierra",e[e.tLlaveAbre=25]="tLlaveAbre",e[e.tLlaveCierra=26]="tLlaveCierra",e[e.tCorcheteAbre=27]="tCorcheteAbre",e[e.tCorcheteCierra=28]="tCorcheteCierra",e[e.tPunto=29]="tPunto"}(terminales||(terminales={}));export function creaTAS(){let e=[];for(let a=0;a<28;a++)e.push([]);return e}class celda{constructor(e){this.elementos=e,this.cantidad=e.length}}function cargaEProduccionesTAS(e){return e[variables.vSENTENCIAS][terminales.tLlaveCierra]=new celda([]),e[variables.vVARIABLE][terminales.tLlaveCierra]=new celda([]),e[variables.vVARIABLE][terminales.tPuntoComa]=new celda([]),e[variables.vPOT][terminales.tLlaveCierra]=new celda([]),e[variables.vPOT][terminales.tParentesisCierra]=new celda([]),e[variables.vPOT][terminales.tPuntoComa]=new celda([]),e[variables.vPOT][terminales.tComa]=new celda([]),e[variables.vPOT][terminales.tCorcheteCierra]=new celda([]),e[variables.vPOT][terminales.tSuma]=new celda([]),e[variables.vPOT][terminales.tResta]=new celda([]),e[variables.vPOT][terminales.tProducto]=new celda([]),e[variables.vPOT][terminales.tDivision]=new celda([]),e[variables.vPOT][terminales.tCorcheteCierra]=new celda([]),e[variables.vPOT][terminales.tOpRel]=new celda([]),e[variables.vPOT][terminales.tAnd]=new celda([]),e[variables.vPOT][terminales.tOr]=new celda([]),e[variables.vSUMARESTA][terminales.tLlaveCierra]=new celda([]),e[variables.vSUMARESTA][terminales.tParentesisCierra]=new celda([]),e[variables.vSUMARESTA][terminales.tPuntoComa]=new celda([]),e[variables.vSUMARESTA][terminales.tComa]=new celda([]),e[variables.vSUMARESTA][terminales.tCorcheteCierra]=new celda([]),e[variables.vSUMARESTA][terminales.tOpRel]=new celda([]),e[variables.vSUMARESTA][terminales.tAnd]=new celda([]),e[variables.vSUMARESTA][terminales.tOr]=new celda([]),e[variables.vMULTDIV][terminales.tLlaveCierra]=new celda([]),e[variables.vMULTDIV][terminales.tParentesisCierra]=new celda([]),e[variables.vMULTDIV][terminales.tPuntoComa]=new celda([]),e[variables.vMULTDIV][terminales.tComa]=new celda([]),e[variables.vMULTDIV][terminales.tSuma]=new celda([]),e[variables.vMULTDIV][terminales.tResta]=new celda([]),e[variables.vMULTDIV][terminales.tCorcheteCierra]=new celda([]),e[variables.vMULTDIV][terminales.tOpRel]=new celda([]),e[variables.vMULTDIV][terminales.tAnd]=new celda([]),e[variables.vMULTDIV][terminales.tOr]=new celda([]),e[variables.vSAUX][terminales.tParentesisCierra]=new celda([]),e[variables.vCONDICIONALFACT][terminales.tLlaveCierra]=new celda([]),e[variables.vCONDICIONALFACT][terminales.tPuntoComa]=new celda([]),e[variables.vCONJUNCION][terminales.tCorcheteCierra]=new celda([]),e[variables.vCONJUNCION][terminales.tOr]=new celda([]),e[variables.vDISYUNCION][terminales.tCorcheteCierra]=new celda([]),e}export function cargarTAS(e){return(e=cargaEProduccionesTAS(e))[variables.vPROGRAMA][terminales.tPrograma]=new celda(["tPrograma","tId","tLlaveAbre","vCUERPO","tLlaveCierra"]),e[variables.vCUERPO][terminales.tId]=new celda(["vSENTENCIA","vSENTENCIAS"]),e[variables.vCUERPO][terminales.tVariables]=new celda(["vSENTENCIA","vSENTENCIAS"]),e[variables.vCUERPO][terminales.tLeer]=new celda(["vSENTENCIA","vSENTENCIAS"]),e[variables.vCUERPO][terminales.tEscribir]=new celda(["vSENTENCIA","vSENTENCIAS"]),e[variables.vCUERPO][terminales.tIf]=new celda(["vSENTENCIA","vSENTENCIAS"]),e[variables.vCUERPO][terminales.tWhile]=new celda(["vSENTENCIA","vSENTENCIAS"]),e[variables.vSENTENCIAS][terminales.tPuntoComa]=new celda(["tPuntoComa","vCUERPO"]),e[variables.vSENTENCIA][terminales.tId]=new celda(["vASIGNACION"]),e[variables.vSENTENCIA][terminales.tVariables]=new celda(["vDECLARACION"]),e[variables.vSENTENCIA][terminales.tLeer]=new celda(["vLECTURA"]),e[variables.vSENTENCIA][terminales.tEscribir]=new celda(["vESCRITURA"]),e[variables.vSENTENCIA][terminales.tIf]=new celda(["vCONDICIONAL"]),e[variables.vSENTENCIA][terminales.tWhile]=new celda(["vMIENTRAS"]),e[variables.vDECLARACION][terminales.tVariables]=new celda(["tVariables","vVARIABLES"]),e[variables.vVARIABLES][terminales.tId]=new celda(["tId","vVARIABLE"]),e[variables.vVARIABLE][terminales.tComa]=new celda(["tComa","vVARIABLES"]),e[variables.vASIGNACION][terminales.tId]=new celda(["tId","tOpAsignacion","vEXPARIT"]),e[variables.vEXPARIT][terminales.tId]=new celda(["vIZQARIT","vSUMARESTA"]),e[variables.vEXPARIT][terminales.tParentesisAbre]=new celda(["vIZQARIT","vSUMARESTA"]),e[variables.vEXPARIT][terminales.tRaiz]=new celda(["vIZQARIT","vSUMARESTA"]),e[variables.vEXPARIT][terminales.tResta]=new celda(["vIZQARIT","vSUMARESTA"]),e[variables.vEXPARIT][terminales.tConstReal]=new celda(["vIZQARIT","vSUMARESTA"]),e[variables.vIZQARIT][terminales.tId]=new celda(["vRAIZPOT","vMULTDIV"]),e[variables.vIZQARIT][terminales.tParentesisAbre]=new celda(["vRAIZPOT","vMULTDIV"]),e[variables.vIZQARIT][terminales.tRaiz]=new celda(["vRAIZPOT","vMULTDIV"]),e[variables.vIZQARIT][terminales.tResta]=new celda(["vRAIZPOT","vMULTDIV"]),e[variables.vIZQARIT][terminales.tConstReal]=new celda(["vRAIZPOT","vMULTDIV"]),e[variables.vRAIZPOT][terminales.tId]=new celda(["vOPERANDOS","vPOT"]),e[variables.vRAIZPOT][terminales.tParentesisAbre]=new celda(["vOPERANDOS","vPOT"]),e[variables.vRAIZPOT][terminales.tRaiz]=new celda(["tRaiz","tParentesisAbre","vEXPARIT","tParentesisCierra","vPOT"]),e[variables.vRAIZPOT][terminales.tResta]=new celda(["vOPERANDOS","vPOT"]),e[variables.vRAIZPOT][terminales.tConstReal]=new celda(["vOPERANDOS","vPOT"]),e[variables.vPOT][terminales.tPotencia]=new celda(["tPotencia","vOPERANDOS"]),e[variables.vSUMARESTA][terminales.tSuma]=new celda(["tSuma","vOPERANDOS","vSUMARESTA"]),e[variables.vSUMARESTA][terminales.tResta]=new celda(["tResta","vOPERANDOS","vSUMARESTA"]),e[variables.vMULTDIV][terminales.tProducto]=new celda(["tProducto","vOPERANDOS","vMULTDIV"]),e[variables.vMULTDIV][terminales.tDivision]=new celda(["tDivision","vOPERANDOS","vMULTDIV"]),e[variables.vOPERANDOS][terminales.tId]=new celda(["tId"]),e[variables.vOPERANDOS][terminales.tParentesisAbre]=new celda(["tParentesisAbre","vEXPARIT","tParentesisCierra"]),e[variables.vOPERANDOS][terminales.tResta]=new celda(["tResta","vOPERANDOS"]),e[variables.vOPERANDOS][terminales.tConstReal]=new celda(["tConstReal"]),e[variables.vLECTURA][terminales.tLeer]=new celda(["tLeer","tParentesisAbre","tCadena","tComa","tId","tParentesisCierra"]),e[variables.vESCRITURA][terminales.tEscribir]=new celda(["tEscribir","tParentesisAbre","vSALIDAS","tParentesisCierra"]),e[variables.vSALIDAS][terminales.tId]=new celda(["vSALIDA","vSAUX"]),e[variables.vSALIDAS][terminales.tParentesisAbre]=new celda(["vSALIDA","vSAUX"]),e[variables.vSALIDAS][terminales.tRaiz]=new celda(["vSALIDA","vSAUX"]),e[variables.vSALIDAS][terminales.tResta]=new celda(["vSALIDA","vSAUX"]),e[variables.vSALIDAS][terminales.tConstReal]=new celda(["vSALIDA","vSAUX"]),e[variables.vSALIDAS][terminales.tCadena]=new celda(["vSALIDA","vSAUX"]),e[variables.vSAUX][terminales.tComa]=new celda(["tComa","vSALIDAS"]),e[variables.vSALIDA][terminales.tId]=new celda(["vEXPARIT"]),e[variables.vSALIDA][terminales.tParentesisAbre]=new celda(["vEXPARIT"]),e[variables.vSALIDA][terminales.tRaiz]=new celda(["vEXPARIT"]),e[variables.vSALIDA][terminales.tResta]=new celda(["vEXPARIT"]),e[variables.vSALIDA][terminales.tConstReal]=new celda(["vEXPARIT"]),e[variables.vSALIDA][terminales.tCadena]=new celda(["tCadena"]),e[variables.vCONDICIONAL][terminales.tIf]=new celda(["tIf","tCorcheteAbre","vCONDICION","tCorcheteCierra","tLlaveAbre","vCUERPO","tLlaveCierra","vCONDICIONALFACT"]),e[variables.vCONDICIONALFACT][terminales.tElse]=new celda(["tElse","tLlaveAbre","vCUERPO","tLlaveCierra"]),e[variables.vMIENTRAS][terminales.tWhile]=new celda(["tWhile","tCorcheteAbre","vCONDICION","tCorcheteCierra","tLlaveAbre","vCUERPO","tLlaveCierra"]),e[variables.vCONDICION][terminales.tId]=new celda(["vIZQCOND","vDISYUNCION"]),e[variables.vCONDICION][terminales.tParentesisAbre]=new celda(["vIZQCOND","vDISYUNCION"]),e[variables.vCONDICION][terminales.tRaiz]=new celda(["vIZQCOND","vDISYUNCION"]),e[variables.vCONDICION][terminales.tResta]=new celda(["vIZQCOND","vDISYUNCION"]),e[variables.vCONDICION][terminales.tConstReal]=new celda(["vIZQCOND","vDISYUNCION"]),e[variables.vCONDICION][terminales.tCorcheteAbre]=new celda(["vIZQCOND","vDISYUNCION"]),e[variables.vCONDICION][terminales.tNot]=new celda(["vIZQCOND","vDISYUNCION"]),e[variables.vIZQCOND][terminales.tId]=new celda(["vNEGACION","vCONJUNCION"]),e[variables.vIZQCOND][terminales.tParentesisAbre]=new celda(["vNEGACION","vCONJUNCION"]),e[variables.vIZQCOND][terminales.tRaiz]=new celda(["vNEGACION","vCONJUNCION"]),e[variables.vIZQCOND][terminales.tResta]=new celda(["vNEGACION","vCONJUNCION"]),e[variables.vIZQCOND][terminales.tConstReal]=new celda(["vNEGACION","vCONJUNCION"]),e[variables.vIZQCOND][terminales.tCorcheteAbre]=new celda(["vNEGACION","vCONJUNCION"]),e[variables.vIZQCOND][terminales.tNot]=new celda(["vNEGACION","vCONJUNCION"]),e[variables.vNEGACION][terminales.tId]=new celda(["vEXPARIT","tOpRel","vEXPARIT"]),e[variables.vNEGACION][terminales.tParentesisAbre]=new celda(["vEXPARIT","tOpRel","vEXPARIT"]),e[variables.vNEGACION][terminales.tRaiz]=new celda(["vEXPARIT","tOpRel","vEXPARIT"]),e[variables.vNEGACION][terminales.tResta]=new celda(["vEXPARIT","tOpRel","vEXPARIT"]),e[variables.vNEGACION][terminales.tConstReal]=new celda(["vEXPARIT","tOpRel","vEXPARIT"]),e[variables.vNEGACION][terminales.tCorcheteAbre]=new celda(["tCorcheteAbre","vCONDICION","tCorcheteCierra"]),e[variables.vNEGACION][terminales.tNot]=new celda(["tNot","vNEGACION"]),e[variables.vCONJUNCION][terminales.tAnd]=new celda(["tAnd","vNEGACION","vCONJUNCION"]),e[variables.vDISYUNCION][terminales.tOr]=new celda(["tOr","vIZQCOND","vDISYUNCION"]),e}
+// export type variables = 'vPROGRAMA' | 'vCUERPO'| 'vSENTENCIAS' | 'vSENTENCIA' | 'vDECLARACION' | 'vVARIABLES' | 'vVARIABLE' | 'vASIGNACION' | 'vEXPARIT' | 'vIZQARIT' | 'vRAIZPOT' | 'vPOT' | 'vSUMARESTA' | 'vMULTDIV' | 'vOPERANDOS' | 'vLECTURA' | 'vESCRITURA' | 'vSALIDAS' | 'vSAUX' | 'vSALIDA' | 'vCONDICIONAL' | 'vCONDICIONALFACT' | 'vMIENTRAS' | 'vCONDICION' | 'vIZQCOND' | 'vNEGACION' | 'vCONJUNCION' | 'vDISYUNCION' ;
+// export type terminales = 'tPrograma' | 'tEscribir' | 'tVariables' | 'tLeer' | 'tWhile' | 'tIf' | 'tElse' | 'tAnd' | 'tOr' | 'tNot' | 
+// 'tId' | 'tCadena' | 'tConstReal' | 'tPuntoComa' | 'tComa' | 'tOpRel' | 'tOpAsignacion' | 'tSuma' | 'tResta' | 'tProducto' | 'tDivision' |'tPotencia' | 'tRaiz' | 
+// 'tParentesisAbre' | 'tParentesisCierra' | 'tLlaveAbre' | 'tLlaveCierra' | 'tCorcheteAbre' | 'tCorcheteCierra';
+//import { simboloGramatical } from "./manejoArbol";
+export var variables;
+(function (variables) {
+    variables[variables["vPROGRAMA"] = 0] = "vPROGRAMA";
+    variables[variables["vCUERPO"] = 1] = "vCUERPO";
+    variables[variables["vSENTENCIAS"] = 2] = "vSENTENCIAS";
+    variables[variables["vSENTENCIA"] = 3] = "vSENTENCIA";
+    variables[variables["vDECLARACION"] = 4] = "vDECLARACION";
+    variables[variables["vVARIABLES"] = 5] = "vVARIABLES";
+    variables[variables["vVARIABLE"] = 6] = "vVARIABLE";
+    variables[variables["vASIGNACION"] = 7] = "vASIGNACION";
+    variables[variables["vEXPARIT"] = 8] = "vEXPARIT";
+    variables[variables["vIZQARIT"] = 9] = "vIZQARIT";
+    variables[variables["vRAIZPOT"] = 10] = "vRAIZPOT";
+    variables[variables["vPOT"] = 11] = "vPOT";
+    variables[variables["vSUMARESTA"] = 12] = "vSUMARESTA";
+    variables[variables["vMULTDIV"] = 13] = "vMULTDIV";
+    variables[variables["vOPERANDOS"] = 14] = "vOPERANDOS";
+    variables[variables["vLECTURA"] = 15] = "vLECTURA";
+    variables[variables["vESCRITURA"] = 16] = "vESCRITURA";
+    variables[variables["vSALIDAS"] = 17] = "vSALIDAS";
+    variables[variables["vSAUX"] = 18] = "vSAUX";
+    variables[variables["vSALIDA"] = 19] = "vSALIDA";
+    variables[variables["vCONDICIONAL"] = 20] = "vCONDICIONAL";
+    variables[variables["vCONDICIONALFACT"] = 21] = "vCONDICIONALFACT";
+    variables[variables["vMIENTRAS"] = 22] = "vMIENTRAS";
+    variables[variables["vCONDICION"] = 23] = "vCONDICION";
+    variables[variables["vIZQCOND"] = 24] = "vIZQCOND";
+    variables[variables["vNEGACION"] = 25] = "vNEGACION";
+    variables[variables["vCONJUNCION"] = 26] = "vCONJUNCION";
+    variables[variables["vDISYUNCION"] = 27] = "vDISYUNCION";
+})(variables || (variables = {}));
+export var terminales;
+(function (terminales) {
+    terminales[terminales["tPrograma"] = 0] = "tPrograma";
+    terminales[terminales["tEscribir"] = 1] = "tEscribir";
+    terminales[terminales["tVariables"] = 2] = "tVariables";
+    terminales[terminales["tLeer"] = 3] = "tLeer";
+    terminales[terminales["tWhile"] = 4] = "tWhile";
+    terminales[terminales["tIf"] = 5] = "tIf";
+    terminales[terminales["tElse"] = 6] = "tElse";
+    terminales[terminales["tAnd"] = 7] = "tAnd";
+    terminales[terminales["tOr"] = 8] = "tOr";
+    terminales[terminales["tNot"] = 9] = "tNot";
+    terminales[terminales["tId"] = 10] = "tId";
+    terminales[terminales["tCadena"] = 11] = "tCadena";
+    terminales[terminales["tConstReal"] = 12] = "tConstReal";
+    terminales[terminales["tPuntoComa"] = 13] = "tPuntoComa";
+    terminales[terminales["tComa"] = 14] = "tComa";
+    terminales[terminales["tOpRel"] = 15] = "tOpRel";
+    terminales[terminales["tOpAsignacion"] = 16] = "tOpAsignacion";
+    terminales[terminales["tSuma"] = 17] = "tSuma";
+    terminales[terminales["tResta"] = 18] = "tResta";
+    terminales[terminales["tProducto"] = 19] = "tProducto";
+    terminales[terminales["tDivision"] = 20] = "tDivision";
+    terminales[terminales["tPotencia"] = 21] = "tPotencia";
+    terminales[terminales["tRaiz"] = 22] = "tRaiz";
+    terminales[terminales["tParentesisAbre"] = 23] = "tParentesisAbre";
+    terminales[terminales["tParentesisCierra"] = 24] = "tParentesisCierra";
+    terminales[terminales["tLlaveAbre"] = 25] = "tLlaveAbre";
+    terminales[terminales["tLlaveCierra"] = 26] = "tLlaveCierra";
+    terminales[terminales["tCorcheteAbre"] = 27] = "tCorcheteAbre";
+    terminales[terminales["tCorcheteCierra"] = 28] = "tCorcheteCierra";
+    terminales[terminales["tPunto"] = 29] = "tPunto";
+})(terminales || (terminales = {}));
+export function creaTAS() {
+    const cantidadVariables = 28; // Defino la cantidad de variables que tiene la CFG para crear la TAS.
+    let TAS = [];
+    // Creando cada subArray para cargar los datos en la tabla
+    for (let celdas = 0; celdas < cantidadVariables; celdas++) {
+        TAS.push([]);
+    }
+    return TAS;
+}
+// Cada celda sera donde estaran los elementos que hay que derivar (parte derecha de la CFG), cantidad es el length de elementos.
+class celda {
+    constructor(elemento) {
+        this.elementos = elemento;
+        this.cantidad = elemento.length;
+    }
+}
+function cargaEProduccionesTAS(TAS) {
+    // Si el length es 0, significa que es epsilon. Si el length > 0 hay derivacion, y si es un error lexico, la celda contieen undefined.
+    TAS[variables.vSENTENCIAS][terminales.tLlaveCierra] = new celda([]);
+    TAS[variables.vVARIABLE][terminales.tLlaveCierra] = new celda([]);
+    TAS[variables.vVARIABLE][terminales.tPuntoComa] = new celda([]);
+    TAS[variables.vPOT][terminales.tLlaveCierra] = new celda([]);
+    TAS[variables.vPOT][terminales.tParentesisCierra] = new celda([]);
+    TAS[variables.vPOT][terminales.tPuntoComa] = new celda([]);
+    TAS[variables.vPOT][terminales.tComa] = new celda([]);
+    TAS[variables.vPOT][terminales.tCorcheteCierra] = new celda([]);
+    TAS[variables.vPOT][terminales.tSuma] = new celda([]);
+    TAS[variables.vPOT][terminales.tResta] = new celda([]);
+    TAS[variables.vPOT][terminales.tProducto] = new celda([]);
+    TAS[variables.vPOT][terminales.tDivision] = new celda([]);
+    TAS[variables.vPOT][terminales.tCorcheteCierra] = new celda([]);
+    TAS[variables.vPOT][terminales.tOpRel] = new celda([]);
+    TAS[variables.vPOT][terminales.tAnd] = new celda([]);
+    TAS[variables.vPOT][terminales.tOr] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tLlaveCierra] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tParentesisCierra] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tPuntoComa] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tComa] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tCorcheteCierra] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tOpRel] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tAnd] = new celda([]);
+    TAS[variables.vSUMARESTA][terminales.tOr] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tLlaveCierra] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tParentesisCierra] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tPuntoComa] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tComa] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tSuma] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tResta] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tCorcheteCierra] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tOpRel] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tAnd] = new celda([]);
+    TAS[variables.vMULTDIV][terminales.tOr] = new celda([]);
+    TAS[variables.vSAUX][terminales.tParentesisCierra] = new celda([]);
+    TAS[variables.vCONDICIONALFACT][terminales.tLlaveCierra] = new celda([]);
+    TAS[variables.vCONDICIONALFACT][terminales.tPuntoComa] = new celda([]);
+    TAS[variables.vCONJUNCION][terminales.tCorcheteCierra] = new celda([]);
+    TAS[variables.vCONJUNCION][terminales.tOr] = new celda([]);
+    TAS[variables.vDISYUNCION][terminales.tCorcheteCierra] = new celda([]);
+    return TAS;
+}
+export function cargarTAS(TAS) {
+    TAS = cargaEProduccionesTAS(TAS); // Primero carga todas las epsilon producciones.
+    // Cargando cada celda de la TAS de acuerdo a la construida a partir de la CFG.
+    TAS[variables.vPROGRAMA][terminales.tPrograma] = new celda(['tPrograma', 'tId', 'tLlaveAbre', 'vCUERPO', 'tLlaveCierra']);
+    TAS[variables.vCUERPO][terminales.tId] = new celda(['vSENTENCIA', 'vSENTENCIAS']);
+    TAS[variables.vCUERPO][terminales.tVariables] = new celda(['vSENTENCIA', 'vSENTENCIAS']);
+    TAS[variables.vCUERPO][terminales.tLeer] = new celda(['vSENTENCIA', 'vSENTENCIAS']);
+    TAS[variables.vCUERPO][terminales.tEscribir] = new celda(['vSENTENCIA', 'vSENTENCIAS']);
+    TAS[variables.vCUERPO][terminales.tIf] = new celda(['vSENTENCIA', 'vSENTENCIAS']);
+    TAS[variables.vCUERPO][terminales.tWhile] = new celda(['vSENTENCIA', 'vSENTENCIAS']);
+    TAS[variables.vSENTENCIAS][terminales.tPuntoComa] = new celda(['tPuntoComa', 'vCUERPO']);
+    TAS[variables.vSENTENCIA][terminales.tId] = new celda(['vASIGNACION']);
+    TAS[variables.vSENTENCIA][terminales.tVariables] = new celda(['vDECLARACION']);
+    TAS[variables.vSENTENCIA][terminales.tLeer] = new celda(['vLECTURA']);
+    TAS[variables.vSENTENCIA][terminales.tEscribir] = new celda(['vESCRITURA']);
+    TAS[variables.vSENTENCIA][terminales.tIf] = new celda(['vCONDICIONAL']);
+    TAS[variables.vSENTENCIA][terminales.tWhile] = new celda(['vMIENTRAS']);
+    TAS[variables.vDECLARACION][terminales.tVariables] = new celda(['tVariables', 'vVARIABLES']);
+    TAS[variables.vVARIABLES][terminales.tId] = new celda(['tId', 'vVARIABLE']);
+    TAS[variables.vVARIABLE][terminales.tComa] = new celda(['tComa', 'vVARIABLES']);
+    TAS[variables.vASIGNACION][terminales.tId] = new celda(['tId', 'tOpAsignacion', 'vEXPARIT']);
+    TAS[variables.vEXPARIT][terminales.tId] = new celda(['vIZQARIT', 'vSUMARESTA']);
+    TAS[variables.vEXPARIT][terminales.tParentesisAbre] = new celda(['vIZQARIT', 'vSUMARESTA']);
+    TAS[variables.vEXPARIT][terminales.tRaiz] = new celda(['vIZQARIT', 'vSUMARESTA']);
+    TAS[variables.vEXPARIT][terminales.tResta] = new celda(['vIZQARIT', 'vSUMARESTA']);
+    TAS[variables.vEXPARIT][terminales.tConstReal] = new celda(['vIZQARIT', 'vSUMARESTA']);
+    TAS[variables.vIZQARIT][terminales.tId] = new celda(['vRAIZPOT', 'vMULTDIV']);
+    TAS[variables.vIZQARIT][terminales.tParentesisAbre] = new celda(['vRAIZPOT', 'vMULTDIV']);
+    TAS[variables.vIZQARIT][terminales.tRaiz] = new celda(['vRAIZPOT', 'vMULTDIV']);
+    TAS[variables.vIZQARIT][terminales.tResta] = new celda(['vRAIZPOT', 'vMULTDIV']);
+    TAS[variables.vIZQARIT][terminales.tConstReal] = new celda(['vRAIZPOT', 'vMULTDIV']);
+    TAS[variables.vRAIZPOT][terminales.tId] = new celda(['vOPERANDOS', 'vPOT']);
+    TAS[variables.vRAIZPOT][terminales.tParentesisAbre] = new celda(['vOPERANDOS', 'vPOT']);
+    TAS[variables.vRAIZPOT][terminales.tRaiz] = new celda(['tRaiz', 'tParentesisAbre', 'vEXPARIT', 'tParentesisCierra', 'vPOT']);
+    TAS[variables.vRAIZPOT][terminales.tResta] = new celda(['vOPERANDOS', 'vPOT']);
+    TAS[variables.vRAIZPOT][terminales.tConstReal] = new celda(['vOPERANDOS', 'vPOT']);
+    TAS[variables.vPOT][terminales.tPotencia] = new celda(['tPotencia', 'vOPERANDOS']);
+    TAS[variables.vSUMARESTA][terminales.tSuma] = new celda(['tSuma', 'vOPERANDOS', 'vSUMARESTA']);
+    TAS[variables.vSUMARESTA][terminales.tResta] = new celda(['tResta', 'vOPERANDOS', 'vSUMARESTA']);
+    TAS[variables.vMULTDIV][terminales.tProducto] = new celda(['tProducto', 'vOPERANDOS', 'vMULTDIV']);
+    TAS[variables.vMULTDIV][terminales.tDivision] = new celda(['tDivision', 'vOPERANDOS', 'vMULTDIV']);
+    TAS[variables.vOPERANDOS][terminales.tId] = new celda(['tId']);
+    TAS[variables.vOPERANDOS][terminales.tParentesisAbre] = new celda(['tParentesisAbre', 'vEXPARIT', 'tParentesisCierra']);
+    TAS[variables.vOPERANDOS][terminales.tResta] = new celda(['tResta', 'vOPERANDOS']);
+    TAS[variables.vOPERANDOS][terminales.tConstReal] = new celda(['tConstReal']);
+    TAS[variables.vLECTURA][terminales.tLeer] = new celda(['tLeer', 'tParentesisAbre', 'tCadena', 'tComa', 'tId', 'tParentesisCierra']);
+    TAS[variables.vESCRITURA][terminales.tEscribir] = new celda(['tEscribir', 'tParentesisAbre', 'vSALIDAS', 'tParentesisCierra']);
+    TAS[variables.vSALIDAS][terminales.tId] = new celda(['vSALIDA', 'vSAUX']);
+    TAS[variables.vSALIDAS][terminales.tParentesisAbre] = new celda(['vSALIDA', 'vSAUX']);
+    TAS[variables.vSALIDAS][terminales.tRaiz] = new celda(['vSALIDA', 'vSAUX']);
+    TAS[variables.vSALIDAS][terminales.tResta] = new celda(['vSALIDA', 'vSAUX']);
+    TAS[variables.vSALIDAS][terminales.tConstReal] = new celda(['vSALIDA', 'vSAUX']);
+    TAS[variables.vSALIDAS][terminales.tCadena] = new celda(['vSALIDA', 'vSAUX']);
+    TAS[variables.vSAUX][terminales.tComa] = new celda(['tComa', 'vSALIDAS']);
+    TAS[variables.vSALIDA][terminales.tId] = new celda(['vEXPARIT']);
+    TAS[variables.vSALIDA][terminales.tParentesisAbre] = new celda(['vEXPARIT']);
+    TAS[variables.vSALIDA][terminales.tRaiz] = new celda(['vEXPARIT']);
+    TAS[variables.vSALIDA][terminales.tResta] = new celda(['vEXPARIT']);
+    TAS[variables.vSALIDA][terminales.tConstReal] = new celda(['vEXPARIT']);
+    TAS[variables.vSALIDA][terminales.tCadena] = new celda(['tCadena']);
+    TAS[variables.vCONDICIONAL][terminales.tIf] = new celda(['tIf', 'tCorcheteAbre', 'vCONDICION', 'tCorcheteCierra', 'tLlaveAbre', 'vCUERPO', 'tLlaveCierra', 'vCONDICIONALFACT']);
+    TAS[variables.vCONDICIONALFACT][terminales.tElse] = new celda(['tElse', 'tLlaveAbre', 'vCUERPO', 'tLlaveCierra']);
+    TAS[variables.vMIENTRAS][terminales.tWhile] = new celda(['tWhile', 'tCorcheteAbre', 'vCONDICION', 'tCorcheteCierra', 'tLlaveAbre', 'vCUERPO', 'tLlaveCierra']);
+    TAS[variables.vCONDICION][terminales.tId] = new celda(['vIZQCOND', 'vDISYUNCION']);
+    TAS[variables.vCONDICION][terminales.tParentesisAbre] = new celda(['vIZQCOND', 'vDISYUNCION']);
+    TAS[variables.vCONDICION][terminales.tRaiz] = new celda(['vIZQCOND', 'vDISYUNCION']);
+    TAS[variables.vCONDICION][terminales.tResta] = new celda(['vIZQCOND', 'vDISYUNCION']);
+    TAS[variables.vCONDICION][terminales.tConstReal] = new celda(['vIZQCOND', 'vDISYUNCION']);
+    TAS[variables.vCONDICION][terminales.tCorcheteAbre] = new celda(['vIZQCOND', 'vDISYUNCION']);
+    TAS[variables.vCONDICION][terminales.tNot] = new celda(['vIZQCOND', 'vDISYUNCION']);
+    TAS[variables.vIZQCOND][terminales.tId] = new celda(['vNEGACION', 'vCONJUNCION']);
+    TAS[variables.vIZQCOND][terminales.tParentesisAbre] = new celda(['vNEGACION', 'vCONJUNCION']);
+    TAS[variables.vIZQCOND][terminales.tRaiz] = new celda(['vNEGACION', 'vCONJUNCION']);
+    TAS[variables.vIZQCOND][terminales.tResta] = new celda(['vNEGACION', 'vCONJUNCION']);
+    TAS[variables.vIZQCOND][terminales.tConstReal] = new celda(['vNEGACION', 'vCONJUNCION']);
+    TAS[variables.vIZQCOND][terminales.tCorcheteAbre] = new celda(['vNEGACION', 'vCONJUNCION']);
+    TAS[variables.vIZQCOND][terminales.tNot] = new celda(['vNEGACION', 'vCONJUNCION']);
+    TAS[variables.vNEGACION][terminales.tId] = new celda(['vEXPARIT', 'tOpRel', 'vEXPARIT']);
+    TAS[variables.vNEGACION][terminales.tParentesisAbre] = new celda(['vEXPARIT', 'tOpRel', 'vEXPARIT']);
+    TAS[variables.vNEGACION][terminales.tRaiz] = new celda(['vEXPARIT', 'tOpRel', 'vEXPARIT']);
+    TAS[variables.vNEGACION][terminales.tResta] = new celda(['vEXPARIT', 'tOpRel', 'vEXPARIT']);
+    TAS[variables.vNEGACION][terminales.tConstReal] = new celda(['vEXPARIT', 'tOpRel', 'vEXPARIT']);
+    TAS[variables.vNEGACION][terminales.tCorcheteAbre] = new celda(['tCorcheteAbre', 'vCONDICION', 'tCorcheteCierra']);
+    TAS[variables.vNEGACION][terminales.tNot] = new celda(['tNot', 'vNEGACION']);
+    TAS[variables.vCONJUNCION][terminales.tAnd] = new celda(['tAnd', 'vNEGACION', 'vCONJUNCION']);
+    TAS[variables.vDISYUNCION][terminales.tOr] = new celda(['tOr', 'vIZQCOND', 'vDISYUNCION']);
+    return TAS;
+}
