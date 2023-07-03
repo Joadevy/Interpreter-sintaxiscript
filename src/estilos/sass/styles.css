@@ -31,6 +31,8 @@ body {
   display: grid;
   place-content: center;
   min-height: 100vh;
+  text-align: justify;
+  position: relative;
 }
 body .titulo, body .parrafo {
   color: var(--white);
@@ -68,9 +70,12 @@ body .header .header__subtitulo {
 body .language_selector {
   margin-top: 0.5rem;
   display: flex;
+  position: absolute;
   justify-content: end;
   align-items: center;
   gap: 5px;
+  top: 5px;
+  right: 20%;
 }
 body .language_selector .language_es, body .language_selector .language_en {
   width: 35px;

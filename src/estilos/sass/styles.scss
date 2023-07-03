@@ -35,6 +35,7 @@ body {
     place-content: center;
     min-height: 100vh;
     text-align: justify;
+    position: relative;
 
     .titulo,.parrafo{
         color: var(--white);
@@ -75,10 +76,12 @@ body {
     .language_selector{
         margin-top: .5rem;
         display: flex; 
-        // border: 1px solid white;
+        position: absolute;
         justify-content: end;
         align-items: center;
         gap:5px;
+        top: 5px;
+        right: 20%;
 
         .language_es, .language_en{
              width: 35px;
