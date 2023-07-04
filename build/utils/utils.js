@@ -7,7 +7,9 @@ for (const toggler of togglerLanguage) {
     })
 }
 
-export const toggleLanguage = async (language) => {
+localStorage.getItem('language') === null ? localStorage.setItem('language', 'es') : toggleLanguage(localStorage.getItem('language'));
+
+export async function toggleLanguage(language){
     const response = await fetch(`./src/languages/${language}.json`);
     const translation = await (response.json());
 
@@ -20,8 +22,6 @@ export const toggleLanguage = async (language) => {
 
     changeInputLanguage(language);
 }
-
-localStorage.getItem('language') === null ? localStorage.setItem('language', 'es') : toggleLanguage(localStorage.getItem('language'));
 
 const changeInputLanguage = (language) => {
   const selectBtn = document.querySelector('.verificador__input');
